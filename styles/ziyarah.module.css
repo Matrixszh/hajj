@@ -1,0 +1,195 @@
+.banner {
+  position: relative;
+  min-height: 500px; /* allow growth with content */
+  width: 100%;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background-image: url('/Zbf.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #078792B8;
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 20px;
+  z-index: 2;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.textContent {
+  flex: 1;
+  color: white;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 22px;
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.exploreButton,
+.exploreButton2 {
+  display: inline-block;
+  padding: 6px 24px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.exploreButton {
+  background: linear-gradient(90deg, #D3AF37 0%, #FFDC66 100%);
+  color: #333;
+}
+
+.exploreButton2 {
+  background-color: transparent;
+  color: #ebebeb;
+  border: 1px solid #ebebeb;
+  margin-left: 10px;
+}
+
+.imageContainer {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.imageFrame {
+  background: linear-gradient(135deg, #7DE9F2 0%, #4ECDC4 50%, #26A69A 100%);
+  padding: 15px;
+  border-radius: 45px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 8px 20px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.imageInner {
+  border-radius: 35px;
+  overflow: hidden;
+  background: #000;
+}
+
+.bannerImage {
+  width: 280px;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 35px;
+}
+
+/* Larger tablet breakpoint for stacking */
+@media (max-width: 1024px) {
+  .content {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 30px;
+    padding: 40px 0;
+  }
+
+  .textContent {
+    order: 2;
+  }
+
+  .imageContainer {
+    order: 1;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner {
+    min-height: auto;
+    padding: 20px 0;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .bannerImage {
+    width: 220px;
+    height: 320px;
+    border-radius: 25px;
+  }
+
+  .imageFrame {
+    padding: 12px;
+    border-radius: 35px;
+  }
+
+  .exploreButton,
+  .exploreButton2 {
+    font-size: 13px;
+    padding: 5px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 26px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .bannerImage {
+    width: 180px;
+    height: 260px;
+    border-radius: 22px;
+  }
+
+  .imageFrame {
+    padding: 8px;
+    border-radius: 30px;
+  }
+}

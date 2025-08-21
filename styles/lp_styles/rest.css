@@ -1,0 +1,378 @@
+/* Quote Section */
+.quoteSection {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.quote {
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.quoteText {
+  font-size: 28px;
+  color: #333;
+  margin: 0 0 30px 0;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.allah {
+  color: #4a9b93;
+  font-weight: 600;
+}
+
+.enough {
+  color: #4a9b93;
+  font-weight: 600;
+}
+
+.quoteCitation {
+  font-size: 16px;
+  color: #666;
+  font-style: normal;
+}
+
+.quranText {
+  color: #4a9b93;
+  font-weight: 600;
+}
+
+/* Application Section */
+.applicationSection {
+  background-color: white;
+  padding: 80px 0;
+}
+
+.applicationTitle {
+  text-align: center;
+  font-size: 32px;
+  color: #4a9b93;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+}
+
+.applicationSubtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+
+.stepsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.stepBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.stepCard {
+  width: 160px;
+  height: 160px;
+  background: linear-gradient(90deg, #7DE9F2 0%, #078792 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(7, 135, 146, 0.3);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.stepCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(7, 135, 146, 0.4);
+}
+
+.stepNumber {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.stepIcon {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+}
+
+.stepLabel {
+  font-size: 13px;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Progress Line */
+.progressLine {
+  position: relative;
+  height: 20px;
+  max-width: 800px;
+  margin: 30px auto 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.progressLine::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background-color: #138b96;
+  z-index: 1;
+}
+
+.progressDot {
+  width: 16px;
+  height: 16px;
+  background-color: #138b96;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+/* Contact Button */
+.applicationContactContainer {
+  text-align: center;
+}
+
+.applicationContactButton {
+  display: inline-block;
+  background-color: transparent;
+  color: #078792;
+  padding: 12px 35px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: 2px solid #078792;
+  transition: all 0.3s ease;
+}
+
+.applicationContactButton:hover {
+  background-color: #078792;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(7, 135, 146, 0.3);
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(135deg, #b8ddd9 0%, #a8d0cc 100%);
+  padding: 40px 0;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerLogo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.footerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 10px;
+}
+
+.socialIcon {
+  width: 30px;
+  height: 30px;
+  background-color: #2d7d76;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.socialIcon:hover {
+  background-color: #1f5a54;
+  transform: translateY(-2px);
+}
+
+.address {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .applicationSection,
+  .quoteSection {
+    padding: 50px 0;
+  }
+  
+  .applicationTitle {
+    font-size: 24px;
+  }
+  
+  .quoteText {
+    font-size: 22px;
+  }
+  
+  .footerContent {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .footerRight {
+    align-items: center;
+  }
+  
+  .applicationSection {
+    padding: 60px 0;
+  }
+  
+  .applicationTitle {
+    font-size: 28px;
+  }
+  
+  .stepsWrapper {
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .progressLine {
+    display: none;
+  }
+  
+  .stepCard {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .stepIcon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .stepLabel {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .quoteText {
+    font-size: 18px;
+  }
+  
+  .applicationSection {
+    padding: 50px 0;
+  }
+  
+  .container2 {
+    padding: 0 15px;
+  }
+  
+  .applicationTitle {
+    font-size: 24px;
+  }
+  
+  .applicationSubtitle {
+    font-size: 13px;
+  }
+  
+  .stepCard {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .stepIcon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .stepLabel {
+    font-size: 12px;
+  }
+  
+  .applicationContactButton {
+    padding: 10px 30px;
+    font-size: 13px;
+  }
+}
+
+/* Common Utility Classes */
+.container {
+  position: relative;
+  z-index: 3;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  border: 1px solid #d6b55c;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.landingPage {
+  width: 100%;
+}
+
+.gradientText {
+  background: #078792B2;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}

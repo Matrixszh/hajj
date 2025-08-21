@@ -1,0 +1,1433 @@
+.landingPage {
+  width: 100%;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #7DE9F2 0%, #078792 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent; /* Fallback for browsers that don't support the property */
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 50px; /* more spacing inside the box */
+  border: 1px solid #d6b55c; /* use the light gold tone like the image */
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* soft shadow like the image */
+}
+
+/* Add these CSS rules to your Z.module.css file */
+
+/* Flip card styles for Ziyarat */
+.flipCard {
+  perspective: 1000px;
+  background: none !important;
+}
+
+.flipCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flipCard:hover .flipCardInner {
+  transform: rotateY(180deg);
+}
+
+.flipCardFront, .flipCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.flipCardBack {
+  transform: rotateY(180deg);
+}
+
+/* Card number styling for front side */
+.cardNumber {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+/* Update packageLabel for front side positioning */
+.flipCardFront .packageLabel {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Back side content styling */
+.flipCardBack .cardContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 30px;
+  text-align: center;
+  background: rgba(7, 135, 146, 0.85);
+}
+
+.flipCardBack .cardTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.flipCardBack .cardDescription {
+  font-size: 14px;
+  line-height: 1.6;
+  color: white;
+  text-align: center;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Middle card background and content styling */
+.middleCardBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+}
+
+.middleCard .cardContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 30px;
+  text-align: center;
+  background: rgba(7, 135, 146, 0.85);
+}
+
+.middleCard .cardTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.middleCard .cardDescription {
+  font-size: 14px;
+  line-height: 1.6;
+  color: white;
+  text-align: center;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Update the price styling for middle card to match the number style */
+.middleCard .price {
+  font-size: 80px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 10px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+  align-self: center;
+  margin-top: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cardNumber {
+    font-size: 80px;
+  }
+  
+  .middleCard .price {
+    font-size: 60px;
+  }
+  
+  .flipCardBack .cardTitle,
+  .middleCard .cardTitle {
+    font-size: 24px;
+  }
+  
+  .flipCardBack .cardDescription,
+  .middleCard .cardDescription {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardNumber {
+    font-size: 60px;
+  }
+  
+  .middleCard .price {
+    font-size: 50px;
+  }
+  
+  .flipCardFront .packageLabel {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+/* About Section */
+.aboutSection {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+  position: relative;
+  text-align: center;
+}
+
+.container2 {
+  max-width: 800px; /* Reduced max-width for more compact layout */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.aboutContent {
+  margin-bottom: 40px; /* Space between content and button */
+}
+
+.aboutTitle {
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 400;
+  margin-bottom: 30px;
+  background: linear-gradient(90deg, #7DE9F2 0%, #078792 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.brandName {
+  font-weight: 600;
+  background: linear-gradient(90deg, #7DE9F2 0%, #078792 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.aboutText {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.aboutText p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+  text-align: center;
+}
+
+.exploreButton2 {
+  display: inline-block;
+  background-color: transparent;
+  color: #3288b9;
+  padding: 12px 32px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 1px solid #078792;
+  margin-top: 20px;
+}
+
+.exploreButton2:hover {
+  background-color: #078792;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(50, 136, 185, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .aboutSection {
+    padding: 60px 0;
+  }
+
+  .container2 {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .aboutTitle {
+    font-size: 32px;
+    margin-bottom: 25px;
+  }
+
+  .aboutText p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .exploreButton2 {
+    padding: 10px 28px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSection {
+    padding: 50px 0;
+  }
+
+  .aboutTitle {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .aboutText p {
+    font-size: 14px;
+  }
+
+  .exploreButton2 {
+    padding: 8px 24px;
+    font-size: 12px;
+  }
+}
+/* Second Section - Offer */
+.offerSection {
+  position: relative;
+  padding: 80px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.offerBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/package_bg.jpg'); /* Add your background image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.offerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(184, 221, 217, 0.9) 0%, rgba(168, 208, 204, 0.9) 100%);
+  z-index: 2;
+}
+
+.container {
+  position: relative;
+  z-index: 3;
+}
+
+.offerTitle {
+  font-size: 32px;
+  color: #2d7d76;
+  margin: 0 0 50px 0;
+  font-weight: 500;
+}
+
+.tabContainer {
+  margin-bottom: 40px;
+}
+
+.tabs {
+  display: inline-flex;
+  background-color: transparent;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  border: 1px solid rgba(74, 155, 147, 0.3);
+}
+
+.tab {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  padding: 12px 30px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border-right: 1px solid rgba(74, 155, 147, 0.3);
+}
+
+.tab:last-child {
+  border-right: none;
+}
+
+.tab:hover {
+  background-color: rgba(74, 155, 147, 0.1);
+}
+
+.activeTab {
+  background-color: #4a9b93 !important;
+  color: white !important;
+}
+
+.contentCard {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 2px #2d7d76 solid;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  min-height: 250px;
+}
+
+.textContent {
+  flex: 1;
+  padding: 40px;
+  text-align: left;
+}
+
+.cardTitle {
+  font-size: 24px;
+  color: #333;
+  margin: 0 0 20px 0;
+  font-weight: 600;
+}
+
+.cardDescription {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666;
+  margin: 0;
+}
+
+.imageContainer {
+  flex: 0 0 300px;
+  height: 250px;
+  position: relative;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contactButtonContainer {
+  text-align: center;
+}
+
+.contactButton {
+  display: inline-block;
+  background-color: white;
+  color: #2d7d76;
+  padding: 12px 30px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  border: 2px solid #2d7d76;
+  transition: all 0.3s ease;
+}
+
+.contactButton:hover {
+  background-color: #2d7d76;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(45, 125, 118, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .aboutContent {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .aboutTitle {
+    flex: none;
+    font-size: 28px;
+  }
+  
+  .cardContent {
+    flex-direction: column;
+    min-height: auto;
+  }
+  
+  .textContent {
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .imageContainer {
+    flex: none;
+    width: 100%;
+    height: 200px;
+  }
+  
+  .imagePlaceholder {
+    border-left: none;
+    border-top: 1px solid #eee;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  
+  .tab {
+    flex: 1;
+    min-width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutSection,
+  .offerSection {
+    padding: 50px 0;
+  }
+  
+  .aboutTitle {
+    font-size: 24px;
+  }
+  
+  .offerTitle {
+    font-size: 24px;
+  }
+  
+  .textContent {
+    padding: 20px;
+  }
+  
+  .cardTitle {
+    font-size: 20px;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+}
+.differenceSection {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+/* Background image for the section */
+.differenceBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/package_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.differenceBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/package_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Overlay for the section */
+.differenceOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(129, 200, 217, 0.6); /* #81C8D999 */
+  z-index: 2;
+}
+
+.container2 {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 32px;
+  color: #333;
+  margin: 0 20px 20px 0;
+  font-weight: 500;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  font-size: 20px;
+  color: #000000;
+  margin: 0 0 60px 0;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.packageCard {
+  position: relative;
+  height: 550px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.packageCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.packageCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.packageCard::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 30px 25px;
+  text-align: left;
+}
+
+.price {
+  font-size: 36px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  align-self: center;
+  margin-top: 80px;
+}
+
+.pointsList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  width: 100%;
+  margin-left: 30px;
+}
+
+.point {
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  padding-left: 5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-align: left;
+}
+
+.point::before {
+  content: '•';
+  color: #d4af37;
+  font-size: 20px;
+  margin-right: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.packageLabel {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contactContainer {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.contactBtn {
+  padding: 15px 40px;
+  border: none;
+  background: linear-gradient(90deg, #7DE9F2 0%, #078792 100%);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 20px;
+}
+
+.contactBtn:hover {
+  background-color: #4a9b93;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(74, 155, 147, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 10px;
+  }
+  
+  .packageCard {
+    height: 400px;
+  }
+  
+  .price {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .point {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .cardContent {
+    padding: 30px 20px;
+  }
+  
+  .sectionTitle {
+    font-size: 24px;
+  }
+  
+  .differenceSection {
+    padding: 50px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .packageCard {
+    height: 350px;
+  }
+  
+  .price {
+    font-size: 24px;
+  }
+  
+  .point {
+    font-size: 13px;
+  }
+}
+
+
+/* Fourth Section - Gallery */
+.gallerySection {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.galleryBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/package_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.galleryOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(129, 200, 217, 0.6); /* #81C8D999 */
+  z-index: 2;
+}
+
+.container2 {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.gallerySectionTitle {
+  text-align: center;
+  font-size: 32px;
+  color: '#078792';
+  margin: 0 0 20px 0;
+  font-weight: 500;
+}
+
+.gallerySectionSubtitle {
+  text-align: center;
+  font-size: 20px;
+  color: #000000;
+  margin: 0 0 60px 0;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.galleryItem {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: relative;
+}
+
+.galleryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.galleryImage:hover {
+  transform: scale(1.05);
+}
+
+.galleryPlaceholder {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .gallerySectionTitle {
+    font-size: 24px;
+  }
+
+  .gallerySection {
+    padding: 50px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+
+.container {
+  position: relative;
+  z-index: 3; /* On top of both background and overlay */
+}
+
+
+.applicationSection {
+  background-color: white;
+  padding: 80px 0;
+}
+
+.applicationTitle {
+  text-align: center;
+  font-size: 32px;
+  color: #138b96;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.applicationSubtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+
+.stepsWrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  flex-wrap: wrap;
+}
+
+.stepBlock {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.stepCard {
+  width: 130px;
+  height: 130px;
+  background-color: #138b96;
+  color: white;
+  border-radius: 8px;
+  padding: 20px 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.stepCard:hover {
+  transform: scale(1.05);
+}
+
+.stepNumber {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.stepIconPlaceholder {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.stepLabel {
+  font-size: 14px;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.connectorLine {
+  position: relative;
+  height: 20px;
+  max-width: 800px;
+  margin: 30px auto 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.connectorLine::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background-color: #138b96;
+  z-index: 1;
+}
+
+.connectorDot {
+  width: 16px;
+  height: 16px;
+  background-color: #138b96;
+  border-radius: 4px;
+  z-index: 2;
+}
+
+.applicationContactContainer {
+  text-align: center;
+}
+
+.applicationContactButton {
+  display: inline-block;
+  background-color: transparent;
+  color: #138b96;
+  padding: 12px 30px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  border: 2px solid #138b96;
+  transition: all 0.3s ease;
+}
+
+.applicationContactButton:hover {
+  background-color: #138b96;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(19, 139, 150, 0.3);
+}
+.testimonialsGrid > :nth-child(2) {
+  filter: none;
+}
+/* Sixth Section - Quote */
+.quoteSection {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.quote {
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.quoteText {
+  font-size: 28px;
+  color: #333;
+  margin: 0 0 30px 0;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.allah {
+  color: #4a9b93;
+  font-weight: 600;
+}
+
+.enough {
+  color: #4a9b93;
+  font-weight: 600;
+}
+
+.quoteCitation {
+  font-size: 16px;
+  color: #666;
+  font-style: normal;
+}
+
+.quranText {
+  color: #4a9b93;
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+background: #07879280;
+  padding: 40px 0;
+}
+
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerLogo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+.footerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 10px;
+}
+
+.socialIcon {
+  width: 30px;
+  height: 30px;
+  background-color: #2d7d76;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.socialIcon:hover {
+  background-color: #1f5a54;
+  transform: translateY(-2px);
+}
+
+.address {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+/* Additional Responsive Updates */
+@media (max-width: 768px) {
+  .stepsContainer {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .stepConnector {
+    display: none;
+  }
+  
+  .applicationSection,
+  .quoteSection {
+    padding: 50px 0;
+  }
+  
+  .applicationTitle {
+    font-size: 24px;
+  }
+  
+  .quoteText {
+    font-size: 22px;
+  }
+  
+  .footerContent {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .footerRight {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .stepIcon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .stepIconPlaceholder {
+    font-size: 18px;
+  }
+  
+  .stepTitle {
+    font-size: 14px;
+  }
+  
+  .quoteText {
+    font-size: 18px;
+  }
+}
+.testimonialsSection {
+  background-image: url('/package_bg.jpg'); /* Update path as needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 80px 0;
+}
+
+.testimonialsSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(173, 216, 230, 0.85); /* Light blue overlay */
+  z-index: 1;
+}
+
+.container2 {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.testimonialsTitle {
+  text-align: center;
+  font-size: 48px;
+  color: #2c3e50;
+  margin: 0 0 20px 0;
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.customerHighlight {
+  color: #d4af37; /* Golden/orange color for "Customer" */
+}
+
+.testimonialsSubtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #2c3e50;
+  margin: 0 0 60px 0;
+  line-height: 1.6;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+}
+
+.testimonialsGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto 50px auto;
+}
+
+.testimonialCard {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 40px 25px;
+  border-radius: 15px;
+  text-align: center;
+  width: 280px;
+  min-height: 280px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  border: 2px solid transparent;
+  
+  /* Blur effect for side cards */
+  filter: blur(2px);
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+.testimonialCard:hover {
+  filter: none;
+  opacity: 1;
+  transform: scale(1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.testimonialCard.center {
+  filter: none;
+  opacity: 1;
+  transform: scale(1);
+  border: 3px solid #d4af37; /* Golden border for center card */
+  box-shadow: 0 12px 40px rgba(243, 156, 18, 0.3);
+  z-index: 3;
+}
+
+.testimonialText {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0 0 30px 0;
+  color: #2c3e50;
+  font-style: italic;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.testimonialAuthor {
+  margin-top: auto;
+}
+
+.authorName {
+  font-size: 18px;
+  font-weight: 600;
+  color: #d4af37; /* Golden color for author name */
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.contactButton {
+  display: block;
+  margin: 0 auto;
+background-color: #d4af37;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+}
+
+.contactButton:hover {
+background-color: #d4af37;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
+}
+
+.contactButton:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .testimonialsTitle {
+    font-size: 36px;
+  }
+  
+  .testimonialsGrid {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .testimonialCard,
+  .testimonialCard.center {
+    width: 90%;
+    max-width: 350px;
+    filter: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .testimonialCard.center {
+    border: 3px solid #f39c12;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonialsSection {
+    padding: 60px 0;
+  }
+  
+  .testimonialsTitle {
+    font-size: 28px;
+  }
+  
+  .testimonialsSubtitle {
+    font-size: 14px;
+  }
+  
+  .testimonialCard {
+    padding: 30px 20px;
+    min-height: 250px;
+  }
+}

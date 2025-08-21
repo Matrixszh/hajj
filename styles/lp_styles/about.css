@@ -1,0 +1,98 @@
+/* About Section */
+.aboutSection {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+  position: relative;
+  text-align: center;
+}
+
+.aboutSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, #4a9b93, #2d7d76);
+}
+
+.aboutContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 30px;
+  text-align: center;
+}
+
+.aboutTitle {
+  font-size: 32px;
+  line-height: 1.4;
+  margin-bottom: 0;
+  color: black;
+  text-align: center;
+}
+
+.brandName {
+  color: #d6b55c;
+  font-weight: 600;
+}
+
+.aboutText {
+  max-width: 700px;
+  text-align: center;
+}
+
+.aboutText p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+  max-width: 700px;
+}
+
+.exploreButton2 {
+  margin-top: 20px;
+  display: inline-block;
+  color: #127faa;
+  padding: 6px 24px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 1px solid #127faa;
+  margin-left: 10px;
+}
+
+.exploreButton2:hover {
+  background-color: #eeeeee;
+  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 208, 63, 0.3);
+}
+
+/* Responsive for About Section */
+@media (max-width: 768px) {
+  .aboutTitle {
+    font-size: 28px;
+  }
+  
+  .aboutText p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutTitle {
+    font-size: 24px;
+  }
+  
+  .aboutText p {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,302 @@
+/* Difference Section - Fixed Flip Animation */
+.differenceSection {
+  background-color: white;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.container2 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 36px;
+  color: #4a9b93;
+  margin: 0 0 20px 0;
+  font-weight: 600;
+}
+
+.sectionSubtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 80px 0;
+  line-height: 1.6;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 80px;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+/* FIXED: Card Container for Flip Effect */
+.cardContainer {
+  perspective: 1000px;
+  height: 400px; /* Fixed height instead of min-height */
+  width: 100%;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s ease-in-out; /* Faster transition */
+  transform-style: preserve-3d;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.cardContainer.flippable:hover .cardInner {
+  transform: rotateY(180deg);
+}
+
+.cardFront, .cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* FIXED: Both use center */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e0e0e0;
+}
+
+/* Front of Cards - Background Image with Feature Icon */
+.cardFront {
+  background-image: url('/cardbg2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Dark overlay for better icon visibility */
+.cardFront::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+}
+
+.cardImageBackground {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* FIXED: Feature icon styling - removed hover transform to prevent conflicts */
+.featureIcon {
+  filter: brightness(0) invert(1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  width: 80px !important;
+  height: 80px !important;
+  object-fit: contain;
+  transition: none; /* FIXED: Removed transition to prevent conflicts */
+}
+
+/* FIXED: Back of Cards - Text Content */
+.cardBack {
+  transform: rotateY(180deg);
+  padding: 30px;
+  justify-content: center; /* FIXED: Changed from flex-start to center */
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  text-align: center;
+  gap: 20px; /* FIXED: Added gap for consistent spacing */
+}
+
+.cardLogo {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(214, 181, 92, 0.1);
+  border-radius: 50%;
+  border: 2px solid rgba(214, 181, 92, 0.2);
+  flex-shrink: 0; /* FIXED: Prevent shrinking */
+}
+
+.goldenIcon {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: contain;
+  filter: brightness(1.2) saturate(1.3);
+}
+
+.cardTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #d6b55c;
+  margin: 0;
+  text-align: center;
+  line-height: 1.3;
+  flex-shrink: 0; /* FIXED: Prevent shrinking */
+}
+
+.cardText {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  margin: 0;
+  text-align: center;
+  font-weight: 400;
+  flex-grow: 1; /* FIXED: Allow text to grow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Design for Cards */
+@media (max-width: 992px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 800px;
+  }
+  
+  .cardContainer {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .differenceSection {
+    padding: 80px 0;
+  }
+  
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 400px;
+  }
+  
+  .sectionTitle {
+    font-size: 30px;
+  }
+  
+  .sectionSubtitle {
+    font-size: 14px;
+    margin-bottom: 60px;
+  }
+  
+  .cardContainer {
+    height: 320px;
+  }
+  
+  .cardTitle {
+    font-size: 20px;
+  }
+  
+  .cardText {
+    font-size: 14px;
+  }
+  
+  .featureIcon {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  
+  .goldenIcon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .cardImageBackground {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .cardLogo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .cardBack {
+    padding: 25px;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .differenceSection {
+    padding: 60px 0;
+  }
+  
+  .container2 {
+    padding: 0 15px;
+  }
+  
+  .sectionTitle {
+    font-size: 26px;
+  }
+  
+  .sectionSubtitle {
+    font-size: 13px;
+  }
+  
+  .cardBack {
+    padding: 20px;
+    gap: 12px;
+  }
+  
+  .cardTitle {
+    font-size: 18px;
+  }
+  
+  .cardText {
+    font-size: 13px;
+  }
+  
+  .featureIcon {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .goldenIcon {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  
+  .cardContainer {
+    height: 280px;
+  }
+  
+  .cardImageBackground {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .cardLogo {
+    width: 50px;
+    height: 50px;
+  }
+}
