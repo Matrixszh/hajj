@@ -834,6 +834,18 @@ content: '';
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(7, 135, 146, 0.3);
 }
+.backPoints {
+  list-style-type: disc; /* default bullet */
+  padding-left: 20px;   /* spacing so bullets don’t touch the edge */
+  text-align: left;     /* align points properly */
+  color: #555;          /* softer text color */
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.backPoints li {
+  margin-bottom: 8px; /* spacing between points */
+}
 
 /* Additional Responsive Updates */
 @media (max-width: 768px) {
