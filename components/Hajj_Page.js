@@ -60,8 +60,6 @@ const LandingPage = () => {
     }
   ];
 
-
-
   return (
     <div className={styles.landingPage}>
       {/* First Section - What is Caravan72 */}
@@ -77,14 +75,12 @@ const LandingPage = () => {
 
             <div className={styles.aboutText}>
               <p>
-                Caravan 72 stands out from other Hajj providers for its unparalleled expertise and comprehensive services, particularly in navigating the new visa and pilgrimage systems.We offer three tailored Hajj packages designed to meet the unique needs of our diverse community. Whether you're looking for complete convenience, flexible support, or specialized services for Pakistani passport holders, we have you covered.
+                Caravan 72 stands out from other Hajj providers for its unparalleled expertise and comprehensive services, particularly in navigating the new visa and pilgrimage systems. We offer three tailored Hajj packages designed to meet the unique needs of our diverse community. Whether you&apos;re looking for complete convenience, flexible support, or specialized services for Pakistani passport holders, we have you covered.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-
 
       <section className={styles.differenceSection}>
         <div className={styles.container2}>
@@ -138,7 +134,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-
       <section className={styles.gallerySection}>
         {/* Background layers */}
         <div className={styles.galleryBackground}></div>
@@ -166,7 +161,6 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
 
       <section className={styles.applicationSection}>
         <div className={styles.container2}>
