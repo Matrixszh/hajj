@@ -7,7 +7,7 @@ import styles from '../styles/Header.module.css';
 const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   // Function to check if a link is active
   const isActive = (path) => {
     return pathname === path;
@@ -27,36 +27,48 @@ const Header = () => {
         <div className={styles.logo}>
           <Link href="/">LOGO</Link>
         </div>
-        
+
         {/* Desktop Navigation */}
         <nav className={styles.nav}>
-          <Link 
-            href="/hajj" 
+          <Link
+            href="/"
+            className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}
+          >
+            Home
+          </Link>
+          <Link
+            href="/hajj"
             className={`${styles.navLink} ${isActive('/hajj') ? styles.active : ''}`}
           >
             Hajj
           </Link>
-          <Link 
-            href="/umrah" 
+          <Link
+            href="/umrah"
             className={`${styles.navLink} ${isActive('/umrah') ? styles.active : ''}`}
           >
             Umrah
           </Link>
-          <Link 
-            href="/ziyarah" 
+          <Link
+            href="/ziyarah"
             className={`${styles.navLink} ${isActive('/ziyarah') ? styles.active : ''}`}
           >
             Ziyarah
           </Link>
+          <Link
+            href="/contact"
+            className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
+          >
+            Contact
+          </Link>
         </nav>
-        
+
         {/* Desktop Contact Button */}
         <div className={styles.contactButton}>
           <Link href="/contact">CONTACT</Link>
         </div>
 
         {/* Mobile Hamburger Button */}
-        <button 
+        <button
           className={styles.hamburger}
           onClick={toggleMenu}
           aria-label="Toggle menu"
@@ -70,29 +82,36 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuOpen : ''}`}>
         <nav className={styles.mobileNav}>
-          <Link 
-            href="/hajj" 
+          <Link
+            href="/"
+            className={`${styles.mobileNavLink} ${isActive('/') ? styles.active : ''}`}
+            onClick={closeMenu}
+          >
+            Home
+          </Link>
+          <Link
+            href="/hajj"
             className={`${styles.mobileNavLink} ${isActive('/hajj') ? styles.active : ''}`}
             onClick={closeMenu}
           >
             Hajj
           </Link>
-          <Link 
-            href="/umrah" 
+          <Link
+            href="/umrah"
             className={`${styles.mobileNavLink} ${isActive('/umrah') ? styles.active : ''}`}
             onClick={closeMenu}
           >
             Umrah
           </Link>
-          <Link 
-            href="/ziyarah" 
+          <Link
+            href="/ziyarah"
             className={`${styles.mobileNavLink} ${isActive('/ziyarah') ? styles.active : ''}`}
             onClick={closeMenu}
           >
             Ziyarah
           </Link>
-          <Link 
-            href="/contact" 
+          <Link
+            href="/contact"
             className={styles.mobileContactButton}
             onClick={closeMenu}
           >
@@ -103,7 +122,7 @@ const Header = () => {
 
       {/* Mobile Menu Backdrop */}
       {isMenuOpen && (
-        <div 
+        <div
           className={styles.mobileBackdrop}
           onClick={closeMenu}
         ></div>
