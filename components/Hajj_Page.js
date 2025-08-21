@@ -26,37 +26,40 @@ const LandingPage = () => {
     {
       num: 1,
       title: "Premium",
-      backTitle: "Premium Excellence",
+      backTitle: "Full Service Hajj",
       backPoints: [
-        "Luxury 5-star hotel stay",
-        "Private transport with guide",
-        "Personalized itinerary planning",
-        "24/7 assistance during the trip"
+        "Hajj visa obtained on your behalf",
+        "Trip fully organized by our expert team",
+        "Rooming with our group for a familiar, supportive environment",
+        "Logistical support for a seamless experience",
+        "On-ground guidance and assistance at every stage of your journey"
       ]
     },
     {
       num: 2,
       title: "Ease",
-      backTitle: "Ease & Convenience",
+      backTitle: "Self Service Hajj",
       backPoints: [
-        "Hassle-free booking process",
-        "Affordable pricing options",
-        "Flexible scheduling",
-        "Comprehensive support"
+        "Guidance in obtaining your Hajj visa",
+        "Trip arranged by an authorized Saudi company",
+        "Help with rooming among our group (subject to availability)",
+        "Support to bridge logistical gaps",
+        "Full guidance during all Hajj rituals"
       ]
     },
     {
       num: 3,
       title: "Bronze",
-      backTitle: "Bronze Value",
+      backTitle: "Pakistani Passport Hajj",
       backPoints: [
-        "Budget-friendly accommodations",
-        "Group transport options",
-        "Guided tours included",
-        "Reliable service"
+        "Visa guaranteed through our trusted channels",
+        "Trip organized by our team (you will not be sent with Pakistan-based groups)",
+        "Deluxe accommodations and arrangements per U.S. standards",
+        "Comprehensive guidance and support throughout your Hajj journey"
       ]
     }
   ];
+
 
 
   return (
@@ -74,12 +77,7 @@ const LandingPage = () => {
 
             <div className={styles.aboutText}>
               <p>
-                Whether you run a large business or a home-based one, reaching your target customers is key to your
-                success. Dhaqaq helps you reach your customers through directories, community portals, and social networks.
-                Dhaqaq will connect with thousands of dots in your community. Dhaqaq helps you plan, start, and
-                grow your small business. Create a business account on Dhaqaq and connect with thousands of deals
-                in your community. Dhaqaq makes it easier for people to find and connect with businesses of all types.
-                Create a business account on Dhaqaq and connect with thousands of deals in your community.
+                Caravan 72 stands out from other Hajj providers for its unparalleled expertise and comprehensive services, particularly in navigating the new visa and pilgrimage systems.We offer three tailored Hajj packages designed to meet the unique needs of our diverse community. Whether you're looking for complete convenience, flexible support, or specialized services for Pakistani passport holders, we have you covered.
               </p>
             </div>
           </div>
@@ -94,8 +92,7 @@ const LandingPage = () => {
             <span style={{ color: "#4a9b93" }}>Packages</span> We Offer
           </h2>
           <p className={styles.sectionSubtitle}>
-            The Growing List Of Products, Features, And Services Available To You
-            As A Figma User. We&apos;ve Also Updated Our Terms
+            Each package is crafted with care, backed by years of experience, and focused on providing a spiritually fulfilling and worry-free Hajj.
           </p>
 
           <div className={styles.featuresGrid}>

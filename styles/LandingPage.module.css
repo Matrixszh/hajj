@@ -148,7 +148,7 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  height: 400px;
+  height: 500px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -816,7 +816,7 @@
   
   .featureCard {
     height: auto;
-    min-height: 350px;
+    min-height: 500px; 
   }
   
   .backCardTitle {
