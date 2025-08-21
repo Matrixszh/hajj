@@ -151,7 +151,6 @@ const LandingPage = () => {
             The Growing List Of Products, Features, And Services Available To You As A
             Figma User. We&apos;ve Also Updated Our Terms.
           </p>
-
           <div className={styles.galleryGrid}>
             {[1, 2, 3, 4, 5, 6].map((item) => (
               <div key={item} className={styles.galleryItem}>
