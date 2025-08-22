@@ -6,6 +6,7 @@ import styles from '../styles/LandingPage.module.css';
 
 const LandingPage = () => {
   const [activeTab, setActiveTab] = useState('HAJJ');
+  const [activeYear, setActiveYear] = useState('2025'); // New state for active year - defaults to latest
 
   const tabContent = {
     HAJJ: {
@@ -21,6 +22,26 @@ const LandingPage = () => {
       description: 'Discover the rich Islamic heritage through our carefully curated Ziyarah tours. Visit historical sites with expert guidance and authentic experiences.'
     }
   };
+
+  // Gallery data organized by year
+  const galleryData = {
+    '2025': [
+      { id: 19, src: '/hajj251.jpg', alt: 'Hajj 2025 - Sacred Journey Begins' },
+      { id: 20, src: '/hajj252.jpg', alt: 'Hajj 2025 - Unity in Prayer' },
+      { id: 21, src: '/hajj253.jpg', alt: 'Hajj 2025 - Spiritual Gathering' }
+    ],
+    '2024': [
+      { id: 1, src: '/hajj241.jpg', alt: 'Hajj 2024 - Kaaba' }
+    ],
+    '2023': [
+      { id: 7, src: '/hajj231.jpg', alt: 'Hajj 2023 - Masjid Nabawi' }
+    ],
+    '2022': [
+      { id: 13, src: '/hajj221.jpg', alt: 'Hajj 2022 - Arrival' }
+    ]
+  };
+
+  const availableYears = Object.keys(galleryData).sort((a, b) => b - a); // Sort years in descending order
 
   const packages = [
     {
@@ -67,15 +88,25 @@ const LandingPage = () => {
         <div className={styles.container}>
           <div className={styles.aboutContent}>
             <h2 className={styles.aboutTitle}>
-              How Do We <br />
+              Why <br />
             </h2>
             <h2 className={styles.brandNameTitle}>
-              <span className={styles.brandName}>Help You</span> ?
+              <span className={styles.brandName}>Caravan 72</span> ?
             </h2>
 
             <div className={styles.aboutText}>
               <p>
-                Caravan 72 stands out from other Hajj providers for its unparalleled expertise and comprehensive services, particularly in navigating the new visa and pilgrimage systems. We offer three tailored Hajj packages designed to meet the unique needs of our diverse community. Whether you&apos;re looking for complete convenience, flexible support, or specialized services for Pakistani passport holders, we have you covered.
+                Caravan 72 stands out from other Hajj providers for its unparalleled expertise and comprehensive services, particularly in navigating the new visa and pilgrimage systems. Unlike other groups, Caravan 72 takes full responsibility for every step of your journey. You do not have to:
+
+                Deal with Nusuk directly
+
+                Navigate the complexities of Saudi companies
+
+                Manage the purchase of packages
+
+                Apply for and obtain visas on your own
+
+                We handle it all for you. From the moment you register until your safe return home, we act as your liaison, ensuring every detail is managed with precision and care—so you can remain focused solely on your spiritual journey.
               </p>
             </div>
           </div>
@@ -129,11 +160,12 @@ const LandingPage = () => {
           </div>
 
           <div style={{ textAlign: "center", marginTop: "40px" }}>
-            <button className={styles.contactBtn}>Contact</button>
+            <button className={styles.contactBtn}>Register Now</button>
           </div>
         </div>
       </section>
 
+      {/* Updated Gallery Section with Year Categories */}
       <section className={styles.gallerySection}>
         {/* Background layers */}
         <div className={styles.galleryBackground}></div>
@@ -143,21 +175,38 @@ const LandingPage = () => {
         <div className={styles.container2}>
           <h2 className={styles.gallerySectionTitle}>Pictures That Speak</h2>
           <p className={styles.gallerySectionSubtitle}>
-            The Growing List Of Products, Features, And Services Available To You As A
-            Figma User. We&apos;ve Also Updated Our Terms.
+            Relive the spiritual journey through our collection of memorable moments from each Hajj season.
           </p>
-          <div className={styles.galleryGrid}>
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className={styles.galleryItem}>
-                <Image
-                  src={`/gallery-image-${item}.jpg`}
-                  alt={`Gallery ${item}`}
-                  width={200}
-                  height={150}
-                  className={styles.galleryImage}
-                />
-              </div>
+
+          {/* Year Tabs */}
+          <div className={styles.yearTabs}>
+            {availableYears.map((year) => (
+              <button
+                key={year}
+                className={`${styles.yearTab} ${activeYear === year ? styles.yearTabActive : ''}`}
+                onClick={() => setActiveYear(year)}
+              >
+                Hajj {year}
+              </button>
             ))}
+          </div>
+
+          {/* Gallery Grid for Selected Year */}
+          <div className={styles.galleryContainer}>
+            <h3 className={styles.activeYearTitle}>Hajj {activeYear} Memories</h3>
+            <div className={styles.galleryGrid}>
+              {galleryData[activeYear]?.map((image) => (
+                <div key={image.id} className={styles.galleryItem}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={200}
+                    height={150}
+                    className={styles.galleryImage}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -165,11 +214,10 @@ const LandingPage = () => {
       <section className={styles.applicationSection}>
         <div className={styles.container2}>
           <h2 className={`${styles.applicationTitle} ${styles.gradientText}`}>
-            Your Application Made Easy!
+            The Hajj Process!
           </h2>
           <p className={styles.applicationSubtitle}>
-            The Growing List Of Products, Features, And Services Available To You As A
-            Figma User. We&apos;ve Also Updated Our Terms.
+            Caravan 72 Makes Your Hajj process into 4 Easy Steps
           </p>
 
           {/* Step Cards */}
@@ -179,16 +227,16 @@ const LandingPage = () => {
                 <div className={styles.stepCard}>
                   <span className={styles.stepNumber}>{step}</span>
                   <div className={styles.stepIconPlaceholder}>
-                    {step === 1 && "🪶"}
-                    {step === 2 && "📝"}
-                    {step === 3 && "➕"}
+                    {step === 1 && "📝"}
+                    {step === 2 && "💲"}
+                    {step === 3 && "🪶"}
                     {step === 4 && "✔️"}
                   </div>
                   <div className={styles.stepLabel}>
-                    {step === 1 && "Ease"}
-                    {step === 2 && "Fill In Form"}
-                    {step === 3 && "Application Added"}
-                    {step === 4 && "Approved"}
+                    {step === 1 && "Register & Pay Deposit"}
+                    {step === 2 && "Submit Funds Before Deadline"}
+                    {step === 3 && "Visa & Package Confirmation"}
+                    {step === 4 && "Prepare for Hajj & Pack Your Bags"}
                   </div>
                 </div>
               </div>
@@ -209,7 +257,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Testimonials Section - What Do Our Customer Say */}
+      {/* Testimonials Section - What Do Our Customer Say 
       <section className={styles.testimonialsSection}>
         <div className={styles.container2}>
           <h2 className={styles.testimonialsTitle}>What Do Our Customer Say ?</h2>
@@ -243,6 +291,7 @@ const LandingPage = () => {
 
         </div>
       </section>
+      */}
       {/* Sixth Section - Quote */}
       <section className={styles.quoteSection}>
         <div className={styles.container2}>

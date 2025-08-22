@@ -14,7 +14,7 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 40px 50px; /* more spacing inside the box */
-  border: 1px solid #d6b55c; /* use the light gold tone like the image */
+  border: 1px solid #f0b207; /* use the light gold tone like the image */
   border-radius: 8px;
   background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* soft shadow like the image */
@@ -45,20 +45,21 @@
 }
 
 .aboutTitle {
-  font-size: 32px;
+  font-size: 48px;
   line-height: 1.4;
   margin-bottom: 0;
   color: black;
 }
 
 .brandNameTitle {
-  font-size: 32px;
+  font-size: 48px;
   line-height: 1.4;
   margin-bottom: 20px;
-  color: #d6b55c; /* fallback if needed */
+  color: #f0b207; /* fallback if needed */
 }
 
 .brandName {
+  
   font-weight: 600;
 }
 
@@ -67,7 +68,7 @@
 }
 
 .aboutText p {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.7;
   color: #333;
   margin: 0 auto;
@@ -97,7 +98,7 @@
 }
 
 .brandName {
-  color: #d6b55c;
+  color: #f0b207;
   font-weight: 600;
 }
 
@@ -148,7 +149,7 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  height: 500px;
+  height: 600px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -212,9 +213,9 @@
 }
 
 .backTitle {
-  font-size: 22px;
-  font-weight: 600;
-  color: #d4af37; /* gold */
+  font-size: 24px;
+  font-weight: 800;
+  color: #eab70e; /* gold */
   margin-bottom: 20px;
 }
 
@@ -336,7 +337,7 @@
 
 .galleryImage {
   width: 100%;
-  height: 100%;
+  height: 100%s;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
@@ -394,14 +395,14 @@
 
 .applicationTitle {
   text-align: center;
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 500;
   margin-bottom: 15px;
 }
 
 .applicationSubtitle {
   text-align: center;
-  font-size: 14px;
+  font-size: 32px;
   color: #444;
   line-height: 1.6;
   max-width: 600px;
@@ -428,9 +429,9 @@
 }
 
 .stepCard {
-  width: 130px;
-  height: 130px;
-  background: linear-gradient(90deg, #7DE9F2 0%, #078792 100%);
+  width: 330px;
+  height: 230px;
+  background: linear-gradient(90deg, #000000 0%, #078792 100%);
   color: white;
   border-radius: 8px;
   padding: 20px 10px;
@@ -452,17 +453,17 @@
   position: absolute;
   top: 8px;
   left: 10px;
-  font-size: 12px;
+  font-size: 28px;
   opacity: 0.8;
 }
 
 .stepIconPlaceholder {
-  font-size: 24px;
+  font-size: 48px;
   margin-bottom: 8px;
 }
 
 .stepLabel {
-  font-size: 14px;
+  font-size: 28px;
   font-weight: 500;
   margin: 0;
   text-align: center;
@@ -562,7 +563,7 @@
   padding-left: 20px;   /* spacing so bullets don’t touch the edge */
   text-align: left;     /* align points properly */
   color: #555;          /* softer text color */
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.6;
 }
 
@@ -1168,7 +1169,129 @@
   transform: scale(1.03);
   z-index: 2;
 }
+.yearTabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
 
+.yearTab {
+  padding: 12px 24px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(45, 125, 118, 0.3);
+  color: #2d7d76;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(10px);
+}
+
+.yearTab:hover {
+  background-color: rgba(45, 125, 118, 0.1);
+  border-color: #2d7d76;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(45, 125, 118, 0.2);
+}
+
+.yearTabActive {
+  background-color: #2d7d76;
+  color: white;
+  border-color: #2d7d76;
+  box-shadow: 0 4px 15px rgba(45, 125, 118, 0.4);
+}
+
+.yearTabActive:hover {
+  background-color: #245a54;
+  border-color: #245a54;
+}
+
+/* Gallery Container */
+.galleryContainer {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.activeYearTitle {
+  text-align: center;
+  font-size: 24px;
+  color: #2d7d76;
+  margin-bottom: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Enhanced Gallery Grid for better visual impact */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Gallery Items */
+.galleryItem {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.galleryItem:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.galleryItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(45, 125, 118, 0.1), rgba(45, 125, 118, 0.3));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  border-radius: 12px;
+}
+
+.galleryItem:hover::before {
+  opacity: 1;
+}
+
+.galleryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+
+.galleryItem:hover .galleryImage {
+  transform: scale(1.05);
+}
 /* Responsive */
 @media (max-width: 768px) {
   .testimonialsGrid {
@@ -1182,5 +1305,68 @@
     transform: none;
     filter: none;
     opacity: 1;
+  }
+}
+@media (max-width: 768px) {
+  .yearTabs {
+    gap: 8px;
+    padding: 0 15px;
+  }
+  
+  .yearTab {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+  
+  .activeYearTitle {
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+  
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .yearTabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  
+  .yearTab {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  
+  .activeYearTitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Loading animation for when switching years */
+.galleryGrid.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Enhanced hover effects for better user experience */
+@media (hover: hover) {
+  .galleryItem {
+    cursor: pointer;
+  }
+  
+  .galleryItem:hover .galleryImage {
+    filter: brightness(1.1);
   }
 }

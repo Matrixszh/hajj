@@ -15,9 +15,9 @@ const Banner = () => {
         <div className={styles.content}>
           <div className={styles.textContent}>
             <h1 className={styles.title}>
-              A Opportunity To Refresh Your Faith And Cleanse Your Soul </h1>
+              Your Trusted Hajj Partner  </h1>
             <p className={styles.subtitle}>
-              Nusuk Hajj is the one-stop-shop platform overseen by the Ministry of Hajj and Umrah, offering pilgrims from serviced countries a variety of Hajj packages, provided by authorized service providers, ensuring a seamless Hajj experience.
+              The most experienced Western group on the new Nusuk platform, having successfully organized and led Hajj groups since its introduction in 2022. From visas and flights to accommodations, transportation, and on-the-ground support, we take care of every detail—so you don’t have to.
             </p>
             <Link href="/contact" className={styles.exploreButton}>
               CONTACT

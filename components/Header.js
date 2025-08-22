@@ -115,7 +115,7 @@ const Header = () => {
             className={styles.mobileContactButton}
             onClick={closeMenu}
           >
-            CONTACT
+            Register
           </Link>
         </nav>
       </div>
