@@ -61,14 +61,14 @@ const Header = () => {
               Hajj
             </Link>
             <div className={styles.dropdownContent}>
-              <Link href="/hajj/packages" className={styles.dropdownItem}>
-                Hajj Packages
+              <Link href="/hajj1" className={styles.dropdownItem}>
+                Full Service
               </Link>
               <Link href="/hajj/guide" className={styles.dropdownItem}>
-                Hajj Guide
+                Self Service
               </Link>
               <Link href="/hajj/requirements" className={styles.dropdownItem}>
-                Requirements
+                Pakistani Passport
               </Link>
             </div>
           </div>
@@ -89,13 +89,13 @@ const Header = () => {
             href="/contact"
             className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
           >
-            Contact
+            Register
           </Link>
         </nav>
 
         {/* Desktop Contact Button */}
         <div className={styles.contactButton}>
-          <Link href="/contact">CONTACT</Link>
+          <Link href="/contact">RGISTER NOW</Link>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -145,25 +145,25 @@ const Header = () => {
             {/* Mobile Sub-menu */}
             <div className={`${styles.mobileSubMenu} ${isHajjExpanded ? styles.mobileSubMenuOpen : ''}`}>
               <Link
-                href="/hajj/packages"
+                href="/hajj1"
                 className={`${styles.mobileSubNavLink} ${isActive('/hajj/packages') ? styles.active : ''}`}
                 onClick={closeMenu}
               >
-                Hajj Packages
+                Full Service
               </Link>
               <Link
                 href="/hajj/guide"
                 className={`${styles.mobileSubNavLink} ${isActive('/hajj/guide') ? styles.active : ''}`}
                 onClick={closeMenu}
               >
-                Hajj Guide
+                Self Service
               </Link>
               <Link
                 href="/hajj/requirements"
                 className={`${styles.mobileSubNavLink} ${isActive('/hajj/requirements') ? styles.active : ''}`}
                 onClick={closeMenu}
               >
-                Requirements
+                Pakistani Passport
               </Link>
             </div>
           </div>
