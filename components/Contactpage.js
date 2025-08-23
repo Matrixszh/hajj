@@ -1,10 +1,9 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import styles from '../styles/ContactPage.module.css';
 
 const ContactPage = () => {
-    const form = useRef();
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
@@ -41,38 +40,86 @@ const ContactPage = () => {
     });
 
     const [errors, setErrors] = useState({});
+    const compressImage = (file, maxWidth = 800, quality = 0.7) => {
+        return new Promise((resolve) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
 
+            img.onload = () => {
+                // Calculate new dimensions
+                const ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
+                canvas.width = img.width * ratio;
+                canvas.height = img.height * ratio;
+
+                // Draw and compress
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                canvas.toBlob(resolve, 'image/jpeg', quality);
+            };
+
+            img.src = URL.createObjectURL(file);
+        });
+    };
     // Initialize EmailJS
     useEffect(() => {
-        emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+        try {
+            if (process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+                emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+            } else {
+                console.error('EmailJS public key is missing');
+            }
+        } catch (error) {
+            console.error('Error initializing EmailJS:', error);
+        }
     }, []);
 
     const handleInputChange = (e) => {
         const { name, value, type, checked, files } = e.target;
 
-        if (type === 'file') {
-            setFormData(prev => ({
-                ...prev,
-                [name]: files[0]
-            }));
-        } else if (type === 'checkbox') {
-            setFormData(prev => ({
-                ...prev,
-                [name]: checked
-            }));
-        } else {
-            setFormData(prev => ({
-                ...prev,
-                [name]: value
-            }));
-        }
+        try {
+            if (type === 'file') {
+                const file = files?.[0];
+                if (file) {
+                    // Validate file size (5MB limit)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('File size must be less than 5MB');
+                        e.target.value = ''; // Clear the input
+                        return;
+                    }
+                    // Validate file type
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
+                    if (!allowedTypes.includes(file.type)) {
+                        alert('Please select a valid image (JPEG, PNG) or PDF file');
+                        e.target.value = ''; // Clear the input
+                        return;
+                    }
+                }
+                setFormData(prev => ({
+                    ...prev,
+                    [name]: file || null
+                }));
+            } else if (type === 'checkbox') {
+                setFormData(prev => ({
+                    ...prev,
+                    [name]: checked
+                }));
+            } else {
+                setFormData(prev => ({
+                    ...prev,
+                    [name]: value
+                }));
+            }
 
-        // Clear error when user starts typing
-        if (errors[name]) {
-            setErrors(prev => ({
-                ...prev,
-                [name]: ''
-            }));
+            // Clear error when user starts typing
+            if (errors[name]) {
+                setErrors(prev => ({
+                    ...prev,
+                    [name]: ''
+                }));
+            }
+        } catch (error) {
+            console.error('Error handling input change:', error);
         }
     };
 
@@ -126,59 +173,205 @@ const ContactPage = () => {
         setCurrentStep(prev => prev - 1);
     };
 
-    const handleSubmit = (e) => {
+    // Convert file to Base64
+    const convertToBase64 = async (file, compress = true) => {
+        return new Promise(async (resolve, reject) => {
+            if (!file) {
+                resolve('');
+                return;
+            }
+
+            let processedFile = file;
+
+            // Compress image files
+            if (compress && file.type.startsWith('image/') && file.type !== 'image/gif') {
+                try {
+                    processedFile = await compressImage(file);
+                    console.log(`Compressed ${file.name} from ${file.size} to ${processedFile.size} bytes`);
+                } catch (error) {
+                    console.error('Compression failed, using original file:', error);
+                }
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = () => {
+                try {
+                    const base64 = reader.result;
+                    // Check size (approximate, since Base64 adds ~33% overhead)
+                    const sizeInKB = (base64.length * 0.75) / 1024;
+                    console.log(`Base64 size: ${sizeInKB.toFixed(2)} KB`);
+
+                    if (sizeInKB > 30) { // Leave room for other form data
+                        console.warn('File still too large after compression');
+                        reject(new Error('File too large even after compression. Please use a smaller file.'));
+                        return;
+                    }
+
+                    resolve(base64);
+                } catch (error) {
+                    console.error('Error in FileReader onload:', error);
+                    reject(error);
+                }
+            };
+
+            reader.onerror = (error) => {
+                console.error('FileReader error:', error);
+                reject(error);
+            };
+
+            reader.onabort = () => {
+                console.error('FileReader aborted');
+                reject(new Error('File reading was aborted'));
+            };
+
+            try {
+                reader.readAsDataURL(processedFile);
+            } catch (error) {
+                console.error('Error starting FileReader:', error);
+                reject(error);
+            }
+        });
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!validateStep(currentStep)) return;
 
         setIsSubmitting(true);
 
-        // Send email using EmailJS
-        emailjs.sendForm(
-            process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-            process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-            form.current,
-            process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-        )
-            .then(() => {
-                alert('Form submitted successfully! We will contact you soon.');
-                // Reset form
-                setFormData({
-                    firstName: '',
-                    middleName: '',
-                    lastName: '',
-                    motherName: '',
-                    fatherName: '',
-                    email: '',
-                    cellPhone: '',
-                    dateOfBirth: '',
-                    gender: '',
-                    nationality: '',
-                    previousNationality: '',
-                    streetAddress: '',
-                    city: '',
-                    zipCode: '',
-                    state: '',
-                    passportNumber: '',
-                    dateOfIssue: '',
-                    dateOfExpiration: '',
-                    passportCopy: null,
-                    photograph: null,
-                    departureCity: '',
-                    roomRequirement: '',
-                    travelingCompanions: '',
-                    marjaTaqleed: '',
-                    termsAccepted: false
-                });
-                setCurrentStep(1);
-            })
-            .catch((error) => {
-                alert('Failed to send form. Please try again.');
-                console.error('EmailJS error:', error);
-            })
-            .finally(() => {
+        try {
+            // Check if EmailJS is properly initialized
+            if (!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+                throw new Error('EmailJS configuration is missing');
+            }
+
+            // Convert files to Base64 with compression
+            let passportCopyBase64 = '';
+            let photographBase64 = '';
+
+            if (formData.passportCopy) {
+                try {
+                    console.log('Converting and compressing passport copy...');
+                    passportCopyBase64 = await convertToBase64(formData.passportCopy, true);
+                } catch (error) {
+                    console.error('Error processing passport copy:', error);
+                    alert(`Error processing passport copy: ${error.message}`);
+                    setIsSubmitting(false);
+                    return;
+                }
+            }
+
+            if (formData.photograph) {
+                try {
+                    console.log('Converting and compressing photograph...');
+                    photographBase64 = await convertToBase64(formData.photograph, true);
+                } catch (error) {
+                    console.error('Error processing photograph:', error);
+                    alert(`Error processing photograph: ${error.message}`);
+                    setIsSubmitting(false);
+                    return;
+                }
+            }
+            const totalSize = JSON.stringify({
+                ...formData,
+                passportCopyBase64,
+                photographBase64
+            }).length / 1024;
+
+            console.log(`Total payload size: ${totalSize.toFixed(2)} KB`);
+
+            if (totalSize > 45) { // Leave some buffer
+                alert('Files are too large. Please use smaller images and try again.');
                 setIsSubmitting(false);
+                return;
+            }
+
+            // Prepare template parameters
+            const templateParams = {
+                firstName: formData.firstName || '',
+                middleName: formData.middleName || 'N/A',
+                lastName: formData.lastName || '',
+                motherName: formData.motherName || '',
+                fatherName: formData.fatherName || '',
+                email: formData.email || '',
+                cellPhone: formData.cellPhone || '',
+                dateOfBirth: formData.dateOfBirth || '',
+                gender: formData.gender || '',
+                nationality: formData.nationality || '',
+                previousNationality: formData.previousNationality || 'N/A',
+                streetAddress: formData.streetAddress || '',
+                city: formData.city || '',
+                zipCode: formData.zipCode || '',
+                state: formData.state || '',
+                passportNumber: formData.passportNumber || '',
+                dateOfIssue: formData.dateOfIssue || '',
+                dateOfExpiration: formData.dateOfExpiration || '',
+                departureCity: formData.departureCity || '',
+                roomRequirement: formData.roomRequirement || '',
+                travelingCompanions: formData.travelingCompanions || '',
+                marjaTaqleed: formData.marjaTaqleed || '',
+                termsAccepted: formData.termsAccepted ? 'Yes' : 'No',
+                passportCopyBase64: passportCopyBase64,
+                photographBase64: photographBase64,
+                passportCopyName: formData.passportCopy?.name || 'Not uploaded',
+                photographName: formData.photograph?.name || 'Not uploaded',
+                submissionDate: new Date().toLocaleDateString(),
+                submissionTime: new Date().toLocaleTimeString()
+            };
+
+            console.log('Sending email with EmailJS...');
+
+            const result = await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+                templateParams,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+            );
+
+            console.log('Email sent successfully:', result);
+            alert('Form submitted successfully! We will contact you soon.');
+
+            // Reset form
+            setFormData({
+                firstName: '',
+                middleName: '',
+                lastName: '',
+                motherName: '',
+                fatherName: '',
+                email: '',
+                cellPhone: '',
+                dateOfBirth: '',
+                gender: '',
+                nationality: '',
+                previousNationality: '',
+                streetAddress: '',
+                city: '',
+                zipCode: '',
+                state: '',
+                passportNumber: '',
+                dateOfIssue: '',
+                dateOfExpiration: '',
+                passportCopy: null,
+                photograph: null,
+                departureCity: '',
+                roomRequirement: '',
+                travelingCompanions: '',
+                marjaTaqleed: '',
+                termsAccepted: false
             });
+            setCurrentStep(1);
+
+        } catch (error) {
+            console.error('Detailed EmailJS error:', error);
+            if (error.text) {
+                console.error('EmailJS error text:', error.text);
+            }
+            alert(`Failed to send form: ${error.message || 'Please try again.'}`);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const renderStep1 = () => (
@@ -224,7 +417,7 @@ const ContactPage = () => {
 
             <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                    <label className={styles.label}>Mother's Name *</label>
+                    <label className={styles.label}>Mother&apos;s Name *</label>
                     <input
                         type="text"
                         name="motherName"
@@ -236,7 +429,7 @@ const ContactPage = () => {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label className={styles.label}>Father's Name *</label>
+                    <label className={styles.label}>Father&apos;s Name *</label>
                     <input
                         type="text"
                         name="fatherName"
@@ -442,6 +635,12 @@ const ContactPage = () => {
                         accept="image/*,.pdf"
                         className={`${styles.input} ${errors.passportCopy ? styles.inputError : ''}`}
                     />
+                    <small className={styles.fileNote}>Max file size: 5MB</small>
+                    {formData.passportCopy && (
+                        <div className={styles.filePreview}>
+                            Selected: {formData.passportCopy.name}
+                        </div>
+                    )}
                     {errors.passportCopy && <span className={styles.error}>{errors.passportCopy}</span>}
                 </div>
 
@@ -454,6 +653,12 @@ const ContactPage = () => {
                         accept="image/*"
                         className={`${styles.input} ${errors.photograph ? styles.inputError : ''}`}
                     />
+                    <small className={styles.fileNote}>Max file size: 5MB</small>
+                    {formData.photograph && (
+                        <div className={styles.filePreview}>
+                            Selected: {formData.photograph.name}
+                        </div>
+                    )}
                     {errors.photograph && <span className={styles.error}>{errors.photograph}</span>}
                 </div>
             </div>
@@ -590,7 +795,7 @@ const ContactPage = () => {
                         </div>
                     </div>
 
-                    <form ref={form} onSubmit={handleSubmit} className={styles.form}>
+                    <form onSubmit={handleSubmit} className={styles.form}>
                         {/* Render current step */}
                         {currentStep === 1 && renderStep1()}
                         {currentStep === 2 && renderStep2()}

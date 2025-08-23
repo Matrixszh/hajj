@@ -255,6 +255,30 @@
     flex: 1;
     line-height: 1.5;
 }
+/* Add these new styles to your existing CSS file */
+
+.fileNote {
+    display: block;
+    color: #6c757d;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.filePreview {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+/* Loading state for submit button */
+.submitButton:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
 
 @media (max-width: 768px) {
     .radioGroup {
