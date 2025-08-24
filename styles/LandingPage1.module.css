@@ -1,34 +1,131 @@
-.landingPage {
+/* HajjPackage.module.css - Updated with Brand Colors */
+
+.hajjPackage {
   width: 100%;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  color: #333;
+  position: relative;
+  overflow-x: hidden;
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 3;
+}
+
+/* Gradient Text Utility */
 .gradientText {
-  background: #078792B2; /* This is teal with ~70% opacity */
+  background: #078792B2;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 50px; /* more spacing inside the box */
-  border: 1px solid #f0b207; /* use the light gold tone like the image */
-  border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* soft shadow like the image */
+/* Background Elements */
+.backgroundElements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* First Section - About */
-.aboutSection {
+.bgCircle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bgCircle1 {
+  top: -10rem;
+  right: -10rem;
+  width: 24rem;
+  height: 24rem;
+  background: linear-gradient(135deg, rgba(240, 178, 7, 0.1), rgba(212, 175, 55, 0.1));
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.bgCircle2 {
+  bottom: -10rem;
+  left: -10rem;
+  width: 24rem;
+  height: 24rem;
+  background: linear-gradient(135deg, rgba(74, 155, 147, 0.1), rgba(45, 125, 118, 0.1));
+  animation: pulse 4s ease-in-out infinite 1s;
+}
+
+.bgCircle3 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16rem;
+  height: 16rem;
+  background: linear-gradient(135deg, rgba(7, 135, 146, 0.05), rgba(19, 139, 150, 0.05));
+  animation: spin 20s linear infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 0.3; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.6; 
+    transform: scale(1.1); 
+  }
+}
+
+@keyframes spin {
+  from { 
+    transform: translate(-50%, -50%) rotate(0deg); 
+  }
+  to { 
+    transform: translate(-50%, -50%) rotate(360deg); 
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { 
+    transform: translateY(0); 
+  }
+  40% { 
+    transform: translateY(-10px); 
+  }
+  60% { 
+    transform: translateY(-5px); 
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Section */
+.heroSection {
   background-color: #f8f9fa;
   padding: 80px 0;
   position: relative;
   text-align: center;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
 }
 
-.aboutSection::before {
+.heroSection::before {
   content: '';
   position: absolute;
   top: 0;
@@ -38,269 +135,108 @@
   background: linear-gradient(90deg, #4a9b93, #2d7d76);
 }
 
-.aboutContent {
+.heroSection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heroContent {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-.aboutTitle {
-  font-size: 48px;
-  line-height: 1.4;
-  margin-bottom: 0;
-  color: black;
-}
-
-.brandNameTitle {
-  font-size: 48px;
-  line-height: 1.4;
-  margin-bottom: 20px;
-  color: #f0b207; /* fallback if needed */
-}
-
-.brandName {
-  font-weight: 600;
-  color: #f0b207;
-}
-
-.aboutText {
-  margin-top: 20px;
-  flex: 1; /* make it grow and fill available space */
-  max-width: 700px; /* optional: avoid overly long lines */
-}
-
-.aboutText p {
-  font-size: 20px;
-  line-height: 1.7;
-  color: #333;
-  margin: 0 auto;
-  max-width: 700px;
-}
-
-.exploreButton2 {
-  margin-top: 20px;
-  display: inline-block;
-  color: #127faa;
-  padding: 6px 24px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 1px;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  border: 1px solid #127faa;
-  margin-left: 10px;
-}
-
-.exploreButton2:hover {
-  background-color: #eeeeee;
-  color: #333;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(244, 208, 63, 0.3);
-}
-
-/* Second Section - Offer */
-.differenceSection {
-  background-color: white;
-  padding: 80px 0;
-}
-
-.container2 {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 3;
-}
-
-.sectionTitle {
-  text-align: center;
-  font-size: 32px;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-.sectionSubtitle {
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto 60px;
-}
-
-.featuresGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  align-items: stretch;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.featureCard {
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  height: 600px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.featureCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Flip Card */
-.flipCard {
-  width: 100%;
-  height: 100%;
-  perspective: 1000px;
-}
-
-.flipCardInner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.flipCard:hover .flipCardInner {
-  transform: rotateY(180deg);
-}
-
-.flipCardFront,
-.flipCardBack {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Front side */
-.flipCardFront {
-  background-color: white;
-}
-
-/* Back side - updated to accommodate button */
-.flipCardBack {
-  background-color: white;
-  color: black;
-  transform: rotateY(180deg);
-  padding: 30px 25px 25px; /* Reduced top padding to make room for button */
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  border: 1px solid #d4af37; /* subtle gold border */
-}
-
-.backNumber {
-  font-size: 64px;
-  font-weight: 700;
-  color: #d4af37; /* gold */
-  margin-bottom: 10px;
-}
-
-.backTitle {
-  font-size: 24px;
-  font-weight: 800;
-  color: #eab70e; /* gold */
-  margin-bottom: 20px;
-}
-
-.backText {
-  font-size: 14px;
-  line-height: 1.6;
-  color: black;
-  text-align: justify;
-}
-
-/* Adjust back points for better spacing */
-.backPoints {
-  list-style-type: disc; /* default bullet */
-  padding-left: 20px; /* spacing so bullets don't touch the edge */
-  text-align: left; /* align points properly */
-  color: #555; /* softer text color */
-  font-size: 16px; /* Slightly reduced */
-  line-height: 1.4; /* Tighter line height */
-  margin-bottom: 0; /* Remove bottom margin */
-}
-
-.backPoints li {
-  margin-bottom: 6px; /* Reduced spacing between points */
-}
-
-/* Package button styles */
-.packageButton {
-  margin-top: 20px;
-  padding: 12px 30px;
-  background-color: #d4af37;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-}
-
-.packageButton:hover {
-  background-color: #c19b26;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-}
-
-.packageButton:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-}
-
-/* Image container */
-.imageContainer {
-  flex: 1;
-  position: relative;
+.heroTitle {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  margin-bottom: 1.5rem;
 }
 
-.centerImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.titleIcon {
+  font-size: 3rem;
+  margin-right: 1rem;
+  animation: bounce 2s infinite;
 }
 
-/* Updated cardNumber styles for text instead of numbers */
-.cardNumber {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px; /* Reduced from 64px for text */
-  font-weight: 700;
-  color: #1f3b57;
+.heroTitle h1 {
+  font-size: 48px;
+  font-weight: 600;
+  color: #f0b207;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.heroSubtitle {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Details Card */
+.detailsCard {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px 50px;
+  border: 1px solid #f0b207;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.detailItem {
   text-align: center;
-  white-space: nowrap;
-  max-width: 90%;
-  line-height: 1.2;
 }
 
-.featureCard:hover .cardNumber {
-  transform: translate(-50%, -50%) scale(1.1);
+.detailIcon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: #4a9b93;
 }
 
-/* Button */
-.contactBtn {
+.detailItem h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.detailItem p {
+  color: #333;
+  margin: 0.25rem 0;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #4a9b93;
+  margin-bottom: 0.5rem;
+}
+
+.priceNote {
+  color: #f0b207 !important;
+  font-size: 0.875rem;
+}
+
+.spotsCounter {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #d4af37;
+}
+
+/* CTA Buttons */
+.ctaButton {
+  margin-top: 20px;
   padding: 12px 40px;
   border: 1px solid #4a9b93;
   background-color: white;
@@ -314,856 +250,451 @@
   font-weight: 500;
 }
 
-.contactBtn:hover {
+.ctaButton:hover {
   background-color: #4a9b93;
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(74, 155, 147, 0.3);
 }
 
-.contactBtn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(74, 155, 147, 0.3);
+.finalCtaButton {
+  padding: 12px 40px;
+  border: 1px solid #d4af37;
+  background-color: #d4af37;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
-/* Fourth Section - Gallery */
-.gallerySection {
+.finalCtaButton:hover {
+  background-color: #c19b26;
+  border-color: #c19b26;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Features Section */
+.featuresSection {
+  background-color: white;
+  padding: 80px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.sectionTitle.teal {
+  color: #4a9b93;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  align-items: stretch;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.featureCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px 20px;
+  border: 1px solid rgba(74, 155, 147, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #4a9b93;
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  color: #4a9b93;
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.featureCard p {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Spiritual Section */
+.spiritualSection {
   position: relative;
   overflow: hidden;
   padding: 80px 0;
 }
 
-.galleryBackground {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/package_bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 1;
-}
-
-.galleryOverlay {
+.spiritualSection::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, rgba(184, 221, 217, 0.9), rgba(168, 208, 204, 0.9));
+  z-index: 1;
+}
+
+.spiritualGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
   z-index: 2;
 }
 
-.gallerySectionTitle {
-  text-align: center;
-  font-size: 32px;
-  color: #2d7d76;
-  margin: 0 0 20px 0;
-  font-weight: 500;
-}
-
-.gallerySectionSubtitle {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin: 0 0 60px 0;
-  line-height: 1.6;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.yearTabs {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-}
-
-.yearTab {
-  padding: 12px 24px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(45, 125, 118, 0.3);
-  color: #2d7d76;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(10px);
-}
-
-.yearTab:hover {
-  background-color: rgba(45, 125, 118, 0.1);
-  border-color: #2d7d76;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(45, 125, 118, 0.2);
-}
-
-.yearTabActive {
-  background-color: #2d7d76;
-  color: white;
-  border-color: #2d7d76;
-  box-shadow: 0 4px 15px rgba(45, 125, 118, 0.4);
-}
-
-.yearTabActive:hover {
-  background-color: #245a54;
-  border-color: #245a54;
-}
-
-/* Gallery Container */
-.galleryContainer {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.activeYearTitle {
-  text-align: center;
-  font-size: 24px;
+.spiritualContent .sectionTitle {
+  text-align: left;
   color: #2d7d76;
   margin-bottom: 30px;
+}
+
+.servicesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.serviceItem {
+  display: flex;
+  align-items: center;
+  font-size: 1.125rem;
+  color: #333;
+}
+
+.checkmark {
+  color: #4a9b93;
+  font-weight: 700;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+.guidanceCard {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(45, 125, 118, 0.3);
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.guidanceCard h3 {
+  font-size: 24px;
   font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #2d7d76;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* Updated gallery grid for larger images */
-.galleryGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px; /* Increased gap for larger images */
-  max-width: 1000px; /* Increased max-width */
-  margin: 0 auto;
-  animation: fadeIn 0.5s ease-in-out;
+.guidanceIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #2d7d76;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.guidanceCard p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
 }
 
-/* Enhanced Gallery Items */
-.galleryItem {
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  position: relative;
-  min-height: 225px; /* Ensure minimum height for larger images */
-}
-
-.galleryItem:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-.galleryItem::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(45, 125, 118, 0.1), rgba(45, 125, 118, 0.3));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 1;
-  border-radius: 12px;
-}
-
-.galleryItem:hover::before {
-  opacity: 1;
-}
-
-.galleryPlaceholder {
-  width: 100%;
-  height: 100%;
-  background-color: #f8f9fa;
-  border: 2px dashed #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #999;
-  font-size: 14px;
-}
-
-.galleryImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-  border-radius: 12px;
-}
-
-.galleryItem:hover .galleryImage {
-  transform: scale(1.05);
-}
-
-/* Loading animation for when switching years */
-.galleryGrid.loading {
-  opacity: 0.5;
-  pointer-events: none;
-}
-
-/* Enhanced hover effects for better user experience */
-@media (hover: hover) {
-  .galleryItem {
-    cursor: pointer;
-  }
-  .galleryItem:hover .galleryImage {
-    filter: brightness(1.1);
-  }
-}
-
-/* Application Section - FIXED RESPONSIVE CENTERING */
-.applicationSection {
+/* Inclusions Section */
+.inclusionsSection {
   background-color: white;
   padding: 80px 0;
+  position: relative;
+  z-index: 1;
 }
 
-.applicationTitle {
+.inclusionsSection .sectionTitle {
+  color: #4a9b93;
+}
+
+.inclusionsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.inclusionItem {
+  background-color: white;
+  border: 1px solid rgba(74, 155, 147, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.inclusionItem:hover {
+  border-color: #4a9b93;
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(74, 155, 147, 0.1);
+}
+
+.inclusionIcon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  color: #4a9b93;
+}
+
+.inclusionItem span:last-child {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Final CTA Section */
+.finalCtaSection {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+  position: relative;
+  z-index: 1;
   text-align: center;
+}
+
+.finalCtaSection .sectionTitle {
+  background: #078792B2;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
   font-size: 48px;
   font-weight: 500;
   margin-bottom: 15px;
 }
 
-.applicationSubtitle {
-  text-align: center;
-  font-size: 32px;
-  color: #444;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto 60px;
-}
-
-.stepsWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto 40px;
-  padding: 0 20px;
-  flex-wrap: wrap;
-}
-
-.stepBlock {
-  flex: 1;
-  min-width: 150px;
-  display: flex;
-  justify-content: center;
-  max-width: 200px; /* Add max-width to prevent stretching */
-}
-
-.stepCard {
-  width: 330px;
-  height: 230px;
-  background: linear-gradient(90deg, #000000 0%, #078792 100%);
-  color: white;
-  border-radius: 8px;
-  padding: 20px 10px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.stepCard:hover {
-  transform: scale(1.05);
-}
-
-.stepNumber {
-  position: absolute;
-  top: 8px;
-  left: 10px;
-  font-size: 28px;
-  opacity: 0.8;
-}
-
-.stepIconPlaceholder {
-  font-size: 48px;
-  margin-bottom: 8px;
-}
-
-.stepLabel {
-  font-size: 28px;
-  font-weight: 500;
-  margin: 0;
-  text-align: center;
-}
-
-.connectorLine {
-  position: relative;
-  height: 20px;
-  max-width: 800px;
-  margin: 30px auto 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-}
-
-.connectorLine::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  right: 20px;
-  height: 2px;
-  background-color: #138b96;
-  z-index: 1;
-}
-
-.connectorDot {
-  width: 16px;
-  height: 16px;
-  background-color: #138b96;
-  border-radius: 4px;
-  z-index: 2;
-}
-
-.applicationContactContainer {
-  text-align: center;
-}
-
-.applicationContactButton {
-  display: inline-block;
-  background-color: transparent;
-  color: #138b96;
-  padding: 12px 30px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  border-radius: 4px;
-  border: 2px solid #138b96;
-  transition: all 0.3s ease;
-}
-
-.applicationContactButton:hover {
-  background-color: #138b96;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(19, 139, 150, 0.3);
-}
-
-/* Sixth Section - Quote */
-.quoteSection {
-  background-color: #f8f9fa;
-  padding: 80px 0;
-  text-align: center;
-}
-
-.quote {
-  margin: 0;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.quoteText {
-  font-size: 28px;
+.ctaDescription {
+  font-size: 20px;
   color: #333;
-  margin: 0 0 30px 0;
-  line-height: 1.4;
-  font-style: italic;
+  margin-bottom: 2rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
 }
 
-.allah {
-  color: #4a9b93;
+.urgencyCard {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 40px 50px;
+  border: 1px solid #f0b207;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.urgencyIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.pulseDot {
+  width: 1rem;
+  height: 1rem;
+  background-color: #d4af37;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  animation: pulse 2s infinite;
+}
+
+.urgencyIndicator span {
+  font-size: 1.125rem;
   font-weight: 600;
+  color: #333;
 }
 
-.enough {
-  color: #4a9b93;
-  font-weight: 600;
+.spotsRemaining {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #d4af37;
+  margin-bottom: 0.5rem;
 }
 
-.quoteCitation {
+.urgencyCard p {
+  color: #333;
+  margin: 0;
   font-size: 16px;
-  color: #666;
-  font-style: normal;
-}
-
-.quranText {
-  color: #4a9b93;
-  font-weight: 600;
 }
 
 /* Footer */
 .footer {
   background: linear-gradient(135deg, #b8ddd9 0%, #a8d0cc 100%);
   padding: 40px 0;
+  position: relative;
+  z-index: 1;
 }
 
-.footerContent {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footerLeft {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footerLogo {
-  font-size: 18px;
-  font-weight: bold;
+.footer p {
   color: #333;
-}
-
-.copyright {
-  font-size: 12px;
-  color: #666;
   margin: 0;
-}
-
-.footerRight {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-.socialIcons {
-  display: flex;
-  gap: 10px;
-}
-
-.socialIcon {
-  width: 30px;
-  height: 30px;
-  background-color: #2d7d76;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.socialIcon:hover {
-  background-color: #1f5a54;
-  transform: translateY(-2px);
-}
-
-.address {
-  font-size: 12px;
-  color: #666;
-  margin: 0;
-}
-
-/* Testimonials Section */
-.testimonialsSection {
-  background-color: white;
-  padding: 80px 0;
-}
-
-.testimonialsTitle {
-  text-align: center;
-  font-size: 32px;
-  color: #f4d03f;
-  margin: 0 0 20px 0;
-  font-weight: 500;
-}
-
-.testimonialsSubtitle {
   text-align: center;
   font-size: 14px;
-  color: #666;
-  margin: 0 0 60px 0;
-  line-height: 1.6;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.testimonialsGrid {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.testimonialCard {
-  background: linear-gradient(135deg, #f5d142 0%, #e0b500 100%);
-  padding: 40px 30px;
-  border-radius: 12px;
-  color: white;
-  text-align: center;
-  width: 280px;
-  height: 300px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  opacity: 0.5;
-  transform: scale(0.9);
-  transition: all 0.3s ease-in-out;
-  filter: blur(1px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.testimonialCard.center {
-  opacity: 1;
-  transform: scale(1);
-  filter: none;
-  z-index: 1;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-
-.testimonialText {
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0 10px;
-  font-style: normal;
-  color: #fff;
-}
-
-.testimonialAuthor {
-  margin-top: 20px;
-  font-size: 15px;
-  font-weight: bold;
-  opacity: 1;
-  color: #fff;
-}
-
-/* Hover effect (optional) */
-.testimonialCard:hover {
-  opacity: 1;
-  filter: none;
-  transform: scale(1.03);
-  z-index: 2;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .heroTitle h1 {
+    font-size: 36px;
+  }
+  
+  .heroSubtitle {
+    font-size: 24px;
+  }
+  
+  .detailsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .spiritualGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .spiritualContent .sectionTitle {
+    text-align: center;
+  }
+  
   .featuresGrid {
     grid-template-columns: 1fr;
     gap: 30px;
   }
-
+  
+  .inclusionsGrid {
+    grid-template-columns: 1fr;
+  }
+  
   .sectionTitle {
     font-size: 28px;
   }
-
-  .cardNumber {
-    font-size: 18px; /* Adjusted for mobile */
+  
+  .finalCtaSection .sectionTitle {
+    font-size: 36px;
   }
-
-  .featureCard {
-    height: auto;
-    min-height: 500px;
+  
+  .ctaButton {
+    padding: 10px 30px;
+    font-size: 12px;
   }
-
-  .backTitle {
-    font-size: 20px;
-  }
-
-  .backText {
-    font-size: 13px;
-  }
-
-  .backPoints {
+  
+  .finalCtaButton {
+    padding: 12px 30px;
     font-size: 14px;
   }
 
-  .flipCardBack {
-    padding: 25px 20px 20px;
+  .titleIcon {
+    font-size: 2rem;
   }
 
-  .packageButton {
-    padding: 10px 25px;
-    font-size: 12px;
-  }
-
-  .galleryGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 0 15px;
-    max-width: 700px;
-  }
-
-  .differenceSection,
-  .gallerySection {
-    padding: 50px 0;
-  }
-
-  .gallerySectionTitle {
-    font-size: 24px;
-  }
-
-  .stepsWrapper {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    justify-content: center;
-  }
-
-  .stepBlock {
-    flex: none;
-    width: auto;
-    max-width: none;
-    display: flex;
-    justify-content: center;
-  }
-
-  .stepCard {
-    width: 140px;
-    height: 140px;
-  }
-
-  .connectorLine {
-    display: none; /* Hide connector line on mobile */
-  }
-
-  .applicationTitle {
-    font-size: 28px;
-  }
-
-  .applicationSection {
-    padding: 60px 0;
-  }
-
-  .quoteText {
-    font-size: 22px;
-  }
-
-  .footerContent {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-
-  .footerRight {
-    align-items: center;
-  }
-
-  .testimonialsGrid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .testimonialCard,
-  .testimonialCard.center {
-    width: 90%;
-    transform: none;
-    filter: none;
-    opacity: 1;
-  }
-
-  .yearTabs {
-    gap: 8px;
+  .container {
     padding: 0 15px;
   }
 
-  .yearTab {
-    padding: 10px 18px;
-    font-size: 13px;
+  .detailsCard {
+    padding: 30px 25px;
+    margin: 20px auto;
   }
 
-  .activeYearTitle {
-    font-size: 20px;
-    margin-bottom: 25px;
+  .urgencyCard {
+    padding: 30px 25px;
+    margin: 20px auto;
+  }
+
+  .ctaDescription {
+    font-size: 18px;
+  }
+
+  .detailItem p {
+    font-size: 18px;
   }
 }
 
 @media (max-width: 480px) {
-  .differenceSection {
-    padding: 60px 0;
+  .heroTitle h1 {
+    font-size: 28px;
   }
-
-  .container2 {
-    padding: 0 15px;
+  
+  .heroSubtitle {
+    font-size: 20px;
   }
 
   .sectionTitle {
     font-size: 24px;
   }
 
-  .contactBtn {
-    padding: 10px 30px;
-    font-size: 12px;
-  }
-
-  .galleryGrid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 400px;
-  }
-
-  .galleryItem {
-    min-height: 300px; /* Maintain aspect ratio on mobile */
-  }
-
-  .featuresGrid {
-    gap: 20px;
-  }
-
-  .backTitle {
-    font-size: 18px;
-  }
-
-  .backText {
-    font-size: 12px;
-    padding: 0 10px;
-  }
-
-  .backPoints {
-    font-size: 13px;
-  }
-
-  .backPoints li {
-    margin-bottom: 4px;
-  }
-
-  .flipCardBack {
-    padding: 25px 20px;
-  }
-
-  .packageButton {
-    padding: 8px 20px;
-    font-size: 11px;
-  }
-
-  .stepIcon {
-    width: 60px;
-    height: 60px;
-  }
-
-  .stepIconPlaceholder {
-    font-size: 18px;
-  }
-
-  .stepTitle {
-    font-size: 14px;
-  }
-
-  .stepCard {
-    width: 120px;
-    height: 120px;
-  }
-
-  .stepIconPlaceholder {
-    font-size: 20px;
-  }
-
-  .stepLabel {
-    font-size: 13px;
-  }
-
-  .applicationTitle {
-    font-size: 24px;
-  }
-
-  .applicationSubtitle {
-    font-size: 13px;
-  }
-
-  .applicationContactButton {
-    padding: 10px 25px;
-    font-size: 13px;
-  }
-
-  .quoteText {
-    font-size: 18px;
-  }
-
-  .cardNumber {
-    font-size: 16px; /* Further adjusted for smaller screens */
-  }
-
-  .yearTabs {
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 10px;
-  }
-
-  .yearTab {
-    flex-shrink: 0;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-
-  .activeYearTitle {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-
-  /* Keep flip effect on mobile but make it touch-friendly */
-  .flipCard {
-    perspective: 1000px;
-  }
-
-  .flipCardInner {
-    transition: transform 0.8s;
-  }
-
-  /* Add touch-based flip for mobile */
-  .flipCard:active .flipCardInner,
-  .flipCard:hover .flipCardInner {
-    transform: rotateY(180deg);
-  }
-}
-
-/* RESPONSIVE FIXES */
-@media (max-width: 768px) {
-  .stepsWrapper {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    justify-content: center;
-  }
-
-  .stepBlock {
-    flex: none;
-    width: auto;
-    max-width: none;
-    display: flex;
-    justify-content: center;
-  }
-
-  .stepCard {
-    width: 140px;
-    height: 140px;
-  }
-
-  .connectorLine {
-    display: none; /* Hide connector line on mobile */
-  }
-
-  .applicationTitle {
+  .finalCtaSection .sectionTitle {
     font-size: 28px;
   }
 
-  .applicationSection {
-    padding: 60px 0;
+  .ctaDescription {
+    font-size: 16px;
+  }
+
+  .detailItem p {
+    font-size: 16px;
+  }
+
+  .featureCard p {
+    font-size: 13px;
+  }
+
+  .inclusionItem span:last-child {
+    font-size: 14px;
+  }
+
+  .guidanceCard p {
+    font-size: 15px;
+  }
+
+  .guidanceCard h3 {
+    font-size: 20px;
+  }
+
+  .detailsCard,
+  .urgencyCard {
+    padding: 25px 20px;
+    margin: 15px auto;
+  }
+
+  .container {
+    padding: 0 10px;
   }
 }

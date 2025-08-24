@@ -67,7 +67,7 @@ const Header = () => {
               <Link href="/hajj/guide" className={styles.dropdownItem}>
                 Self Service
               </Link>
-              <Link href="/hajj/requirements" className={styles.dropdownItem}>
+              <Link href="/hajj2" className={styles.dropdownItem}>
                 Pakistani Passport
               </Link>
             </div>
@@ -159,7 +159,7 @@ const Header = () => {
                 Self Service
               </Link>
               <Link
-                href="/hajj/requirements"
+                href="/hajj2"
                 className={`${styles.mobileSubNavLink} ${isActive('/hajj/requirements') ? styles.active : ''}`}
                 onClick={closeMenu}
               >

@@ -188,29 +188,29 @@
   background-color: white;
 }
 
-/* Back side */
+/* Back side - updated to accommodate button */
 .flipCardBack {
   background-color: white;
   color: black;
   transform: rotateY(180deg);
-  padding: 30px 25px 25px;
+  padding: 30px 25px 25px; /* Reduced top padding to make room for button */
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  border: 1px solid #d4af37;
+  border: 1px solid #d4af37; /* subtle gold border */
 }
 
 .backNumber {
   font-size: 64px;
   font-weight: 700;
-  color: #d4af37;
+  color: #d4af37; /* gold */
   margin-bottom: 10px;
 }
 
 .backTitle {
   font-size: 24px;
   font-weight: 800;
-  color: #eab70e;
+  color: #eab70e; /* gold */
   margin-bottom: 20px;
 }
 
@@ -221,20 +221,22 @@
   text-align: justify;
 }
 
+/* Adjust back points for better spacing */
 .backPoints {
-  list-style-type: disc;
-  padding-left: 20px;
-  text-align: left;
-  color: #555;
-  font-size: 16px;
-  line-height: 1.4;
-  margin-bottom: 0;
+  list-style-type: disc; /* default bullet */
+  padding-left: 20px; /* spacing so bullets don't touch the edge */
+  text-align: left; /* align points properly */
+  color: #555; /* softer text color */
+  font-size: 16px; /* Slightly reduced */
+  line-height: 1.4; /* Tighter line height */
+  margin-bottom: 0; /* Remove bottom margin */
 }
 
 .backPoints li {
-  margin-bottom: 6px;
+  margin-bottom: 6px; /* Reduced spacing between points */
 }
 
+/* Package button styles */
 .packageButton {
   margin-top: 20px;
   padding: 12px 30px;
@@ -262,6 +264,7 @@
   box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
+/* Image container */
 .imageContainer {
   flex: 1;
   position: relative;
@@ -277,12 +280,13 @@
   object-fit: cover;
 }
 
+/* Updated cardNumber styles for text instead of numbers */
 .cardNumber {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 24px;
+  font-size: 24px; /* Reduced from 64px for text */
   font-weight: 700;
   color: #1f3b57;
   text-align: center;
@@ -295,6 +299,7 @@
   transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* Button */
 .contactBtn {
   padding: 12px 40px;
   border: 1px solid #4a9b93;
@@ -321,7 +326,7 @@
   box-shadow: 0 2px 6px rgba(74, 155, 147, 0.3);
 }
 
-/* Fourth Section - Gallery - COMPLETELY FIXED VERSION */
+/* Fourth Section - Gallery */
 .gallerySection {
   position: relative;
   overflow: hidden;
@@ -361,9 +366,9 @@
 
 .gallerySectionSubtitle {
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   color: #555;
-  margin: 0 0 50px 0;
+  margin: 0 0 60px 0;
   line-height: 1.6;
   max-width: 600px;
   margin-left: auto;
@@ -412,10 +417,10 @@
   border-color: #245a54;
 }
 
+/* Gallery Container */
 .galleryContainer {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 0;
 }
 
 .activeYearTitle {
@@ -428,13 +433,14 @@
   letter-spacing: 1px;
 }
 
+/* Updated gallery grid for larger images */
 .galleryGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 25px; /* Increased gap for larger images */
+  max-width: 1000px; /* Increased max-width */
   margin: 0 auto;
   animation: fadeIn 0.5s ease-in-out;
-  width: 100%;
 }
 
 @keyframes fadeIn {
@@ -448,6 +454,7 @@
   }
 }
 
+/* Enhanced Gallery Items */
 .galleryItem {
   aspect-ratio: 4/3;
   overflow: hidden;
@@ -455,7 +462,7 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
   position: relative;
-  width: 100%;
+  min-height: 225px; /* Ensure minimum height for larger images */
 }
 
 .galleryItem:hover {
@@ -505,11 +512,13 @@
   transform: scale(1.05);
 }
 
+/* Loading animation for when switching years */
 .galleryGrid.loading {
   opacity: 0.5;
   pointer-events: none;
 }
 
+/* Enhanced hover effects for better user experience */
 @media (hover: hover) {
   .galleryItem {
     cursor: pointer;
@@ -558,7 +567,7 @@
   min-width: 150px;
   display: flex;
   justify-content: center;
-  max-width: 200px;
+  max-width: 200px; /* Add max-width to prevent stretching */
 }
 
 .stepCard {
@@ -847,6 +856,7 @@
   color: #fff;
 }
 
+/* Hover effect (optional) */
 .testimonialCard:hover {
   opacity: 1;
   filter: none;
@@ -854,7 +864,7 @@
   z-index: 2;
 }
 
-/* RESPONSIVE DESIGN - TABLET (768px and below) */
+/* Responsive Design - Tablet (768px and below) */
 @media (max-width: 768px) {
   /* About Section */
   .aboutTitle, .brandNameTitle {
@@ -905,13 +915,14 @@
     font-size: 12px;
   }
 
-  /* Gallery Section - MOBILE RESPONSIVE FIXES */
+  /* Gallery Section - Mobile Responsive Fixes */
   .gallerySection {
     padding: 60px 0;
+    overflow-x: hidden;
   }
 
   .container2 {
-    padding: 0 20px;
+    padding: 0 15px;
   }
 
   .gallerySectionTitle {
@@ -920,24 +931,27 @@
   }
 
   .gallerySectionSubtitle {
-    font-size: 15px;
-    margin-bottom: 35px;
+    font-size: 16px;
+    margin-bottom: 40px;
     padding: 0 10px;
   }
 
   .yearTabs {
+    justify-content: center;
     gap: 8px;
     margin-bottom: 30px;
-    padding: 0 10px;
+    padding: 0 15px;
+    flex-wrap: wrap;
   }
 
   .yearTab {
-    padding: 10px 18px;
+    padding: 10px 16px;
     font-size: 13px;
+    min-width: fit-content;
   }
 
   .galleryContainer {
-    padding: 0 10px;
+    padding: 0 15px;
   }
 
   .activeYearTitle {
@@ -947,18 +961,18 @@
 
   .galleryGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 15px;
     max-width: 100%;
+    margin: 0 auto;
   }
 
   .galleryItem {
+    min-height: 200px;
     aspect-ratio: 4/3;
-    min-height: 180px;
   }
 
   .galleryBackground {
     background-attachment: scroll;
-    background-position: center center;
   }
   
   .galleryOverlay {
@@ -1054,7 +1068,7 @@
   }
 }
 
-/* MOBILE (480px and below) */
+/* Mobile (480px and below) */
 @media (max-width: 480px) {
   /* About Section */
   .aboutTitle, .brandNameTitle {
@@ -1078,76 +1092,40 @@
     font-size: 12px;
   }
 
-  /* Gallery Section - COMPLETE MOBILE FIX */
-  .gallerySection {
-    padding: 50px 0;
-  }
-
+  /* Gallery Section Mobile */
   .gallerySectionTitle {
     font-size: 24px;
-    margin-bottom: 12px;
   }
 
   .gallerySectionSubtitle {
     font-size: 14px;
-    margin-bottom: 30px;
-    padding: 0 15px;
-    line-height: 1.5;
   }
 
   .yearTabs {
     gap: 6px;
-    margin-bottom: 25px;
-    padding: 0 15px;
-    justify-content: center;
+    padding: 0 10px;
   }
 
   .yearTab {
-    padding: 8px 14px;
+    padding: 8px 12px;
     font-size: 12px;
-    border-radius: 20px;
-  }
-
-  .galleryContainer {
-    padding: 0;
-    max-width: 100%;
-  }
-
-  .activeYearTitle {
-    font-size: 20px;
-    margin-bottom: 20px;
   }
 
   .galleryGrid {
     grid-template-columns: 1fr;
     gap: 20px;
-    max-width: 350px;
-    margin: 0 auto;
+    padding: 0;
   }
 
   .galleryItem {
-    aspect-ratio: 4/3;
-    min-height: 220px;
+    min-height: 250px;
     max-width: 100%;
-    border-radius: 10px;
+    margin: 0 auto;
   }
 
-  .galleryImage {
-    border-radius: 10px;
-  }
-
-  /* Disable hover effects on mobile */
-  .galleryItem:hover {
-    transform: none;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .galleryItem:hover .galleryImage {
-    transform: none;
-  }
-
-  .galleryItem:hover::before {
-    opacity: 0;
+  .activeYearTitle {
+    font-size: 20px;
+    margin-bottom: 20px;
   }
 
   /* Features Grid */
@@ -1245,58 +1223,8 @@
   }
 }
 
-/* EXTRA SMALL SCREENS (360px and below) */
+/* Very small screens (360px and below) */
 @media (max-width: 360px) {
-  .container2 {
-    padding: 0 10px;
-  }
-
-  .gallerySectionTitle {
-    font-size: 22px;
-  }
-
-  .gallerySectionSubtitle {
-    font-size: 13px;
-    padding: 0 10px;
-  }
-
-  .yearTabs {
-    padding: 0 10px;
-    overflow-x: auto;
-    justify-content: flex-start;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .yearTabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  .yearTab {
-    flex-shrink: 0;
-    padding: 7px 12px;
-    font-size: 11px;
-  }
-
-  .galleryGrid {
-    max-width: 300px;
-    gap: 15px;
-  }
-
-  .galleryItem {
-    min-height: 200px;
-    border-radius: 8px;
-  }
-
-  .galleryImage {
-    border-radius: 8px;
-  }
-
-  .activeYearTitle {
-    font-size: 18px;
-    margin-bottom: 18px;
-  }
-
   .stepsWrapper {
     max-width: 280px;
     gap: 12px;
@@ -1310,9 +1238,21 @@
   .stepLabel {
     font-size: 11px;
   }
-}
 
-/* Ensure gallery section doesn't cause horizontal scroll */
-.gallerySection {
-  overflow-x: hidden;
+  .yearTabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .yearTab {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .activeYearTitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
 }
