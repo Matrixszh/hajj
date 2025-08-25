@@ -32,6 +32,7 @@ const ContactPage = () => {
         photograph: null,
 
         // Step 3 - Travel Details
+        packageType: '', // New field added
         departureCity: '',
         roomRequirement: '',
         travelingCompanions: '',
@@ -153,6 +154,7 @@ const ContactPage = () => {
         }
 
         if (step === 3) {
+            if (!formData.packageType.trim()) newErrors.packageType = 'Package type is required';
             if (!formData.departureCity.trim()) newErrors.departureCity = 'Departure city is required';
             if (!formData.roomRequirement.trim()) newErrors.roomRequirement = 'Room requirement is required';
             if (!formData.travelingCompanions.trim()) newErrors.travelingCompanions = 'Traveling companions information is required';
@@ -303,6 +305,7 @@ const ContactPage = () => {
                 date_of_expiration: sanitizeString(formData.dateOfExpiration),
 
                 // Travel Information
+                package_type: sanitizeString(formData.packageType), // New field added
                 departure_city: sanitizeString(formData.departureCity),
                 room_requirement: sanitizeString(formData.roomRequirement),
                 traveling_companions: sanitizeString(formData.travelingCompanions),
@@ -382,6 +385,7 @@ const ContactPage = () => {
                 dateOfExpiration: '',
                 passportCopy: null,
                 photograph: null,
+                packageType: '', // Reset new field
                 departureCity: '',
                 roomRequirement: '',
                 travelingCompanions: '',
@@ -702,6 +706,24 @@ const ContactPage = () => {
     const renderStep3 = () => (
         <div className={styles.stepContent}>
             <h3 className={styles.stepTitle}>Travel Details</h3>
+
+            {/* NEW PACKAGE TYPE FIELD */}
+            <div className={styles.formGroup}>
+                <label className={styles.label}>Package Type *</label>
+                <select
+                    name="packageType"
+                    value={formData.packageType}
+                    onChange={handleInputChange}
+                    className={`${styles.select} ${errors.packageType ? styles.inputError : ''}`}
+                >
+                    <option value="">Select Package Type</option>
+                    <option value="Full Service">Full Service</option>
+                    <option value="Self Service">Self Service</option>
+                    <option value="Pakistani Passport">Pakistani Passport</option>
+                    <option value="Umrah">Umrah</option>
+                </select>
+                {errors.packageType && <span className={styles.error}>{errors.packageType}</span>}
+            </div>
 
             <div className={styles.formGroup}>
                 <label className={styles.label}>Departure City *</label>
