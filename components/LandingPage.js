@@ -4,18 +4,20 @@ import Link from 'next/link';
 import { useState } from 'react';
 import styles from '../styles/Landing.module.css';
 
+
 const LandingPage = () => {
   const [activeTab, setActiveTab] = useState('HAJJ');
+
 
   const tabContent = {
     HAJJ: {
       title: 'Hajj Pilgrimage',
-      description: 'Experience the spiritual journey of a lifetime with our comprehensive Hajj packages. We provide complete guidance, comfortable accommodation, and seamless travel arrangements to ensure your pilgrimage is performed with peace of mind and devotion.',
+      description: 'The most experienced Western group on the new Nusuk platform, having successfully organized and led Hajj groups since its introduction in 2022. From visas and flights to accommodations, transportation, and on-the-ground support, we take care of every detail—so you don’t have to.',
       image: '/banner/hajj-temp.jpg'
     },
     UMRAH: {
       title: 'Umrah Journey',
-      description: 'Embark on the blessed journey of Umrah with our expertly crafted packages. From visa processing to accommodation near the Holy Mosque, we take care of every detail so you can focus on your spiritual experience and worship.',
+      description: 'Embark on a spiritual journey of a lifetime with our carefully curated Umrah package, designed to provide a seamless and fulfilling pilgrimage experience. With expert guidance, comfortable accommodations, and dedicated support throughout your journey, let us help you focus on what truly matters—your devotion and worship. Begin your sacred Umrah journey with us today.',
       image: '/banner/hajj-banner.jpg'
     },
     ZIYARAH: {
@@ -25,12 +27,14 @@ const LandingPage = () => {
     }
   };
 
+
   const steps = [
     { icon: "⚡", title: "Ease", iconSrc: "/feather.svg" },
     { icon: "📄", title: "Fill In Form", iconSrc: "/form.svg" },
     { icon: "➕", title: "Application Added", iconSrc: "/plus-icon.svg" },
     { icon: "✓", title: "Approved", iconSrc: "/check-icon.svg" }
   ];
+
 
   return (
     <div className={styles.landingPage}>
@@ -44,24 +48,27 @@ const LandingPage = () => {
             </h2>
             <div className={styles.aboutText}>
               <p>
-                Whether you run a large business or a home-based one, reaching your target customers is key to your 
-                success. Dhaqaq helps you reach your customers through directories, community portals, and social networks. 
-                Dhaqaq will connect with thousands of dots in your community. Dhaqaq helps you plan, start, and 
-                grow your small business. 
+                Whether you run a large business or a home-based one, reaching your target customers is key to your
+                success. Dhaqaq helps you reach your customers through directories, community portals, and social networks.
+                Dhaqaq will connect with thousands of dots in your community. Dhaqaq helps you plan, start, and
+                grow your small business.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+
       {/* Second Section - What Do We Offer */}
       <section className={styles.offerSection}>
         <div className={styles.offerBackground}></div>
         <div className={styles.offerOverlay}></div>
-        
+
+
         <div className={styles.container2}>
           <h2 className={styles.offerTitle}>What Do We Offer ?</h2>
-          
+
+
           <div className={styles.tabContainer}>
             <div className={styles.tabs}>
               {Object.keys(tabContent).map((tab) => (
@@ -75,6 +82,7 @@ const LandingPage = () => {
               ))}
             </div>
           </div>
+
 
           <div className={styles.contentCard}>
             <div className={styles.cardContent}>
@@ -96,6 +104,7 @@ const LandingPage = () => {
             </div>
           </div>
 
+
           <div className={styles.contactButtonContainer}>
             <Link href="/contact" className={styles.contactButton}>
               CONTACT
@@ -104,130 +113,135 @@ const LandingPage = () => {
         </div>
       </section>
 
-    {/* Third Section - Why Are We Different */}
-<section className={styles.differenceSection}>
-  <div className={styles.container2}>
-    <h2 className={styles.sectionTitle}>Why Are We Different ?</h2>
-    <p className={styles.sectionSubtitle}>
-      The Growing List Of Products, Features, And Services Available To You As A 
-      Figma User. We&apos;ve Also Updated Our Terms.
-    </p>
 
-    <div className={styles.cardsGrid}>
-      {/* First Card - Flippable */}
-      <div className={`${styles.cardContainer} ${styles.flippable}`}>
-        <div className={styles.cardInner}>
-          {/* Front: Decorative Card with Number */}
-          <div className={styles.cardFront}>
-            <div className={styles.decorativeCard}>
-              <div className={styles.cardNumber}>1</div>
+      {/* Third Section - Why Are We Different */}
+      <section className={styles.differenceSection}>
+        <div className={styles.container2}>
+          <h2 className={styles.sectionTitle}>Why Are We Different ?</h2>
+          <p className={styles.sectionSubtitle}>
+            We handle the details so you can focus on your spiritual journey.
+          </p>
+
+
+          <div className={styles.cardsGrid}>
+            {/* First Card - Flippable */}
+            <div className={`${styles.cardContainer} ${styles.flippable}`}>
+              <div className={styles.cardInner}>
+                {/* Front: Decorative Card with Number */}
+                <div className={styles.cardFront}>
+                  <div className={styles.decorativeCard}>
+                    <div className={styles.cardNumber}>1</div>
+                  </div>
+                </div>
+                {/* Back: Text Content */}
+                <div className={styles.cardBack}>
+                  <div className={styles.cardLogo}>
+                    <div className={styles.logoPlaceholder}>✓</div>
+                  </div>
+                  <h3 className={styles.cardTitle}>Visa Approval</h3>
+                  <p className={styles.cardText}>
+                    Unlike many Hajj providers who leave the visa approval process to the pilgrim’s responsibility, Caravan 72 gets the visa approval, giving peace of mind to those planning their spiritual journey. With our in-depth understanding of the process and established connections, we handle all visa-related concerns efficiently.
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-          {/* Back: Text Content */}
-          <div className={styles.cardBack}>
-            <div className={styles.cardLogo}>
-              <div className={styles.logoPlaceholder}>⚡</div>
+
+
+            {/* Second Card - Flippable */}
+            <div className={`${styles.cardContainer} ${styles.flippable}`}>
+              <div className={styles.cardInner}>
+                {/* Front: Decorative Card with Number */}
+                <div className={styles.cardFront}>
+                  <div className={styles.decorativeCard}>
+                    <div className={styles.cardNumber}>2</div>
+                  </div>
+                </div>
+                {/* Back: Text Content */}
+                <div className={styles.cardBack}>
+                  <div className={styles.cardLogo}>
+                    <div className={styles.logoPlaceholder}>🤝</div>
+                  </div>
+                  <h3 className={styles.cardTitle}>Liaison with Nusuk</h3>
+                  <p className={styles.cardText}>
+                    Caravan 72 takes on the role of a liaison between pilgrims and Nusuk, eliminating the need for pilgrims to manage any dealings with the Nusuk platform. Our team handles all interactions, ensuring that the process remains smooth and stress-free for our clients. This allows pilgrims to focus entirely on their spiritual journey, knowing that we are filling in the logistical gaps that Nusuk does not cover.
+                  </p>
+                </div>
+              </div>
             </div>
-            <h3 className={styles.cardTitle}>Fast</h3>
-            <p className={styles.cardText}>
-              Why Figma&apos;s logo isn&apos;t just two Ferrus logo Figma. Then, dig into the Figma, logo, wordmark, and typography used in the Figma experience. About the Figma logo in EPS vector. Logo in a lot of ways, is at the centre of our visual identity. From this powerful foundation are, designed with a full approach for creating the best experience.
-            </p>
+
+
+            {/* Third Card - Flippable */}
+            <div className={`${styles.cardContainer} ${styles.flippable}`}>
+              <div className={styles.cardInner}>
+                {/* Front: Decorative Card with Number */}
+                <div className={styles.cardFront}>
+                  <div className={styles.decorativeCard}>
+                    <div className={styles.cardNumber}>3</div>
+                  </div>
+                </div>
+                {/* Back: Text Content */}
+                <div className={styles.cardBack}>
+                  <div className={styles.cardLogo}>
+                    <div className={styles.logoPlaceholder}>✈️</div>
+                  </div>
+                  <h3 className={styles.cardTitle}>End-to-End Service</h3>
+                  <p className={styles.cardText}>
+                    From visa processing to travel arrangements and accommodations, Caravan 72 manages every aspect of the pilgrimage. We take care of all the details, including organizing transportation, lodging, and the finer logistical points, so pilgrims don’t have to worry about anything except fulfilling their religious obligations.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Second Card - Flippable */}
-      <div className={`${styles.cardContainer} ${styles.flippable}`}>
-        <div className={styles.cardInner}>
-          {/* Front: Decorative Card with Number */}
-          <div className={styles.cardFront}>
-            <div className={styles.decorativeCard}>
-              <div className={styles.cardNumber}>2</div>
-            </div>
-          </div>
-          {/* Back: Text Content */}
-          <div className={styles.cardBack}>
-            <div className={styles.cardLogo}>
-              <div className={styles.logoPlaceholder}>⚡</div>
-            </div>
-            <h3 className={styles.cardTitle}>Reliable</h3>
-            <p className={styles.cardText}>
-              Why Figma&apos;s logo isn&apos;t just two Ferrus logo Figma. Then, dig into the Figma, logo, wordmark, and typography used in the Figma experience. About the Figma logo in EPS vector. Logo in a lot of ways, is at the centre of our visual identity. From this powerful foundation are, designed with a full approach for creating the best experience.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Third Card - Flippable */}
-      <div className={`${styles.cardContainer} ${styles.flippable}`}>
-        <div className={styles.cardInner}>
-          {/* Front: Decorative Card with Number */}
-          <div className={styles.cardFront}>
-            <div className={styles.decorativeCard}>
-              <div className={styles.cardNumber}>3</div>
-            </div>
-          </div>
-          {/* Back: Text Content */}
-          <div className={styles.cardBack}>
-            <div className={styles.cardLogo}>
-              <div className={styles.logoPlaceholder}>⚡</div>
-            </div>
-            <h3 className={styles.cardTitle}>Easy</h3>
-            <p className={styles.cardText}>
-              Why Figma&apos;s logo isn&apos;t just two Ferrus logo Figma. Then, dig into the Figma, logo, wordmark, and typography used in the Figma experience. About the Figma logo in EPS vector. Logo in a lot of ways, is at the centre of our visual identity. From this powerful foundation are, designed with a full approach for creating the best experience.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
       {/* Fourth Section - Your Application Made Easy */}
       <section className={styles.applicationSection}>
         <div className={styles.container2}>
-          <h2 className={styles.applicationTitle}>Your Application Made Easy !</h2>
+          <h2 className={`${styles.applicationTitle} ${styles.gradientText}`}>
+            The Hajj Process!
+          </h2>
           <p className={styles.applicationSubtitle}>
-            The Growing List Of Products, Features, And Services Available To You As A 
-            Figma User. We&apos;ve Also Updated Our Terms.
+            Caravan 72 Makes Your Hajj process into 4 Easy Steps
           </p>
 
+          {/* Step Cards */}
           <div className={styles.stepsWrapper}>
-            {steps.map((step, idx) => (
-              <div key={idx} className={styles.stepBlock}>
+            {[1, 2, 3, 4].map((step) => (
+              <div className={styles.stepBlock} key={step}>
                 <div className={styles.stepCard}>
-                  <span className={styles.stepNumber}>{idx + 1}</span>
-                  {/* You can uncomment this when you have the actual SVG icons */}
-                  {/* 
-                  <Image
-                    src={step.iconSrc}
-                    alt={step.title}
-                    width={32}
-                    height={32}
-                    className={styles.stepIcon}
-                  />
-                  */}
-                  {/* Temporary emoji icons - replace with SVGs */}
-                  <div style={{ fontSize: '32px' }}>{step.icon}</div>
-                  <p className={styles.stepLabel}>{step.title}</p>
+                  <span className={styles.stepNumber}>{step}</span>
+                  <div className={styles.stepIconPlaceholder}>
+                    {step === 1 && "📝"}
+                    {step === 2 && "💲"}
+                    {step === 3 && "🪶"}
+                    {step === 4 && "✔️"}
+                  </div>
+                  <div className={styles.stepLabel}>
+                    {step === 1 && "Register & Pay Deposit"}
+                    {step === 2 && "Submit Funds Before Deadline"}
+                    {step === 3 && "Visa & Package Confirmation"}
+                    {step === 4 && "Prepare for Hajj & Pack Your Bags"}
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Progress Line with Dots */}
-          <div className={styles.progressLine}>
+          {/* Stepper Indicator */}
+          <div className={styles.connectorLine}>
             {[1, 2, 3, 4].map((dot) => (
-              <div key={dot} className={styles.progressDot}></div>
+              <div key={dot} className={styles.connectorDot}></div>
             ))}
           </div>
 
+          {/* Contact Button */}
           <div className={styles.applicationContactContainer}>
-            <Link href="/contact" className={styles.applicationContactButton}>
-              CONTACT
-            </Link>
+            <a href="#contact" className={styles.applicationContactButton}>CONTACT</a>
           </div>
         </div>
       </section>
+
 
       {/* Fifth Section - Quote */}
       <section className={styles.quoteSection}>
@@ -237,12 +251,13 @@ const LandingPage = () => {
               &quot; And Whoever Puts His Trust In <span className={styles.allah}>Allah</span><br />
               He Will Be <span className={styles.enough}>Enough</span> For Him &quot;
             </p>
-           <cite className={styles.quoteCitation}>
+            <cite className={styles.quoteCitation}>
               <span className={styles.quranText}>Quran</span> 16:5
             </cite>
           </blockquote>
         </div>
       </section>
+
 
       {/* Footer */}
       <footer className={styles.footer}>
@@ -275,5 +290,6 @@ const LandingPage = () => {
     </div>
   );
 };
+
 
 export default LandingPage;

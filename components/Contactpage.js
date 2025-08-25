@@ -40,6 +40,7 @@ const ContactPage = () => {
     });
 
     const [errors, setErrors] = useState({});
+
     const compressImage = (file, maxWidth = 800, quality = 0.7) => {
         return new Promise((resolve) => {
             const canvas = document.createElement('canvas');
@@ -54,13 +55,13 @@ const ContactPage = () => {
 
                 // Draw and compress
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
                 canvas.toBlob(resolve, 'image/jpeg', quality);
             };
 
             img.src = URL.createObjectURL(file);
         });
     };
+
     // Initialize EmailJS
     useEffect(() => {
         try {
@@ -233,93 +234,11 @@ const ContactPage = () => {
             }
         });
     };
-    const generateCSVContent = (formData) => {
-        // Define the headers for the CSV
-        const headers = [
-            'Submission Date',
-            'Submission Time',
-            'First Name',
-            'Middle Name',
-            'Last Name',
-            'Mother Name',
-            'Father Name',
-            'Email',
-            'Cell Phone',
-            'Date of Birth',
-            'Gender',
-            'Nationality',
-            'Previous Nationality',
-            'Street Address',
-            'City',
-            'Zip Code',
-            'State',
-            'Passport Number',
-            'Date of Issue',
-            'Date of Expiration',
-            'Departure City',
-            'Room Requirement',
-            'Traveling Companions',
-            'Marja Taqleed',
-            'Terms Accepted',
-            'Passport Copy Filename',
-            'Photograph Filename'
-        ];
-
-        // Create the data row
-        const dataRow = [
-            new Date().toLocaleDateString(),
-            new Date().toLocaleTimeString(),
-            formData.firstName || '',
-            formData.middleName || '',
-            formData.lastName || '',
-            formData.motherName || '',
-            formData.fatherName || '',
-            formData.email || '',
-            formData.cellPhone || '',
-            formData.dateOfBirth || '',
-            formData.gender || '',
-            formData.nationality || '',
-            formData.previousNationality || '',
-            `"${(formData.streetAddress || '').replace(/"/g, '""')}"`, // Escape quotes in address
-            formData.city || '',
-            formData.zipCode || '',
-            formData.state || '',
-            formData.passportNumber || '',
-            formData.dateOfIssue || '',
-            formData.dateOfExpiration || '',
-            formData.departureCity || '',
-            formData.roomRequirement || '',
-            `"${(formData.travelingCompanions || '').replace(/"/g, '""')}"`, // Escape quotes
-            formData.marjaTaqleed || '',
-            formData.termsAccepted ? 'Yes' : 'No',
-            formData.passportCopy?.name || 'Not uploaded',
-            formData.photograph?.name || 'Not uploaded'
-        ];
-
-        // Combine headers and data
-        const csvContent = [headers.join(','), dataRow.join(',')].join('\n');
-        return csvContent;
-    };
-
-    const createCSVFile = (csvContent, filename) => {
-        // Create a Blob with CSV content
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-
-        // Create a download link (optional - for user download)
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', filename);
-
-        return { blob, url, link };
-    };
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!validateStep(currentStep)) return;
-
         setIsSubmitting(true);
 
         try {
@@ -355,6 +274,7 @@ const ContactPage = () => {
                     return;
                 }
             }
+
             const totalSize = JSON.stringify({
                 ...formData,
                 passportCopyBase64,
@@ -372,7 +292,7 @@ const ContactPage = () => {
             // Prepare template parameters
             const templateParams = {
                 firstName: formData.firstName || '',
-                middleName: formData.middleName || 'N/A',
+                middleName: formData.middleName || '',
                 lastName: formData.lastName || '',
                 motherName: formData.motherName || '',
                 fatherName: formData.fatherName || '',
@@ -381,7 +301,7 @@ const ContactPage = () => {
                 dateOfBirth: formData.dateOfBirth || '',
                 gender: formData.gender || '',
                 nationality: formData.nationality || '',
-                previousNationality: formData.previousNationality || 'N/A',
+                previousNationality: formData.previousNationality || '',
                 streetAddress: formData.streetAddress || '',
                 city: formData.city || '',
                 zipCode: formData.zipCode || '',
@@ -396,8 +316,6 @@ const ContactPage = () => {
                 termsAccepted: formData.termsAccepted ? 'Yes' : 'No',
                 passportCopyBase64: passportCopyBase64,
                 photographBase64: photographBase64,
-                passportCopyName: formData.passportCopy?.name || 'Not uploaded',
-                photographName: formData.photograph?.name || 'Not uploaded',
                 submissionDate: new Date().toLocaleDateString(),
                 submissionTime: new Date().toLocaleTimeString()
             };
