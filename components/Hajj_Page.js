@@ -49,7 +49,7 @@ const LandingPage = () => {
       title: "Full Service",
       backTitle: "Full Service Hajj",
       buttonText: "Learn More",
-      buttonLink: "/full-service-hajj", // or your desired route
+      buttonLink: "/hajj1", // or your desired route
       backPoints: [
         "Hajj visa obtained on your behalf",
         "Trip fully organized by our expert team",
@@ -63,7 +63,7 @@ const LandingPage = () => {
       title: "Self Service",
       backTitle: "Self Service Hajj",
       buttonText: "Learn More",
-      buttonLink: "/self-service-hajj", // or your desired route
+      buttonLink: "/hajj3", // or your desired route
       backPoints: [
         "Guidance in obtaining your Hajj visa",
         "Trip arranged by an authorized Saudi company",
@@ -77,7 +77,7 @@ const LandingPage = () => {
       title: "Pakistani Passport",
       backTitle: "Pakistani Passport Hajj",
       buttonText: "Learn More",
-      buttonLink: "/pakistani-passport-hajj", // or your desired route
+      buttonLink: "/hajj2", // or your desired route
       backPoints: [
         "Visa guaranteed through our trusted channels",
         "Trip organized by our team (you will not be sent with Pakistan-based groups)",

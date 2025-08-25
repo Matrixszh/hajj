@@ -64,7 +64,7 @@ const Header = () => {
               <Link href="/hajj1" className={styles.dropdownItem}>
                 Full Service
               </Link>
-              <Link href="/hajj/guide" className={styles.dropdownItem}>
+              <Link href="/hajj3" className={styles.dropdownItem}>
                 Self Service
               </Link>
               <Link href="/hajj2" className={styles.dropdownItem}>
@@ -152,7 +152,7 @@ const Header = () => {
                 Full Service
               </Link>
               <Link
-                href="/hajj/guide"
+                href="/hajj3"
                 className={`${styles.mobileSubNavLink} ${isActive('/hajj/guide') ? styles.active : ''}`}
                 onClick={closeMenu}
               >

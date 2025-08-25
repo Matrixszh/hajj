@@ -233,6 +233,87 @@ const ContactPage = () => {
             }
         });
     };
+    const generateCSVContent = (formData) => {
+        // Define the headers for the CSV
+        const headers = [
+            'Submission Date',
+            'Submission Time',
+            'First Name',
+            'Middle Name',
+            'Last Name',
+            'Mother Name',
+            'Father Name',
+            'Email',
+            'Cell Phone',
+            'Date of Birth',
+            'Gender',
+            'Nationality',
+            'Previous Nationality',
+            'Street Address',
+            'City',
+            'Zip Code',
+            'State',
+            'Passport Number',
+            'Date of Issue',
+            'Date of Expiration',
+            'Departure City',
+            'Room Requirement',
+            'Traveling Companions',
+            'Marja Taqleed',
+            'Terms Accepted',
+            'Passport Copy Filename',
+            'Photograph Filename'
+        ];
+
+        // Create the data row
+        const dataRow = [
+            new Date().toLocaleDateString(),
+            new Date().toLocaleTimeString(),
+            formData.firstName || '',
+            formData.middleName || '',
+            formData.lastName || '',
+            formData.motherName || '',
+            formData.fatherName || '',
+            formData.email || '',
+            formData.cellPhone || '',
+            formData.dateOfBirth || '',
+            formData.gender || '',
+            formData.nationality || '',
+            formData.previousNationality || '',
+            `"${(formData.streetAddress || '').replace(/"/g, '""')}"`, // Escape quotes in address
+            formData.city || '',
+            formData.zipCode || '',
+            formData.state || '',
+            formData.passportNumber || '',
+            formData.dateOfIssue || '',
+            formData.dateOfExpiration || '',
+            formData.departureCity || '',
+            formData.roomRequirement || '',
+            `"${(formData.travelingCompanions || '').replace(/"/g, '""')}"`, // Escape quotes
+            formData.marjaTaqleed || '',
+            formData.termsAccepted ? 'Yes' : 'No',
+            formData.passportCopy?.name || 'Not uploaded',
+            formData.photograph?.name || 'Not uploaded'
+        ];
+
+        // Combine headers and data
+        const csvContent = [headers.join(','), dataRow.join(',')].join('\n');
+        return csvContent;
+    };
+
+    const createCSVFile = (csvContent, filename) => {
+        // Create a Blob with CSV content
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+        // Create a download link (optional - for user download)
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', filename);
+
+        return { blob, url, link };
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
