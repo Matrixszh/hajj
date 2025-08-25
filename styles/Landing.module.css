@@ -408,7 +408,7 @@
 .cardContainer {
   perspective: 1000px;
   width: 350px;
-  height: 500px;
+  height: 600px;
   margin: 0 auto;
 }
 
@@ -534,7 +534,7 @@
   }
   
   .cardContainer {
-    height: 300px;
+    height: 500px;
   }
   
   .cardIcon {
