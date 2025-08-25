@@ -166,7 +166,7 @@ const HajjPackage = () => {
               <div className={styles.guidanceIcon}>📚</div>
               <p>
                 Our experienced Shia scholars will guide you through every step of your sacred journey,
-                ensuring all rituals are performed according to authentic Shia Ja'fari Fiqh.
+                ensuring all rituals are performed according to authentic Shia Ja&apos;fari Fiqh.
               </p>
             </div>
           </div>
@@ -203,7 +203,7 @@ const HajjPackage = () => {
               <span>Limited Spots Available</span>
             </div>
             <div className={styles.spotsRemaining}>{spotsLeft}</div>
-            <p>Don't miss this opportunity for a blessed journey</p>
+            <p>Don&apos;t miss this opportunity for a blessed journey</p>
           </div>
           <Link href="/contact">
             <button className={styles.finalCtaButton} onClick={handleBookingClick}>

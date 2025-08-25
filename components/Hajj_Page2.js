@@ -154,7 +154,7 @@ const HajjPackage = () => {
                             </p>
                             <br />
                             <p>
-                                From the moment you land until your farewell tawaf, your focus will be on your ibadah—we'll handle the rest.
+                                From the moment you land until your farewell tawaf, your focus will be on your ibadah—we&apos;ll handle the rest.
                             </p>
                         </div>
                     </div>
@@ -164,7 +164,7 @@ const HajjPackage = () => {
             {/* Inclusions Section */}
             <section className={styles.inclusionsSection}>
                 <div className={styles.container}>
-                    <h2 className={styles.sectionTitle}>What's Included</h2>
+                    <h2 className={styles.sectionTitle}>What&apos;s Included</h2>
                     <div className={styles.inclusionsGrid}>
                         {inclusions.map((item, index) => (
                             <div key={index} className={styles.inclusionItem}>
@@ -206,7 +206,7 @@ const HajjPackage = () => {
             <footer className={styles.footer}>
                 <div className={styles.container}>
                     <p>
-                        Don't miss this opportunity for a blessed and worry-free Hajj journey.
+                        Don&apos;t miss this opportunity for a blessed and worry-free Hajj journey.
                         Contact us today to secure your spot.
                     </p>
                 </div>
