@@ -8,23 +8,23 @@ const Banner = () => {
       <div className={styles.backgroundImage}>
         {/* Background image will be set via CSS */}
       </div>
-      
+
       <div className={styles.overlay}></div>
-      
+
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.textContent}>
             <h1 className={styles.title}>
-              Caravan <span className={styles.highlight}>72</span> 
+              Caravan <span className={styles.highlight}>72</span>
             </h1>
             <p className={styles.subtitle}>
               Trusted Hajj And Umrah Services Since 2005
             </p>
             <Link href="/contact" className={styles.exploreButton}>
-              CONTACT
+              REGISTER NOW
             </Link>
           </div>
-          
+
           <div className={styles.imageContainer}>
             <Image
               src="/banner/banner2.png"

@@ -774,8 +774,8 @@ const ContactPage = () => {
         <div className={styles.contactPage}>
             <div className={styles.container}>
                 <div className={styles.formContainer}>
-                    <h1 className={styles.title}>Contact Us</h1>
-                    <p className={styles.subtitle}>Fill out the form below to get in touch with us</p>
+                    <h1 className={styles.title}>Register Now</h1>
+                    <p className={styles.subtitle}>Fill out the form below to register with us </p>
 
                     {/* Progress Bar */}
                     <div className={styles.progressBar}>

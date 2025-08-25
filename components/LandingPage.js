@@ -48,10 +48,8 @@ const LandingPage = () => {
             </h2>
             <div className={styles.aboutText}>
               <p>
-                Whether you run a large business or a home-based one, reaching your target customers is key to your
-                success. Dhaqaq helps you reach your customers through directories, community portals, and social networks.
-                Dhaqaq will connect with thousands of dots in your community. Dhaqaq helps you plan, start, and
-                grow your small business.
+                Caravan 72 is more than a travel service — we are a dedicated team committed to guiding you through the sacred journey of Hajj and Umrah with ease, comfort, and spiritual focus.
+                With 20 years of experience and a proven track record of serving thousands of pilgrims, we are proud to be the most experienced Western group on the Nusuk platform, having successfully organized Hajj groups since 2022. While others are still navigating the system, Caravan 72 has already led multiple groups with unmatched expertise
               </p>
             </div>
           </div>
@@ -107,7 +105,7 @@ const LandingPage = () => {
 
           <div className={styles.contactButtonContainer}>
             <Link href="/contact" className={styles.contactButton}>
-              CONTACT
+              REGISTER
             </Link>
           </div>
         </div>
@@ -237,7 +235,7 @@ const LandingPage = () => {
 
           {/* Contact Button */}
           <div className={styles.applicationContactContainer}>
-            <a href="#contact" className={styles.applicationContactButton}>CONTACT</a>
+            <a href="/contact" className={styles.applicationContactButton}>REGISTER</a>
           </div>
         </div>
       </section>
