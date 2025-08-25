@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -17,9 +18,9 @@ const Header = () => {
   // Function to check if any hajj sub-route is active
   const isHajjActive = () => {
     return pathname === '/hajj' ||
-      pathname === '/hajj/packages' ||
-      pathname === '/hajj/guide' ||
-      pathname === '/hajj/requirements';
+      pathname === '/hajj1' ||
+      pathname === '/hajj3' ||
+      pathname === '/hajj2';
   };
 
   const toggleMenu = () => {
@@ -40,7 +41,15 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <Link href="/">LOGO</Link>
+          <Link href="/">
+            <Image
+              src="/logo.jpg"
+              alt="Company Logo"
+              width={120}
+              height={20}
+              priority={true}
+            />
+          </Link>
         </div>
 
         {/* Desktop Navigation */}

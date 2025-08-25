@@ -17,15 +17,25 @@
 }
 
 .logo {
-  font-size: 18px;
+  font-size: 10px;
   font-weight: bold;
   color: #333;
   z-index: 101;
+  display: flex;
+  align-items: center;
 }
 
 .logo a {
   text-decoration: none;
   color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  max-width: 50%;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Desktop Navigation */
@@ -344,13 +354,17 @@
   .nav {
     display: none;
   }
-  
+
   .contactButton {
     display: none;
   }
-  
+
   .hamburger {
     display: flex;
+  }
+
+  .logo {
+    font-size: 16px;
   }
 }
 
@@ -358,42 +372,42 @@
   .header {
     padding: 0 15px;
   }
-  
+
   .logo {
     font-size: 16px;
   }
-  
+
   .mobileMenu {
     width: 100%;
     right: -100%;
   }
-  
+
   .mobileMenuOpen {
     right: 0;
   }
-  
+
   .mobileNav {
     padding: 30px 15px;
   }
-  
+
   .mobileNavLink {
     font-size: 16px;
     padding: 12px 15px;
   }
-  
+
   .mobileNavLinkContainer .mobileNavLink {
     padding: 12px 15px;
   }
-  
+
   .mobileExpandButton {
     padding: 12px 15px;
   }
-  
+
   .mobileSubNavLink {
     font-size: 13px;
     padding: 10px 30px;
   }
-  
+
   .mobileContactButton {
     font-size: 14px;
     padding: 12px 15px;
