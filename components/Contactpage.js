@@ -7,7 +7,8 @@ const ContactPage = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
-        // Step 1 - Personal Info
+        // Step 1 - Personal Info & Package Selection
+        packageType: '',
         firstName: '',
         middleName: '',
         lastName: '',
@@ -60,6 +61,63 @@ const ContactPage = () => {
 
             img.src = URL.createObjectURL(file);
         });
+    };
+
+    // Generate properly formatted Excel data
+    const generateExcelData = (formData) => {
+        // Escape any quotes in text fields and wrap fields containing commas in quotes
+        const escapeField = (field) => {
+            if (!field) return '';
+            const str = String(field);
+            // If field contains comma, tab, or newline, wrap in quotes and escape existing quotes
+            if (str.includes(',') || str.includes('\t') || str.includes('\n') || str.includes('"')) {
+                return '"' + str.replace(/"/g, '""') + '"';
+            }
+            return str;
+        };
+
+        const headers = [
+            'Submission Date', 'Submission Time', 'Package Type', 'First Name', 'Middle Name',
+            'Last Name', 'Mother Name', 'Father Name', 'Email', 'Cell Phone', 'Date of Birth',
+            'Gender', 'Nationality', 'Previous Nationality', 'Street Address', 'City', 'Zip Code',
+            'State', 'Passport Number', 'Date of Issue', 'Date of Expiration', 'Departure City',
+            'Room Requirement', 'Traveling Companions', 'Marja Taqleed', 'Terms Accepted'
+        ];
+
+        const dataRow = [
+            new Date().toLocaleDateString(),
+            new Date().toLocaleTimeString(),
+            formData.packageType || '',
+            formData.firstName || '',
+            formData.middleName || '',
+            formData.lastName || '',
+            formData.motherName || '',
+            formData.fatherName || '',
+            formData.email || '',
+            formData.cellPhone || '',
+            formData.dateOfBirth || '',
+            formData.gender || '',
+            formData.nationality || '',
+            formData.previousNationality || '',
+            formData.streetAddress || '',
+            formData.city || '',
+            formData.zipCode || '',
+            formData.state || '',
+            formData.passportNumber || '',
+            formData.dateOfIssue || '',
+            formData.dateOfExpiration || '',
+            formData.departureCity || '',
+            formData.roomRequirement || '',
+            formData.travelingCompanions || '',
+            formData.marjaTaqleed || '',
+            formData.termsAccepted ? 'Yes' : 'No'
+        ];
+
+        // Create tab-separated format
+        const headerLine = headers.join('\t');
+        const dataLine = dataRow.map(escapeField).join('\t');
+
+        return headerLine + '\n' + dataLine;
     };
 
     // Initialize EmailJS
@@ -128,6 +186,7 @@ const ContactPage = () => {
         const newErrors = {};
 
         if (step === 1) {
+            if (!formData.packageType.trim()) newErrors.packageType = 'Package selection is required';
             if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
             if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
             if (!formData.motherName.trim()) newErrors.motherName = 'Mother\'s name is required';
@@ -275,10 +334,14 @@ const ContactPage = () => {
                 }
             }
 
+            // Generate properly formatted Excel data
+            const excelFormattedData = generateExcelData(formData);
+
             const totalSize = JSON.stringify({
                 ...formData,
                 passportCopyBase64,
-                photographBase64
+                photographBase64,
+                excelFormattedData
             }).length / 1024;
 
             console.log(`Total payload size: ${totalSize.toFixed(2)} KB`);
@@ -291,6 +354,7 @@ const ContactPage = () => {
 
             // Prepare template parameters
             const templateParams = {
+                packageType: formData.packageType || '',
                 firstName: formData.firstName || '',
                 middleName: formData.middleName || '',
                 lastName: formData.lastName || '',
@@ -317,7 +381,8 @@ const ContactPage = () => {
                 passportCopyBase64: passportCopyBase64,
                 photographBase64: photographBase64,
                 submissionDate: new Date().toLocaleDateString(),
-                submissionTime: new Date().toLocaleTimeString()
+                submissionTime: new Date().toLocaleTimeString(),
+                excelData: excelFormattedData
             };
 
             console.log('Sending email with EmailJS...');
@@ -334,6 +399,7 @@ const ContactPage = () => {
 
             // Reset form
             setFormData({
+                packageType: '',
                 firstName: '',
                 middleName: '',
                 lastName: '',
@@ -375,7 +441,39 @@ const ContactPage = () => {
 
     const renderStep1 = () => (
         <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>Personal Information</h3>
+            <h3 className={styles.stepTitle}>Package Selection & Personal Information</h3>
+
+            {/* Package Selection Field */}
+            <div className={styles.formGroup}>
+                <label className={styles.label}>Select Package *</label>
+                <select
+                    name="packageType"
+                    value={formData.packageType}
+                    onChange={handleInputChange}
+                    className={`${styles.select} ${errors.packageType ? styles.inputError : ''}`}
+                >
+                    <option value="">Choose Your Package</option>
+                    <option value="Full Service Hajj">Full Service Hajj</option>
+                    <option value="Self Service Hajj">Self Service Hajj</option>
+                    <option value="Pakistani Passport Hajj">Pakistani Passport Hajj</option>
+                    <option value="Umrah">Umrah</option>
+                </select>
+                {errors.packageType && <span className={styles.error}>{errors.packageType}</span>}
+                <div className={styles.packageInfo}>
+                    {formData.packageType === 'Full Service Hajj' && (
+                        <small className={styles.infoText}>✨ Complete service with 5-star hotels, guided tours, and premium amenities</small>
+                    )}
+                    {formData.packageType === 'Self Service Hajj' && (
+                        <small className={styles.infoText}>🎒 Budget-friendly option with basic accommodations and self-guided experience</small>
+                    )}
+                    {formData.packageType === 'Pakistani Passport Hajj' && (
+                        <small className={styles.infoText}>🇵🇰 Special package for Pakistani passport holders with dedicated services</small>
+                    )}
+                    {formData.packageType === 'Umrah' && (
+                        <small className={styles.infoText}>🕌 Year-round pilgrimage package with flexible dates and accommodations</small>
+                    )}
+                </div>
+            </div>
 
             <div className={styles.formRow}>
                 <div className={styles.formGroup}>
@@ -774,8 +872,8 @@ const ContactPage = () => {
         <div className={styles.contactPage}>
             <div className={styles.container}>
                 <div className={styles.formContainer}>
-                    <h1 className={styles.title}>Register Now</h1>
-                    <p className={styles.subtitle}>Fill out the form below to register with us </p>
+                    <h1 className={styles.title}>Contact Us</h1>
+                    <p className={styles.subtitle}>Fill out the form below to get in touch with us</p>
 
                     {/* Progress Bar */}
                     <div className={styles.progressBar}>
@@ -786,7 +884,7 @@ const ContactPage = () => {
                                         {step}
                                     </div>
                                     <span className={styles.stepLabel}>
-                                        {step === 1 ? 'Personal Info' : step === 2 ? 'Address & Passport' : 'Travel Details'}
+                                        {step === 1 ? 'Package & Personal Info' : step === 2 ? 'Address & Passport' : 'Travel Details'}
                                     </span>
                                     {step < 3 && <div className={`${styles.stepLine} ${currentStep > step ? styles.active : ''}`}></div>}
                                 </div>
