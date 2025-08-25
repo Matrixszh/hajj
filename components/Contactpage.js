@@ -7,8 +7,7 @@ const ContactPage = () => {
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
-        // Step 1 - Personal Info & Package Selection
-        packageType: '',
+        // Step 1 - Personal Info
         firstName: '',
         middleName: '',
         lastName: '',
@@ -42,7 +41,7 @@ const ContactPage = () => {
 
     const [errors, setErrors] = useState({});
 
-    const compressImage = (file, maxWidth = 800, quality = 0.7) => {
+    const compressImage = (file, maxWidth = 400, quality = 0.3) => {
         return new Promise((resolve) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -61,63 +60,6 @@ const ContactPage = () => {
 
             img.src = URL.createObjectURL(file);
         });
-    };
-
-    // Generate properly formatted Excel data
-    const generateExcelData = (formData) => {
-        // Escape any quotes in text fields and wrap fields containing commas in quotes
-        const escapeField = (field) => {
-            if (!field) return '';
-            const str = String(field);
-            // If field contains comma, tab, or newline, wrap in quotes and escape existing quotes
-            if (str.includes(',') || str.includes('\t') || str.includes('\n') || str.includes('"')) {
-                return '"' + str.replace(/"/g, '""') + '"';
-            }
-            return str;
-        };
-
-        const headers = [
-            'Submission Date', 'Submission Time', 'Package Type', 'First Name', 'Middle Name',
-            'Last Name', 'Mother Name', 'Father Name', 'Email', 'Cell Phone', 'Date of Birth',
-            'Gender', 'Nationality', 'Previous Nationality', 'Street Address', 'City', 'Zip Code',
-            'State', 'Passport Number', 'Date of Issue', 'Date of Expiration', 'Departure City',
-            'Room Requirement', 'Traveling Companions', 'Marja Taqleed', 'Terms Accepted'
-        ];
-
-        const dataRow = [
-            new Date().toLocaleDateString(),
-            new Date().toLocaleTimeString(),
-            formData.packageType || '',
-            formData.firstName || '',
-            formData.middleName || '',
-            formData.lastName || '',
-            formData.motherName || '',
-            formData.fatherName || '',
-            formData.email || '',
-            formData.cellPhone || '',
-            formData.dateOfBirth || '',
-            formData.gender || '',
-            formData.nationality || '',
-            formData.previousNationality || '',
-            formData.streetAddress || '',
-            formData.city || '',
-            formData.zipCode || '',
-            formData.state || '',
-            formData.passportNumber || '',
-            formData.dateOfIssue || '',
-            formData.dateOfExpiration || '',
-            formData.departureCity || '',
-            formData.roomRequirement || '',
-            formData.travelingCompanions || '',
-            formData.marjaTaqleed || '',
-            formData.termsAccepted ? 'Yes' : 'No'
-        ];
-
-        // Create tab-separated format
-        const headerLine = headers.join('\t');
-        const dataLine = dataRow.map(escapeField).join('\t');
-
-        return headerLine + '\n' + dataLine;
     };
 
     // Initialize EmailJS
@@ -140,17 +82,17 @@ const ContactPage = () => {
             if (type === 'file') {
                 const file = files?.[0];
                 if (file) {
-                    // Validate file size (5MB limit)
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('File size must be less than 5MB');
-                        e.target.value = ''; // Clear the input
+                    // Validate file size (2MB limit)
+                    if (file.size > 2 * 1024 * 1024) {
+                        alert('File size must be less than 2MB');
+                        e.target.value = '';
                         return;
                     }
                     // Validate file type
                     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
                     if (!allowedTypes.includes(file.type)) {
                         alert('Please select a valid image (JPEG, PNG) or PDF file');
-                        e.target.value = ''; // Clear the input
+                        e.target.value = '';
                         return;
                     }
                 }
@@ -186,7 +128,6 @@ const ContactPage = () => {
         const newErrors = {};
 
         if (step === 1) {
-            if (!formData.packageType.trim()) newErrors.packageType = 'Package selection is required';
             if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
             if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
             if (!formData.motherName.trim()) newErrors.motherName = 'Mother\'s name is required';
@@ -233,7 +174,7 @@ const ContactPage = () => {
         setCurrentStep(prev => prev - 1);
     };
 
-    // Convert file to Base64
+    // Convert file to Base64 with compression
     const convertToBase64 = async (file, compress = true) => {
         return new Promise(async (resolve, reject) => {
             if (!file) {
@@ -246,7 +187,7 @@ const ContactPage = () => {
             // Compress image files
             if (compress && file.type.startsWith('image/') && file.type !== 'image/gif') {
                 try {
-                    processedFile = await compressImage(file);
+                    processedFile = await compressImage(file, 400, 0.3);
                     console.log(`Compressed ${file.name} from ${file.size} to ${processedFile.size} bytes`);
                 } catch (error) {
                     console.error('Compression failed, using original file:', error);
@@ -258,11 +199,10 @@ const ContactPage = () => {
             reader.onload = () => {
                 try {
                     const base64 = reader.result;
-                    // Check size (approximate, since Base64 adds ~33% overhead)
                     const sizeInKB = (base64.length * 0.75) / 1024;
                     console.log(`Base64 size: ${sizeInKB.toFixed(2)} KB`);
 
-                    if (sizeInKB > 30) { // Leave room for other form data
+                    if (sizeInKB > 15) {
                         console.warn('File still too large after compression');
                         reject(new Error('File too large even after compression. Please use a smaller file.'));
                         return;
@@ -294,10 +234,16 @@ const ContactPage = () => {
         });
     };
 
+    const sanitizeString = (str) => {
+        if (!str) return '';
+        return str.toString().trim().replace(/[\r\n\t]/g, ' ').slice(0, 1000);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!validateStep(currentStep)) return;
+
         setIsSubmitting(true);
 
         try {
@@ -316,9 +262,7 @@ const ContactPage = () => {
                     passportCopyBase64 = await convertToBase64(formData.passportCopy, true);
                 } catch (error) {
                     console.error('Error processing passport copy:', error);
-                    alert(`Error processing passport copy: ${error.message}`);
-                    setIsSubmitting(false);
-                    return;
+                    passportCopyBase64 = '';
                 }
             }
 
@@ -328,62 +272,81 @@ const ContactPage = () => {
                     photographBase64 = await convertToBase64(formData.photograph, true);
                 } catch (error) {
                     console.error('Error processing photograph:', error);
-                    alert(`Error processing photograph: ${error.message}`);
-                    setIsSubmitting(false);
-                    return;
+                    photographBase64 = '';
                 }
-            }
-
-            // Generate properly formatted Excel data
-            const excelFormattedData = generateExcelData(formData);
-
-            const totalSize = JSON.stringify({
-                ...formData,
-                passportCopyBase64,
-                photographBase64,
-                excelFormattedData
-            }).length / 1024;
-
-            console.log(`Total payload size: ${totalSize.toFixed(2)} KB`);
-
-            if (totalSize > 45) { // Leave some buffer
-                alert('Files are too large. Please use smaller images and try again.');
-                setIsSubmitting(false);
-                return;
             }
 
             // Prepare template parameters
             const templateParams = {
-                packageType: formData.packageType || '',
-                firstName: formData.firstName || '',
-                middleName: formData.middleName || '',
-                lastName: formData.lastName || '',
-                motherName: formData.motherName || '',
-                fatherName: formData.fatherName || '',
-                email: formData.email || '',
-                cellPhone: formData.cellPhone || '',
-                dateOfBirth: formData.dateOfBirth || '',
-                gender: formData.gender || '',
-                nationality: formData.nationality || '',
-                previousNationality: formData.previousNationality || '',
-                streetAddress: formData.streetAddress || '',
-                city: formData.city || '',
-                zipCode: formData.zipCode || '',
-                state: formData.state || '',
-                passportNumber: formData.passportNumber || '',
-                dateOfIssue: formData.dateOfIssue || '',
-                dateOfExpiration: formData.dateOfExpiration || '',
-                departureCity: formData.departureCity || '',
-                roomRequirement: formData.roomRequirement || '',
-                travelingCompanions: formData.travelingCompanions || '',
-                marjaTaqleed: formData.marjaTaqleed || '',
-                termsAccepted: formData.termsAccepted ? 'Yes' : 'No',
-                passportCopyBase64: passportCopyBase64,
-                photographBase64: photographBase64,
-                submissionDate: new Date().toLocaleDateString(),
-                submissionTime: new Date().toLocaleTimeString(),
-                excelData: excelFormattedData
+                // Personal Information
+                first_name: sanitizeString(formData.firstName),
+                middle_name: sanitizeString(formData.middleName) || 'N/A',
+                last_name: sanitizeString(formData.lastName),
+                mother_name: sanitizeString(formData.motherName),
+                father_name: sanitizeString(formData.fatherName),
+                email_address: sanitizeString(formData.email),
+                cell_phone: sanitizeString(formData.cellPhone),
+                date_of_birth: sanitizeString(formData.dateOfBirth),
+                gender: sanitizeString(formData.gender),
+                nationality: sanitizeString(formData.nationality),
+                previous_nationality: sanitizeString(formData.previousNationality) || 'N/A',
+
+                // Address Information
+                street_address: sanitizeString(formData.streetAddress),
+                city: sanitizeString(formData.city),
+                zip_code: sanitizeString(formData.zipCode),
+                state: sanitizeString(formData.state),
+
+                // Passport Information
+                passport_number: sanitizeString(formData.passportNumber),
+                date_of_issue: sanitizeString(formData.dateOfIssue),
+                date_of_expiration: sanitizeString(formData.dateOfExpiration),
+
+                // Travel Information
+                departure_city: sanitizeString(formData.departureCity),
+                room_requirement: sanitizeString(formData.roomRequirement),
+                traveling_companions: sanitizeString(formData.travelingCompanions),
+                marja_taqleed: sanitizeString(formData.marjaTaqleed),
+                terms_accepted: formData.termsAccepted ? 'Yes' : 'No',
+
+                // File Information
+                passport_copy_name: formData.passportCopy?.name || 'Not uploaded',
+                photograph_name: formData.photograph?.name || 'Not uploaded',
+                passport_copy_attached: passportCopyBase64 ? 'Yes' : 'No',
+                photograph_attached: photographBase64 ? 'Yes' : 'No',
+
+                // Base64 Data - only send valid image data
+                passport_copy_data: (passportCopyBase64 && passportCopyBase64.startsWith('data:image/'))
+                    ? passportCopyBase64
+                    : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+
+                photograph_data: (photographBase64 && photographBase64.startsWith('data:image/'))
+                    ? photographBase64
+                    : 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+
+                // Metadata
+                submission_date: new Date().toLocaleDateString(),
+                submission_time: new Date().toLocaleTimeString()
             };
+
+            // Validate all parameters
+            Object.keys(templateParams).forEach(key => {
+                if (templateParams[key] === undefined || templateParams[key] === null) {
+                    templateParams[key] = 'N/A';
+                }
+            });
+
+            console.log('Template parameters prepared:', Object.keys(templateParams));
+
+            const totalSize = JSON.stringify(templateParams).length / 1024;
+            console.log(`Total payload size: ${totalSize.toFixed(2)} KB`);
+
+            if (totalSize > 40) {
+                // Use placeholder images if too large
+                templateParams.passport_copy_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+                templateParams.photograph_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+                alert('Images are too large and will not be included in the email. The form data will still be sent.');
+            }
 
             console.log('Sending email with EmailJS...');
 
@@ -399,7 +362,6 @@ const ContactPage = () => {
 
             // Reset form
             setFormData({
-                packageType: '',
                 firstName: '',
                 middleName: '',
                 lastName: '',
@@ -427,6 +389,13 @@ const ContactPage = () => {
                 termsAccepted: false
             });
             setCurrentStep(1);
+            setErrors({});
+
+            // Reset file inputs
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+            fileInputs.forEach(input => {
+                input.value = '';
+            });
 
         } catch (error) {
             console.error('Detailed EmailJS error:', error);
@@ -441,39 +410,7 @@ const ContactPage = () => {
 
     const renderStep1 = () => (
         <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>Package Selection & Personal Information</h3>
-
-            {/* Package Selection Field */}
-            <div className={styles.formGroup}>
-                <label className={styles.label}>Select Package *</label>
-                <select
-                    name="packageType"
-                    value={formData.packageType}
-                    onChange={handleInputChange}
-                    className={`${styles.select} ${errors.packageType ? styles.inputError : ''}`}
-                >
-                    <option value="">Choose Your Package</option>
-                    <option value="Full Service Hajj">Full Service Hajj</option>
-                    <option value="Self Service Hajj">Self Service Hajj</option>
-                    <option value="Pakistani Passport Hajj">Pakistani Passport Hajj</option>
-                    <option value="Umrah">Umrah</option>
-                </select>
-                {errors.packageType && <span className={styles.error}>{errors.packageType}</span>}
-                <div className={styles.packageInfo}>
-                    {formData.packageType === 'Full Service Hajj' && (
-                        <small className={styles.infoText}>✨ Complete service with 5-star hotels, guided tours, and premium amenities</small>
-                    )}
-                    {formData.packageType === 'Self Service Hajj' && (
-                        <small className={styles.infoText}>🎒 Budget-friendly option with basic accommodations and self-guided experience</small>
-                    )}
-                    {formData.packageType === 'Pakistani Passport Hajj' && (
-                        <small className={styles.infoText}>🇵🇰 Special package for Pakistani passport holders with dedicated services</small>
-                    )}
-                    {formData.packageType === 'Umrah' && (
-                        <small className={styles.infoText}>🕌 Year-round pilgrimage package with flexible dates and accommodations</small>
-                    )}
-                </div>
-            </div>
+            <h3 className={styles.stepTitle}>Personal Information</h3>
 
             <div className={styles.formRow}>
                 <div className={styles.formGroup}>
@@ -732,10 +669,10 @@ const ContactPage = () => {
                         accept="image/*,.pdf"
                         className={`${styles.input} ${errors.passportCopy ? styles.inputError : ''}`}
                     />
-                    <small className={styles.fileNote}>Max file size: 5MB</small>
+                    <small className={styles.fileNote}>Max file size: 2MB (will be compressed for email)</small>
                     {formData.passportCopy && (
                         <div className={styles.filePreview}>
-                            Selected: {formData.passportCopy.name}
+                            ✓ Selected: {formData.passportCopy.name}
                         </div>
                     )}
                     {errors.passportCopy && <span className={styles.error}>{errors.passportCopy}</span>}
@@ -750,10 +687,10 @@ const ContactPage = () => {
                         accept="image/*"
                         className={`${styles.input} ${errors.photograph ? styles.inputError : ''}`}
                     />
-                    <small className={styles.fileNote}>Max file size: 5MB</small>
+                    <small className={styles.fileNote}>Max file size: 2MB (will be compressed for email)</small>
                     {formData.photograph && (
                         <div className={styles.filePreview}>
-                            Selected: {formData.photograph.name}
+                            ✓ Selected: {formData.photograph.name}
                         </div>
                     )}
                     {errors.photograph && <span className={styles.error}>{errors.photograph}</span>}
@@ -884,7 +821,7 @@ const ContactPage = () => {
                                         {step}
                                     </div>
                                     <span className={styles.stepLabel}>
-                                        {step === 1 ? 'Package & Personal Info' : step === 2 ? 'Address & Passport' : 'Travel Details'}
+                                        {step === 1 ? 'Personal Info' : step === 2 ? 'Address & Passport' : 'Travel Details'}
                                     </span>
                                     {step < 3 && <div className={`${styles.stepLine} ${currentStep > step ? styles.active : ''}`}></div>}
                                 </div>
