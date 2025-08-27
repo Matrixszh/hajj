@@ -1,6 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import styles from '../../styles/ContactPage.module.css';
+import Header from "@/components/Header";
+
 
 const ContactPage = () => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -719,83 +721,85 @@ const ContactPage = () => {
     }
 
     return (
-        <div className={styles.contactPage}>
-            <div className={styles.container}>
-                <div className={styles.formContainer}>
-                    <h1 className={styles.title}>Pilgrimage Application</h1>
-                    <p className={styles.subtitle}>Complete all steps to submit your application</p>
+        <><div>
+            <Header />
+        </div><div className={styles.contactPage}>
+                <div className={styles.container}>
+                    <div className={styles.formContainer}>
+                        <h1 className={styles.title}>Pilgrimage Application</h1>
+                        <p className={styles.subtitle}>Complete all steps to submit your application</p>
 
-                    <div style={{
-                        backgroundColor: '#e3f2fd',
-                        padding: '1rem',
-                        borderRadius: '6px',
-                        marginBottom: '2rem',
-                        fontSize: '0.9rem',
-                        color: '#1565c0'
-                    }}>
-                        Nodemailer Integration: Files will be sent as email attachments.
-                        4MB file size limit per file for Vercel deployment compatibility.
-                    </div>
+                        <div style={{
+                            backgroundColor: '#e3f2fd',
+                            padding: '1rem',
+                            borderRadius: '6px',
+                            marginBottom: '2rem',
+                            fontSize: '0.9rem',
+                            color: '#1565c0'
+                        }}>
+                            Nodemailer Integration: Files will be sent as email attachments.
+                            4MB file size limit per file for Vercel deployment compatibility.
+                        </div>
 
-                    {/* Progress Bar */}
-                    <div className={styles.progressBar}>
-                        <div className={styles.progressSteps}>
-                            {[1, 2, 3].map((step) => (
-                                <div key={step} className={styles.progressStep}>
-                                    <div className={`${styles.stepCircle} ${currentStep >= step ? styles.active : ''}`}>
-                                        {step}
+                        {/* Progress Bar */}
+                        <div className={styles.progressBar}>
+                            <div className={styles.progressSteps}>
+                                {[1, 2, 3].map((step) => (
+                                    <div key={step} className={styles.progressStep}>
+                                        <div className={`${styles.stepCircle} ${currentStep >= step ? styles.active : ''}`}>
+                                            {step}
+                                        </div>
+                                        <span className={styles.stepLabel}>
+                                            {step === 1 ? 'Personal Info' : step === 2 ? 'Address & Passport' : 'Travel Details'}
+                                        </span>
+                                        {step < 3 && <div className={`${styles.stepLine} ${currentStep > step ? styles.active : ''}`}></div>}
                                     </div>
-                                    <span className={styles.stepLabel}>
-                                        {step === 1 ? 'Personal Info' : step === 2 ? 'Address & Passport' : 'Travel Details'}
-                                    </span>
-                                    {step < 3 && <div className={`${styles.stepLine} ${currentStep > step ? styles.active : ''}`}></div>}
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
+
+                        <form onSubmit={handleSubmit} className={styles.form}>
+                            {/* Render current step */}
+                            {currentStep === 1 && renderStep1()}
+                            {currentStep === 2 && renderStep2()}
+                            {currentStep === 3 && renderStep3()}
+
+                            {/* Navigation Buttons */}
+                            <div className={styles.buttonContainer}>
+                                {currentStep > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={handlePrevious}
+                                        className={styles.prevButton}
+                                        disabled={isSubmitting}
+                                    >
+                                        Previous
+                                    </button>
+                                )}
+
+                                {currentStep < 3 ? (
+                                    <button
+                                        type="button"
+                                        onClick={handleNext}
+                                        className={styles.nextButton}
+                                        disabled={isSubmitting}
+                                    >
+                                        Next
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="submit"
+                                        className={styles.submitButton}
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? 'Submitting Application...' : 'Submit Application'}
+                                    </button>
+                                )}
+                            </div>
+                        </form>
                     </div>
-
-                    <form onSubmit={handleSubmit} className={styles.form}>
-                        {/* Render current step */}
-                        {currentStep === 1 && renderStep1()}
-                        {currentStep === 2 && renderStep2()}
-                        {currentStep === 3 && renderStep3()}
-
-                        {/* Navigation Buttons */}
-                        <div className={styles.buttonContainer}>
-                            {currentStep > 1 && (
-                                <button
-                                    type="button"
-                                    onClick={handlePrevious}
-                                    className={styles.prevButton}
-                                    disabled={isSubmitting}
-                                >
-                                    Previous
-                                </button>
-                            )}
-
-                            {currentStep < 3 ? (
-                                <button
-                                    type="button"
-                                    onClick={handleNext}
-                                    className={styles.nextButton}
-                                    disabled={isSubmitting}
-                                >
-                                    Next
-                                </button>
-                            ) : (
-                                <button
-                                    type="submit"
-                                    className={styles.submitButton}
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? 'Submitting Application...' : 'Submit Application'}
-                                </button>
-                            )}
-                        </div>
-                    </form>
                 </div>
-            </div>
-        </div>
+            </div></>
     );
 };
 
