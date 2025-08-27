@@ -42,15 +42,15 @@ const ContactPage = () => {
 
     const [errors, setErrors] = useState({});
 
-    // Ultra-aggressive compression for production
-    const compressImageUltra = (file, maxWidth = 150, quality = 0.1) => {
+    // More reasonable compression for 1-2MB files
+    const compressImageModerate = (file, maxWidth = 800, quality = 0.7) => {
         return new Promise((resolve) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const img = new Image();
 
             img.onload = () => {
-                // Ultra small dimensions
+                // More reasonable dimensions for better quality
                 const ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
                 const newWidth = Math.floor(img.width * ratio);
                 const newHeight = Math.floor(img.height * ratio);
@@ -102,8 +102,8 @@ const ContactPage = () => {
             if (type === 'file') {
                 const file = files?.[0];
                 if (file) {
-                    // Ultra strict file size for production
-                    const maxSize = process.env.NODE_ENV === 'production' ? 1 * 1024 * 1024 : 2 * 1024 * 1024; // 1MB for prod
+                    // Updated file size limits: 1MB for production, 2MB for development
+                    const maxSize = process.env.NODE_ENV === 'production' ? 1 * 1024 * 1024 : 2 * 1024 * 1024;
 
                     if (file.size > maxSize) {
                         alert(`File size must be less than ${maxSize / (1024 * 1024)}MB`);
@@ -196,8 +196,8 @@ const ContactPage = () => {
         setCurrentStep(prev => prev - 1);
     };
 
-    // Ultra-compressed Base64 conversion
-    const convertToBase64Ultra = async (file) => {
+    // Updated Base64 conversion with moderate compression
+    const convertToBase64Moderate = async (file) => {
         return new Promise(async (resolve, reject) => {
             if (!file) {
                 resolve('');
@@ -209,19 +209,19 @@ const ContactPage = () => {
 
             if (file.type.startsWith('image/')) {
                 try {
-                    const maxWidth = isProduction ? 120 : 200; // Ultra small for production
-                    const quality = isProduction ? 0.05 : 0.1; // Ultra low quality for production
+                    const maxWidth = isProduction ? 600 : 800; // Better quality
+                    const quality = isProduction ? 0.6 : 0.7; // Better quality
 
-                    processedFile = await compressImageUltra(file, maxWidth, quality);
+                    processedFile = await compressImageModerate(file, maxWidth, quality);
 
                     if (!processedFile) {
                         resolve('');
                         return;
                     }
 
-                    console.log(`Ultra-compressed ${file.name} from ${file.size} to ${processedFile.size} bytes`);
+                    console.log(`Compressed ${file.name} from ${file.size} to ${processedFile.size} bytes`);
                 } catch (error) {
-                    console.error('Ultra compression failed:', error);
+                    console.error('Compression failed:', error);
                     resolve('');
                     return;
                 }
@@ -235,8 +235,8 @@ const ContactPage = () => {
                     const sizeInKB = (base64.length * 0.75) / 1024;
                     console.log(`Final Base64 size: ${sizeInKB.toFixed(2)} KB`);
 
-                    // Ultra strict limits
-                    const sizeLimit = isProduction ? 5 : 10; // 5KB for production!
+                    // More reasonable size limits for email
+                    const sizeLimit = isProduction ? 500 : 800; // 500KB for production, 800KB for dev
 
                     if (sizeInKB > sizeLimit) {
                         console.warn(`Still too large: ${sizeInKB.toFixed(2)}KB`);
@@ -266,7 +266,7 @@ const ContactPage = () => {
 
     const sanitizeString = (str) => {
         if (!str) return '';
-        return str.toString().trim().replace(/[\r\n\t]/g, ' ').slice(0, 500); // Shorter strings
+        return str.toString().trim().replace(/[\r\n\t]/g, ' ').slice(0, 500);
     };
 
     const handleSubmit = async (e) => {
@@ -284,19 +284,19 @@ const ContactPage = () => {
                 throw new Error('EmailJS configuration is missing');
             }
 
-            // Process files with ultra compression
+            // Process files with moderate compression
             let passportCopyBase64 = '';
             let photographBase64 = '';
 
             if (formData.passportCopy) {
                 console.log('🔄 Processing passport copy...');
-                passportCopyBase64 = await convertToBase64Ultra(formData.passportCopy);
+                passportCopyBase64 = await convertToBase64Moderate(formData.passportCopy);
                 console.log('✅ Passport copy processed:', passportCopyBase64 ? 'Success' : 'Failed/Too Large');
             }
 
             if (formData.photograph) {
                 console.log('🔄 Processing photograph...');
-                photographBase64 = await convertToBase64Ultra(formData.photograph);
+                photographBase64 = await convertToBase64Moderate(formData.photograph);
                 console.log('✅ Photograph processed:', photographBase64 ? 'Success' : 'Failed/Too Large');
             }
 
@@ -365,8 +365,8 @@ const ContactPage = () => {
             const totalSize = JSON.stringify(templateParams).length / 1024;
             console.log(`📦 Total payload: ${totalSize.toFixed(2)} KB`);
 
-            // Ultra conservative size limit for production
-            if (totalSize > (isProduction ? 15 : 30)) {
+            // More reasonable size limit for the total payload
+            if (totalSize > (isProduction ? 1500 : 2000)) { // 1.5MB for production, 2MB for dev
                 console.warn('🚨 Payload still too large, using placeholders');
                 templateParams.passport_copy_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
                 templateParams.photograph_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
@@ -710,8 +710,8 @@ const ContactPage = () => {
                         className={`${styles.input} ${errors.passportCopy ? styles.inputError : ''}`}
                     />
                     <small className={styles.fileNote}>
-                        📏 Max: 1MB • Will be ultra-compressed to ~5KB for email delivery
-                        {process.env.NODE_ENV === 'production' && <span> • Production: Images heavily compressed</span>}
+                        📏 Max: {process.env.NODE_ENV === 'production' ? '1MB' : '2MB'} • Will be compressed for email delivery
+                        {process.env.NODE_ENV === 'production' && <span> • Production: 1MB limit</span>}
                     </small>
                     {formData.passportCopy && (
                         <div className={styles.filePreview}>
@@ -731,8 +731,8 @@ const ContactPage = () => {
                         className={`${styles.input} ${errors.photograph ? styles.inputError : ''}`}
                     />
                     <small className={styles.fileNote}>
-                        📏 Max: 1MB • Will be ultra-compressed to ~5KB for email delivery
-                        {process.env.NODE_ENV === 'production' && <span> • Production: Images heavily compressed</span>}
+                        📏 Max: {process.env.NODE_ENV === 'production' ? '1MB' : '2MB'} • Will be compressed for email delivery
+                        {process.env.NODE_ENV === 'production' && <span> • Production: 1MB limit</span>}
                     </small>
                     {formData.photograph && (
                         <div className={styles.filePreview}>
@@ -745,7 +745,7 @@ const ContactPage = () => {
 
             <div className={styles.compressionWarning}>
                 <small>
-                    🔄 <strong>Note:</strong> Images will be heavily compressed for email delivery.
+                    🔄 <strong>Note:</strong> Images will be compressed for email delivery.
                     If quality is important, please also email full-resolution files separately.
                 </small>
             </div>
@@ -885,7 +885,7 @@ const ContactPage = () => {
                     {/* Environment indicator for development */}
                     {process.env.NODE_ENV !== 'production' && (
                         <div className={styles.devIndicator}>
-                            <small>Development Mode - Relaxed file size limits</small>
+                            <small>Development Mode - 2MB file size limit</small>
                         </div>
                     )}
 
@@ -893,8 +893,7 @@ const ContactPage = () => {
                     {process.env.NODE_ENV === 'production' && (
                         <div className={styles.productionWarning}>
                             <small>
-                                🔄 <strong>Production Mode:</strong> Images will be ultra-compressed for email delivery.
-                                Large files may not be included in email.
+                                🔄 <strong>Production Mode:</strong> 1MB file size limit. Images will be compressed for email delivery.
                             </small>
                         </div>
                     )}
