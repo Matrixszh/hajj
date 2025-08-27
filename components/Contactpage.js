@@ -42,33 +42,43 @@ const ContactPage = () => {
 
     const [errors, setErrors] = useState({});
 
-    // Environment-aware compression settings
-    const compressImage = (file, maxWidth = 300, quality = 0.2) => {
+    // Ultra-aggressive compression for production
+    const compressImageUltra = (file, maxWidth = 150, quality = 0.1) => {
         return new Promise((resolve) => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const img = new Image();
 
             img.onload = () => {
-                // More aggressive sizing for production
+                // Ultra small dimensions
                 const ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
-                canvas.width = img.width * ratio;
-                canvas.height = img.height * ratio;
+                const newWidth = Math.floor(img.width * ratio);
+                const newHeight = Math.floor(img.height * ratio);
 
-                // Draw and compress
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                canvas.width = newWidth;
+                canvas.height = newHeight;
+
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.drawImage(img, 0, 0, newWidth, newHeight);
+
                 canvas.toBlob(resolve, 'image/jpeg', quality);
+            };
+
+            img.onerror = () => {
+                console.error('Image load error');
+                resolve(null);
             };
 
             img.src = URL.createObjectURL(file);
         });
     };
 
-    // Initialize EmailJS with environment check
+    // Initialize EmailJS
     useEffect(() => {
         try {
             console.log('Environment:', process.env.NODE_ENV);
-            console.log('EmailJS Config:', {
+            console.log('EmailJS Config Check:', {
                 serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ? 'Set' : 'Missing',
                 templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ? 'Set' : 'Missing',
                 publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ? 'Set' : 'Missing'
@@ -76,6 +86,7 @@ const ContactPage = () => {
 
             if (process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
                 emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
+                console.log('EmailJS initialized successfully');
             } else {
                 console.error('EmailJS public key is missing');
             }
@@ -91,16 +102,18 @@ const ContactPage = () => {
             if (type === 'file') {
                 const file = files?.[0];
                 if (file) {
-                    // Validate file size (2MB limit)
-                    if (file.size > 2 * 1024 * 1024) {
-                        alert('File size must be less than 2MB');
+                    // Ultra strict file size for production
+                    const maxSize = process.env.NODE_ENV === 'production' ? 1 * 1024 * 1024 : 2 * 1024 * 1024; // 1MB for prod
+
+                    if (file.size > maxSize) {
+                        alert(`File size must be less than ${maxSize / (1024 * 1024)}MB`);
                         e.target.value = '';
                         return;
                     }
-                    // Validate file type
-                    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
+
+                    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
                     if (!allowedTypes.includes(file.type)) {
-                        alert('Please select a valid image (JPEG, PNG) or PDF file');
+                        alert('Please select a valid image (JPEG, PNG only)');
                         e.target.value = '';
                         return;
                     }
@@ -121,7 +134,6 @@ const ContactPage = () => {
                 }));
             }
 
-            // Clear error when user starts typing
             if (errors[name]) {
                 setErrors(prev => ({
                     ...prev,
@@ -184,27 +196,34 @@ const ContactPage = () => {
         setCurrentStep(prev => prev - 1);
     };
 
-    // Enhanced file conversion with environment-specific compression
-    const convertToBase64 = async (file, compress = true) => {
+    // Ultra-compressed Base64 conversion
+    const convertToBase64Ultra = async (file) => {
         return new Promise(async (resolve, reject) => {
             if (!file) {
                 resolve('');
                 return;
             }
 
-            let processedFile = file;
             const isProduction = process.env.NODE_ENV === 'production';
+            let processedFile = file;
 
-            // More aggressive compression for production
-            if (compress && file.type.startsWith('image/') && file.type !== 'image/gif') {
+            if (file.type.startsWith('image/')) {
                 try {
-                    const maxWidth = isProduction ? 200 : 300;
-                    const quality = isProduction ? 0.1 : 0.2;
+                    const maxWidth = isProduction ? 120 : 200; // Ultra small for production
+                    const quality = isProduction ? 0.05 : 0.1; // Ultra low quality for production
 
-                    processedFile = await compressImage(file, maxWidth, quality);
-                    console.log(`Compressed ${file.name} from ${file.size} to ${processedFile.size} bytes`);
+                    processedFile = await compressImageUltra(file, maxWidth, quality);
+
+                    if (!processedFile) {
+                        resolve('');
+                        return;
+                    }
+
+                    console.log(`Ultra-compressed ${file.name} from ${file.size} to ${processedFile.size} bytes`);
                 } catch (error) {
-                    console.error('Compression failed, using original file:', error);
+                    console.error('Ultra compression failed:', error);
+                    resolve('');
+                    return;
                 }
             }
 
@@ -214,46 +233,40 @@ const ContactPage = () => {
                 try {
                     const base64 = reader.result;
                     const sizeInKB = (base64.length * 0.75) / 1024;
-                    console.log(`Base64 size: ${sizeInKB.toFixed(2)} KB`);
+                    console.log(`Final Base64 size: ${sizeInKB.toFixed(2)} KB`);
 
-                    // Stricter limits for production
-                    const sizeLimit = isProduction ? 10 : 15;
+                    // Ultra strict limits
+                    const sizeLimit = isProduction ? 5 : 10; // 5KB for production!
 
                     if (sizeInKB > sizeLimit) {
-                        console.warn(`File still too large after compression: ${sizeInKB.toFixed(2)} KB`);
-                        reject(new Error(`File too large even after compression. Please use a smaller file. (${sizeInKB.toFixed(2)} KB)`));
+                        console.warn(`Still too large: ${sizeInKB.toFixed(2)}KB`);
+                        resolve(''); // Return empty instead of error
                         return;
                     }
 
                     resolve(base64);
                 } catch (error) {
-                    console.error('Error in FileReader onload:', error);
-                    reject(error);
+                    console.error('Base64 conversion error:', error);
+                    resolve('');
                 }
             };
 
-            reader.onerror = (error) => {
-                console.error('FileReader error:', error);
-                reject(error);
-            };
-
-            reader.onabort = () => {
-                console.error('FileReader aborted');
-                reject(new Error('File reading was aborted'));
+            reader.onerror = () => {
+                resolve('');
             };
 
             try {
                 reader.readAsDataURL(processedFile);
             } catch (error) {
-                console.error('Error starting FileReader:', error);
-                reject(error);
+                console.error('FileReader start error:', error);
+                resolve('');
             }
         });
     };
 
     const sanitizeString = (str) => {
         if (!str) return '';
-        return str.toString().trim().replace(/[\r\n\t]/g, ' ').slice(0, 1000);
+        return str.toString().trim().replace(/[\r\n\t]/g, ' ').slice(0, 500); // Shorter strings
     };
 
     const handleSubmit = async (e) => {
@@ -264,42 +277,28 @@ const ContactPage = () => {
         setIsSubmitting(true);
 
         try {
-            // Check if EmailJS is properly initialized
+            const isProduction = process.env.NODE_ENV === 'production';
+            console.log(`🚀 Submitting in ${isProduction ? 'PRODUCTION' : 'DEVELOPMENT'} mode`);
+
             if (!process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
                 throw new Error('EmailJS configuration is missing');
             }
 
-            const isProduction = process.env.NODE_ENV === 'production';
-            console.log(`Running in ${isProduction ? 'production' : 'development'} mode`);
-
-            // Convert files to Base64 with environment-specific compression
+            // Process files with ultra compression
             let passportCopyBase64 = '';
             let photographBase64 = '';
 
             if (formData.passportCopy) {
-                try {
-                    console.log('Converting and compressing passport copy...');
-                    passportCopyBase64 = await convertToBase64(formData.passportCopy, true);
-                } catch (error) {
-                    console.error('Error processing passport copy:', error);
-                    passportCopyBase64 = '';
-                    // Don't show alert here, handle it below
-                }
+                console.log('🔄 Processing passport copy...');
+                passportCopyBase64 = await convertToBase64Ultra(formData.passportCopy);
+                console.log('✅ Passport copy processed:', passportCopyBase64 ? 'Success' : 'Failed/Too Large');
             }
 
             if (formData.photograph) {
-                try {
-                    console.log('Converting and compressing photograph...');
-                    photographBase64 = await convertToBase64(formData.photograph, true);
-                } catch (error) {
-                    console.error('Error processing photograph:', error);
-                    photographBase64 = '';
-                    // Don't show alert here, handle it below
-                }
+                console.log('🔄 Processing photograph...');
+                photographBase64 = await convertToBase64Ultra(formData.photograph);
+                console.log('✅ Photograph processed:', photographBase64 ? 'Success' : 'Failed/Too Large');
             }
-
-            // Placeholder for empty images
-            const placeholderImage = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
 
             // Prepare template parameters
             const templateParams = {
@@ -336,53 +335,47 @@ const ContactPage = () => {
                 terms_accepted: formData.termsAccepted ? 'Yes' : 'No',
 
                 // File Information
-                passport_copy_name: formData.passportCopy?.name || 'Not uploaded',
-                photograph_name: formData.photograph?.name || 'Not uploaded',
+                passport_copy_name: formData.passportCopy?.name || 'None',
+                photograph_name: formData.photograph?.name || 'None',
                 passport_copy_attached: passportCopyBase64 ? 'Yes' : 'No',
                 photograph_attached: photographBase64 ? 'Yes' : 'No',
 
-                // Base64 Data - use placeholder if empty or invalid
-                passport_copy_data: (passportCopyBase64 && passportCopyBase64.startsWith('data:'))
-                    ? passportCopyBase64
-                    : placeholderImage,
-
-                photograph_data: (photographBase64 && photographBase64.startsWith('data:'))
-                    ? photographBase64
-                    : placeholderImage,
+                // Images - only if they exist and are small enough
+                passport_copy_data: passportCopyBase64 || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+                photograph_data: photographBase64 || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
 
                 // Metadata
                 submission_date: new Date().toLocaleDateString(),
                 submission_time: new Date().toLocaleTimeString(),
-                environment: isProduction ? 'production' : 'development'
+                environment: isProduction ? 'PROD' : 'DEV',
+                images_status: (passportCopyBase64 && photographBase64)
+                    ? 'Both images included'
+                    : (!passportCopyBase64 && !photographBase64)
+                        ? 'No images included - please email separately'
+                        : 'Partial images included'
             };
 
-            // Validate all parameters
-            Object.keys(templateParams).forEach(key => {
-                if (templateParams[key] === undefined || templateParams[key] === null) {
-                    templateParams[key] = 'N/A';
-                }
+            // Log what we're sending
+            console.log('📋 Template params prepared:', Object.keys(templateParams));
+            console.log('🖼️ Image data included:', {
+                passport: !!passportCopyBase64,
+                photo: !!photographBase64
             });
 
-            console.log('Template parameters prepared:', Object.keys(templateParams));
-
-            // Calculate payload size
             const totalSize = JSON.stringify(templateParams).length / 1024;
-            console.log(`Total payload size: ${totalSize.toFixed(2)} KB`);
+            console.log(`📦 Total payload: ${totalSize.toFixed(2)} KB`);
 
-            // More conservative size limits for production
-            const sizeLimit = isProduction ? 25 : 35;
-            let imagesRemoved = false;
-
-            if (totalSize > sizeLimit) {
-                console.warn(`Payload too large (${totalSize.toFixed(2)} KB), removing images`);
-                templateParams.passport_copy_data = placeholderImage;
-                templateParams.photograph_data = placeholderImage;
-                templateParams.passport_copy_attached = 'File too large for email';
-                templateParams.photograph_attached = 'File too large for email';
-                imagesRemoved = true;
+            // Ultra conservative size limit for production
+            if (totalSize > (isProduction ? 15 : 30)) {
+                console.warn('🚨 Payload still too large, using placeholders');
+                templateParams.passport_copy_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+                templateParams.photograph_data = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+                templateParams.passport_copy_attached = 'Removed - too large';
+                templateParams.photograph_attached = 'Removed - too large';
+                templateParams.images_status = 'Images removed due to size - please email separately';
             }
 
-            console.log('Sending email with EmailJS...');
+            console.log('📤 Sending email...');
 
             const result = await emailjs.send(
                 process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
@@ -391,14 +384,16 @@ const ContactPage = () => {
                 process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
             );
 
-            console.log('Email sent successfully:', result);
+            console.log('✅ Email sent successfully:', result);
 
-            // Show appropriate success message
-            if (imagesRemoved || !passportCopyBase64 || !photographBase64) {
-                alert('Form submitted successfully! Note: Images were too large for email delivery and were not included. Please email your documents separately to support@yourcompany.com');
-            } else {
-                alert('Form submitted successfully! We will contact you soon.');
+            const hasImages = passportCopyBase64 && photographBase64;
+            let message = 'Form submitted successfully! We will contact you soon.';
+
+            if (!hasImages) {
+                message += '\n\n⚠️ Images were too large for email. Please send them separately to: support@yourcompany.com';
             }
+
+            alert(message);
 
             // Reset form
             setFormData({
@@ -432,26 +427,19 @@ const ContactPage = () => {
             setCurrentStep(1);
             setErrors({});
 
-            // Reset file inputs
             const fileInputs = document.querySelectorAll('input[type="file"]');
-            fileInputs.forEach(input => {
-                input.value = '';
-            });
+            fileInputs.forEach(input => input.value = '');
 
         } catch (error) {
-            console.error('Detailed EmailJS error:', error);
-            if (error.text) {
-                console.error('EmailJS error text:', error.text);
-            }
+            console.error('❌ EmailJS error:', error);
 
-            // More specific error messages
-            let errorMessage = 'Failed to send form. Please try again.';
-            if (error.message.includes('too large')) {
-                errorMessage = 'Images are too large. Please use smaller images (under 500KB each) and try again.';
-            } else if (error.message.includes('configuration')) {
-                errorMessage = 'Email service configuration error. Please contact support.';
-            } else if (error.text && error.text.includes('size')) {
-                errorMessage = 'Form data is too large. Please use smaller images and try again.';
+            let errorMessage = 'Failed to send form. ';
+            if (error.text?.includes('413') || error.message?.includes('large')) {
+                errorMessage += 'Files are too large. Please try with smaller images.';
+            } else if (error.status === 400) {
+                errorMessage += 'Invalid request. Please check your inputs.';
+            } else {
+                errorMessage += error.message || 'Please try again.';
             }
 
             alert(errorMessage);
@@ -718,13 +706,16 @@ const ContactPage = () => {
                         type="file"
                         name="passportCopy"
                         onChange={handleInputChange}
-                        accept="image/*,.pdf"
+                        accept="image/jpeg,image/jpg,image/png"
                         className={`${styles.input} ${errors.passportCopy ? styles.inputError : ''}`}
                     />
-                    <small className={styles.fileNote}>Max file size: 2MB (will be heavily compressed for email)</small>
+                    <small className={styles.fileNote}>
+                        📏 Max: 1MB • Will be ultra-compressed to ~5KB for email delivery
+                        {process.env.NODE_ENV === 'production' && <span> • Production: Images heavily compressed</span>}
+                    </small>
                     {formData.passportCopy && (
                         <div className={styles.filePreview}>
-                            ✓ Selected: {formData.passportCopy.name}
+                            ✓ Selected: {formData.passportCopy.name} ({Math.round(formData.passportCopy.size / 1024)}KB)
                         </div>
                     )}
                     {errors.passportCopy && <span className={styles.error}>{errors.passportCopy}</span>}
@@ -736,17 +727,27 @@ const ContactPage = () => {
                         type="file"
                         name="photograph"
                         onChange={handleInputChange}
-                        accept="image/*"
+                        accept="image/jpeg,image/jpg,image/png"
                         className={`${styles.input} ${errors.photograph ? styles.inputError : ''}`}
                     />
-                    <small className={styles.fileNote}>Max file size: 2MB (will be heavily compressed for email)</small>
+                    <small className={styles.fileNote}>
+                        📏 Max: 1MB • Will be ultra-compressed to ~5KB for email delivery
+                        {process.env.NODE_ENV === 'production' && <span> • Production: Images heavily compressed</span>}
+                    </small>
                     {formData.photograph && (
                         <div className={styles.filePreview}>
-                            ✓ Selected: {formData.photograph.name}
+                            ✓ Selected: {formData.photograph.name} ({Math.round(formData.photograph.size / 1024)}KB)
                         </div>
                     )}
                     {errors.photograph && <span className={styles.error}>{errors.photograph}</span>}
                 </div>
+            </div>
+
+            <div className={styles.compressionWarning}>
+                <small>
+                    🔄 <strong>Note:</strong> Images will be heavily compressed for email delivery.
+                    If quality is important, please also email full-resolution files separately.
+                </small>
             </div>
         </div>
     );
@@ -880,6 +881,23 @@ const ContactPage = () => {
                 <div className={styles.formContainer}>
                     <h1 className={styles.title}>Contact Us</h1>
                     <p className={styles.subtitle}>Fill out the form below to get in touch with us</p>
+
+                    {/* Environment indicator for development */}
+                    {process.env.NODE_ENV !== 'production' && (
+                        <div className={styles.devIndicator}>
+                            <small>Development Mode - Relaxed file size limits</small>
+                        </div>
+                    )}
+
+                    {/* Production warning */}
+                    {process.env.NODE_ENV === 'production' && (
+                        <div className={styles.productionWarning}>
+                            <small>
+                                🔄 <strong>Production Mode:</strong> Images will be ultra-compressed for email delivery.
+                                Large files may not be included in email.
+                            </small>
+                        </div>
+                    )}
 
                     {/* Progress Bar */}
                     <div className={styles.progressBar}>
