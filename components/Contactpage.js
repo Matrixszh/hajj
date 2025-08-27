@@ -116,8 +116,11 @@ const ContactPage = () => {
         }
     }, []);
 
+    // Fixed handleInputChange function with better state management
     const handleInputChange = (e) => {
         const { name, value, type, checked, files } = e.target;
+
+        console.log('Input change:', { name, value, type }); // Debug logging
 
         try {
             if (type === 'file') {
@@ -141,27 +144,45 @@ const ContactPage = () => {
 
                     console.log(`File selected: ${file.name}, Size: ${(file.size / 1024).toFixed(2)}KB, Type: ${file.type}`);
                 }
-                setFormData(prev => ({
-                    ...prev,
-                    [name]: file || null
-                }));
+
+                // Update file field
+                setFormData(prevData => {
+                    const newData = {
+                        ...prevData,
+                        [name]: file || null
+                    };
+                    console.log('Updated formData (file):', newData); // Debug logging
+                    return newData;
+                });
             } else if (type === 'checkbox') {
-                setFormData(prev => ({
-                    ...prev,
-                    [name]: checked
-                }));
+                // Update checkbox field
+                setFormData(prevData => {
+                    const newData = {
+                        ...prevData,
+                        [name]: checked
+                    };
+                    console.log('Updated formData (checkbox):', newData); // Debug logging
+                    return newData;
+                });
             } else {
-                setFormData(prev => ({
-                    ...prev,
-                    [name]: value
-                }));
+                // Update text/email/tel/date/select fields
+                setFormData(prevData => {
+                    const newData = {
+                        ...prevData,
+                        [name]: value
+                    };
+                    console.log('Updated formData (text):', newData); // Debug logging
+                    return newData;
+                });
             }
 
+            // Clear any existing errors for this field
             if (errors[name]) {
-                setErrors(prev => ({
-                    ...prev,
-                    [name]: ''
-                }));
+                setErrors(prevErrors => {
+                    const newErrors = { ...prevErrors };
+                    delete newErrors[name];
+                    return newErrors;
+                });
             }
         } catch (error) {
             console.error('Error handling input change:', error);
@@ -172,36 +193,36 @@ const ContactPage = () => {
         const newErrors = {};
 
         if (step === 1) {
-            if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
-            if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-            if (!formData.motherName.trim()) newErrors.motherName = 'Mother\'s name is required';
-            if (!formData.fatherName.trim()) newErrors.fatherName = 'Father\'s name is required';
-            if (!formData.email.trim()) newErrors.email = 'Email is required';
+            if (!formData.firstName?.trim()) newErrors.firstName = 'First name is required';
+            if (!formData.lastName?.trim()) newErrors.lastName = 'Last name is required';
+            if (!formData.motherName?.trim()) newErrors.motherName = 'Mother\'s name is required';
+            if (!formData.fatherName?.trim()) newErrors.fatherName = 'Father\'s name is required';
+            if (!formData.email?.trim()) newErrors.email = 'Email is required';
             else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
-            if (!formData.cellPhone.trim()) newErrors.cellPhone = 'Cell phone number is required';
-            if (!formData.dateOfBirth.trim()) newErrors.dateOfBirth = 'Date of birth is required';
-            if (!formData.gender.trim()) newErrors.gender = 'Gender is required';
-            if (!formData.nationality.trim()) newErrors.nationality = 'Nationality is required';
+            if (!formData.cellPhone?.trim()) newErrors.cellPhone = 'Cell phone number is required';
+            if (!formData.dateOfBirth?.trim()) newErrors.dateOfBirth = 'Date of birth is required';
+            if (!formData.gender?.trim()) newErrors.gender = 'Gender is required';
+            if (!formData.nationality?.trim()) newErrors.nationality = 'Nationality is required';
         }
 
         if (step === 2) {
-            if (!formData.streetAddress.trim()) newErrors.streetAddress = 'Street address is required';
-            if (!formData.city.trim()) newErrors.city = 'City is required';
-            if (!formData.zipCode.trim()) newErrors.zipCode = 'Zip code is required';
-            if (!formData.state.trim()) newErrors.state = 'State is required';
-            if (!formData.passportNumber.trim()) newErrors.passportNumber = 'Passport number is required';
-            if (!formData.dateOfIssue.trim()) newErrors.dateOfIssue = 'Date of issue is required';
-            if (!formData.dateOfExpiration.trim()) newErrors.dateOfExpiration = 'Date of expiration is required';
+            if (!formData.streetAddress?.trim()) newErrors.streetAddress = 'Street address is required';
+            if (!formData.city?.trim()) newErrors.city = 'City is required';
+            if (!formData.zipCode?.trim()) newErrors.zipCode = 'Zip code is required';
+            if (!formData.state?.trim()) newErrors.state = 'State is required';
+            if (!formData.passportNumber?.trim()) newErrors.passportNumber = 'Passport number is required';
+            if (!formData.dateOfIssue?.trim()) newErrors.dateOfIssue = 'Date of issue is required';
+            if (!formData.dateOfExpiration?.trim()) newErrors.dateOfExpiration = 'Date of expiration is required';
             if (!formData.passportCopy) newErrors.passportCopy = 'Passport copy is required';
             if (!formData.photograph) newErrors.photograph = 'Photograph is required';
         }
 
         if (step === 3) {
-            if (!formData.packageType.trim()) newErrors.packageType = 'Package type is required';
-            if (!formData.departureCity.trim()) newErrors.departureCity = 'Departure city is required';
-            if (!formData.roomRequirement.trim()) newErrors.roomRequirement = 'Room requirement is required';
-            if (!formData.travelingCompanions.trim()) newErrors.travelingCompanions = 'Traveling companions information is required';
-            if (!formData.marjaTaqleed.trim()) newErrors.marjaTaqleed = 'Marja Taqleed is required';
+            if (!formData.packageType?.trim()) newErrors.packageType = 'Package type is required';
+            if (!formData.departureCity?.trim()) newErrors.departureCity = 'Departure city is required';
+            if (!formData.roomRequirement?.trim()) newErrors.roomRequirement = 'Room requirement is required';
+            if (!formData.travelingCompanions?.trim()) newErrors.travelingCompanions = 'Traveling companions information is required';
+            if (!formData.marjaTaqleed?.trim()) newErrors.marjaTaqleed = 'Marja Taqleed is required';
             if (!formData.termsAccepted) newErrors.termsAccepted = 'You must accept the terms and conditions';
         }
 
@@ -210,6 +231,7 @@ const ContactPage = () => {
     };
 
     const handleNext = () => {
+        console.log('Current formData before validation:', formData); // Debug logging
         if (validateStep(currentStep)) {
             setCurrentStep(prev => prev + 1);
         }
@@ -307,6 +329,8 @@ const ContactPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        console.log('Form submission started with data:', formData); // Debug logging
 
         if (!validateStep(currentStep)) return;
 
@@ -463,8 +487,8 @@ const ContactPage = () => {
 
             alert(message);
 
-            // Reset form
-            setFormData({
+            // Reset form data with proper state update
+            const initialFormData = {
                 firstName: '',
                 middleName: '',
                 lastName: '',
@@ -491,7 +515,9 @@ const ContactPage = () => {
                 travelingCompanions: '',
                 marjaTaqleed: '',
                 termsAccepted: false
-            });
+            };
+
+            setFormData(initialFormData);
             setCurrentStep(1);
             setErrors({});
 
@@ -534,7 +560,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         name="firstName"
-                        value={formData.firstName}
+                        value={formData.firstName || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.firstName ? styles.inputError : ''}`}
                     />
@@ -546,7 +572,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         name="middleName"
-                        value={formData.middleName}
+                        value={formData.middleName || ''}
                         onChange={handleInputChange}
                         className={styles.input}
                     />
@@ -558,7 +584,7 @@ const ContactPage = () => {
                 <input
                     type="text"
                     name="lastName"
-                    value={formData.lastName}
+                    value={formData.lastName || ''}
                     onChange={handleInputChange}
                     className={`${styles.input} ${errors.lastName ? styles.inputError : ''}`}
                 />
@@ -571,7 +597,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         name="motherName"
-                        value={formData.motherName}
+                        value={formData.motherName || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.motherName ? styles.inputError : ''}`}
                     />
@@ -583,7 +609,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         name="fatherName"
-                        value={formData.fatherName}
+                        value={formData.fatherName || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.fatherName ? styles.inputError : ''}`}
                     />
@@ -596,7 +622,7 @@ const ContactPage = () => {
                 <input
                     type="email"
                     name="email"
-                    value={formData.email}
+                    value={formData.email || ''}
                     onChange={handleInputChange}
                     className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
                 />
@@ -608,7 +634,7 @@ const ContactPage = () => {
                 <input
                     type="tel"
                     name="cellPhone"
-                    value={formData.cellPhone}
+                    value={formData.cellPhone || ''}
                     onChange={handleInputChange}
                     className={`${styles.input} ${errors.cellPhone ? styles.inputError : ''}`}
                 />
@@ -621,7 +647,7 @@ const ContactPage = () => {
                     <input
                         type="date"
                         name="dateOfBirth"
-                        value={formData.dateOfBirth}
+                        value={formData.dateOfBirth || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.dateOfBirth ? styles.inputError : ''}`}
                     />
@@ -662,7 +688,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         name="nationality"
-                        value={formData.nationality}
+                        value={formData.nationality || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.nationality ? styles.inputError : ''}`}
                     />
@@ -674,7 +700,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         name="previousNationality"
-                        value={formData.previousNationality}
+                        value={formData.previousNationality || ''}
                         onChange={handleInputChange}
                         className={styles.input}
                     />
@@ -691,7 +717,7 @@ const ContactPage = () => {
                 <label className={styles.label}>Street Address *</label>
                 <textarea
                     name="streetAddress"
-                    value={formData.streetAddress}
+                    value={formData.streetAddress || ''}
                     onChange={handleInputChange}
                     className={`${styles.textarea} ${errors.streetAddress ? styles.inputError : ''}`}
                     rows="3"
@@ -705,7 +731,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         name="city"
-                        value={formData.city}
+                        value={formData.city || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.city ? styles.inputError : ''}`}
                     />
@@ -717,7 +743,7 @@ const ContactPage = () => {
                     <input
                         type="text"
                         name="zipCode"
-                        value={formData.zipCode}
+                        value={formData.zipCode || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.zipCode ? styles.inputError : ''}`}
                     />
@@ -730,7 +756,7 @@ const ContactPage = () => {
                 <input
                     type="text"
                     name="state"
-                    value={formData.state}
+                    value={formData.state || ''}
                     onChange={handleInputChange}
                     className={`${styles.input} ${errors.state ? styles.inputError : ''}`}
                 />
@@ -742,7 +768,7 @@ const ContactPage = () => {
                 <input
                     type="text"
                     name="passportNumber"
-                    value={formData.passportNumber}
+                    value={formData.passportNumber || ''}
                     onChange={handleInputChange}
                     className={`${styles.input} ${errors.passportNumber ? styles.inputError : ''}`}
                 />
@@ -755,7 +781,7 @@ const ContactPage = () => {
                     <input
                         type="date"
                         name="dateOfIssue"
-                        value={formData.dateOfIssue}
+                        value={formData.dateOfIssue || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.dateOfIssue ? styles.inputError : ''}`}
                     />
@@ -767,7 +793,7 @@ const ContactPage = () => {
                     <input
                         type="date"
                         name="dateOfExpiration"
-                        value={formData.dateOfExpiration}
+                        value={formData.dateOfExpiration || ''}
                         onChange={handleInputChange}
                         className={`${styles.input} ${errors.dateOfExpiration ? styles.inputError : ''}`}
                     />
@@ -823,7 +849,7 @@ const ContactPage = () => {
                 <small>
                     🔄 <strong>Image Processing:</strong> Files will be compressed to ensure email delivery.
                     Very large files may not be attached - please email them separately if needed.
-                    Check browser console for detailed processing information.
+                    Check browser console (F12) to see detailed processing information.
                 </small>
             </div>
         </div>
@@ -837,7 +863,7 @@ const ContactPage = () => {
                 <label className={styles.label}>Package Type *</label>
                 <select
                     name="packageType"
-                    value={formData.packageType}
+                    value={formData.packageType || ''}
                     onChange={handleInputChange}
                     className={`${styles.select} ${errors.packageType ? styles.inputError : ''}`}
                 >
@@ -854,7 +880,7 @@ const ContactPage = () => {
                 <label className={styles.label}>Departure City *</label>
                 <select
                     name="departureCity"
-                    value={formData.departureCity}
+                    value={formData.departureCity || ''}
                     onChange={handleInputChange}
                     className={`${styles.select} ${errors.departureCity ? styles.inputError : ''}`}
                 >
@@ -913,7 +939,7 @@ const ContactPage = () => {
                 <label className={styles.label}>Traveling Companions and Relationship *</label>
                 <textarea
                     name="travelingCompanions"
-                    value={formData.travelingCompanions}
+                    value={formData.travelingCompanions || ''}
                     onChange={handleInputChange}
                     className={`${styles.textarea} ${errors.travelingCompanions ? styles.inputError : ''}`}
                     rows="4"
@@ -927,7 +953,7 @@ const ContactPage = () => {
                 <input
                     type="text"
                     name="marjaTaqleed"
-                    value={formData.marjaTaqleed}
+                    value={formData.marjaTaqleed || ''}
                     onChange={handleInputChange}
                     className={`${styles.input} ${errors.marjaTaqleed ? styles.inputError : ''}`}
                 />
@@ -939,7 +965,7 @@ const ContactPage = () => {
                     <input
                         type="checkbox"
                         name="termsAccepted"
-                        checked={formData.termsAccepted}
+                        checked={formData.termsAccepted || false}
                         onChange={handleInputChange}
                         className={styles.checkbox}
                     />
@@ -1033,6 +1059,17 @@ const ContactPage = () => {
                             )}
                         </div>
                     </form>
+
+                    {/* Debug panel for development */}
+                    {process.env.NODE_ENV !== 'production' && (
+                        <div style={{ marginTop: '20px', padding: '10px', background: '#f0f0f0', borderRadius: '5px' }}>
+                            <small>
+                                <strong>Debug Info:</strong><br />
+                                Current Step: {currentStep}<br />
+                                Form Data: {JSON.stringify(formData, null, 2).substring(0, 200)}...
+                            </small>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
