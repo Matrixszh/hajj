@@ -111,8 +111,8 @@ const ContactPage = () => {
         if (step === 1) {
             if (!formData.firstName?.trim()) newErrors.firstName = 'First name is required';
             if (!formData.lastName?.trim()) newErrors.lastName = 'Last name is required';
-            if (!formData.motherName?.trim()) newErrors.motherName = 'Mother\'s name is required';
-            if (!formData.fatherName?.trim()) newErrors.fatherName = 'Father\'s name is required';
+            if (!formData.motherName?.trim()) newErrors.motherName = 'Mother&apos;s name is required';
+            if (!formData.fatherName?.trim()) newErrors.fatherName = 'Father&apos;s name is required';
             if (!formData.email?.trim()) newErrors.email = 'Email is required';
             else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
             if (!formData.cellPhone?.trim()) newErrors.cellPhone = 'Cell phone number is required';
@@ -336,7 +336,7 @@ const ContactPage = () => {
 
             <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                    <label className={styles.label}>Mother's Name *</label>
+                    <label className={styles.label}>Mother&apos;s Name *</label>
                     <input
                         type="text"
                         name="motherName"
@@ -348,7 +348,7 @@ const ContactPage = () => {
                 </div>
 
                 <div className={styles.formGroup}>
-                    <label className={styles.label}>Father's Name *</label>
+                    <label className={styles.label}>Father&apos;s Name *</label>
                     <input
                         type="text"
                         name="fatherName"
