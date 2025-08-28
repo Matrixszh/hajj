@@ -15,9 +15,9 @@ const Banner = () => {
         <div className={styles.content}>
           <div className={styles.textContent}>
             <h1 className={styles.title}>
-              Your Trusted Hajj Partner  </h1>
+              Pakistani Passport Hajj  </h1>
             <p className={styles.subtitle}>
-              The most experienced Western group on the new Nusuk platform, having successfully organized and led Hajj groups since its introduction in 2022. From visas and flights to accommodations, transportation, and on-the-ground support, we take care of every detail—so you don’t have to.
+              This exclusive package is tailored for Pakistani passport holders who wish to bypass the unpredictability of the Nusuk system. With this option, your Hajj visa is 100% guaranteed, and every aspect of your journey is arranged by our experienced team.
             </p>
             <Link href="/contact" className={styles.exploreButton}>
               REGISTER

@@ -261,8 +261,16 @@ const LandingPage = () => {
       <footer className={styles.footer}>
         <div className={styles.container2}>
           <div className={styles.footerContent}>
-            <div className={styles.footerLeft}>
-              <div className={styles.footerLogo}>LOGO</div>
+            <div className={styles.footerLogo}>
+              <Link href="/">
+                <Image
+                  src="/logo.png"
+                  alt="Company Logo"
+                  width={60}
+                  height={20}
+                  priority={true}
+                />
+              </Link>
               <p className={styles.copyright}>Copyright 2024. All Rights Reserved.</p>
             </div>
             <div className={styles.footerRight}>

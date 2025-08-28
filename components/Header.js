@@ -43,7 +43,7 @@ const Header = () => {
         <div className={styles.logo}>
           <Link href="/">
             <Image
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Company Logo"
               width={120}
               height={20}
@@ -87,12 +87,6 @@ const Header = () => {
             className={`${styles.navLink} ${isActive('/umrah') ? styles.active : ''}`}
           >
             Umrah
-          </Link>
-          <Link
-            href="/ziyarah"
-            className={`${styles.navLink} ${isActive('/ziyarah') ? styles.active : ''}`}
-          >
-            Ziyarah
           </Link>
           <Link
             href="/contact"
@@ -183,13 +177,6 @@ const Header = () => {
             onClick={closeMenu}
           >
             Umrah
-          </Link>
-          <Link
-            href="/ziyarah"
-            className={`${styles.mobileNavLink} ${isActive('/ziyarah') ? styles.active : ''}`}
-            onClick={closeMenu}
-          >
-            Ziyarah
           </Link>
           <Link
             href="/contact"

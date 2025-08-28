@@ -268,7 +268,7 @@ const LandingPage = () => {
 
           {/* Contact Button */}
           <div className={styles.applicationContactContainer}>
-            <a href="#contact" className={styles.applicationContactButton}>CONTACT</a>
+            <a href="/contact" className={styles.applicationContactButton}>REGISTER</a>
           </div>
         </div>
       </section>
@@ -328,7 +328,15 @@ const LandingPage = () => {
         <div className={styles.container2}>
           <div className={styles.footerContent}>
             <div className={styles.footerLeft}>
-              <div className={styles.footerLogo}>LOGO</div>
+              <div className={styles.footerLogo}><Link href="/">
+                <Image
+                  src="/logo.png"
+                  alt="Company Logo"
+                  width={60}
+                  height={20}
+                  priority={true}
+                />
+              </Link></div>
               <p className={styles.copyright}>Copyright 2024. All Rights Reserved.</p>
             </div>
             <div className={styles.footerRight}>

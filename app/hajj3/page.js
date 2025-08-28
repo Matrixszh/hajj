@@ -1,4 +1,4 @@
-import Banner from "@/components/Banner";
+import Banner from "@/components/Banner2";
 import Header from "@/components/Header";
 import LandingPage from "@/components/Hajj_Page3";
 

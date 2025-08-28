@@ -116,9 +116,11 @@ const HajjPackage = () => {
         <section className={styles.finalCtaSection}>
           <h2 className={styles.sectionTitle}>Ready to begin your Hajj journey with confidence?</h2>
           <p className={styles.ctaDescription}>Reserve your spot today – only {availableSpots} available.</p>
-          <button onClick={handleBookingClick} className={styles.finalCtaButton}>
-            Reserve Your Spot
-          </button>
+          <Link href="/contact">
+            <button onClick={handleBookingClick} className={styles.finalCtaButton}>
+              Reserve Your Spot
+            </button>
+          </Link>
         </section>
 
         <footer className={styles.footer}>

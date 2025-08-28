@@ -15,9 +15,9 @@ const Banner = () => {
         <div className={styles.content}>
           <div className={styles.textContent}>
             <h1 className={styles.title}>
-              Your Trusted Hajj Partner  </h1>
+              Self Service Hajj  </h1>
             <p className={styles.subtitle}>
-              The most experienced Western group on the new Nusuk platform, having successfully organized and led Hajj groups since its introduction in 2022. From visas and flights to accommodations, transportation, and on-the-ground support, we take care of every detail—so you don’t have to.
+              Superior guidance and higher success rates. You will personally register and select your package through the official Nusuk platform. We’ll walk you through the entire process and maximize your chances of securing a visa and package.
             </p>
             <Link href="/contact" className={styles.exploreButton}>
               REGISTER

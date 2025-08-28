@@ -10,10 +10,7 @@ const HajjPackage = () => {
     useEffect(() => {
         setIsVisible(true);
         // Simulate decreasing spots for urgency
-        const interval = setInterval(() => {
-            setSpotsLeft(prev => Math.max(65, prev - Math.floor(Math.random() * 2)));
-        }, 10000);
-        return () => clearInterval(interval);
+
     }, []);
 
     const features = [
@@ -194,10 +191,11 @@ const HajjPackage = () => {
                         </div>
                         <div className={styles.spotsRemaining}>{spotsLeft} spots remaining</div>
                         <p>Only 80 pilgrims will be accepted for this exclusive package</p>
-
-                        <button className={styles.finalCtaButton} onClick={handleBookingClick}>
-                            Reserve Your Spot Now
-                        </button>
+                        <Link href="/contact">
+                            <button className={styles.finalCtaButton} onClick={handleBookingClick}>
+                                Reserve Your Spot Now
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </section>
