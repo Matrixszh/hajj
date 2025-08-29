@@ -19,8 +19,8 @@ const HajjPackage = () => {
   const features = [
     {
       icon: "✈️",
-      title: "Premium Airfare",
-      desc: "Direct flights from major US cities"
+      title: "Airfare Included",
+      desc: "Airfare is included"
     },
     {
       icon: "🏨",
@@ -58,7 +58,7 @@ const HajjPackage = () => {
   ];
 
   const inclusions = [
-    { icon: "✈️", text: "Airfare from major US cities" },
+    { icon: "✈️", text: "Airfare included" },
     { icon: "📍", text: "Hajj visa via official Nusuk platform" },
     { icon: "🏨", text: "5-Star Makkah & 4-Star Madinah hotels" },
     { icon: "🍽️", text: "Daily breakfast & dinner buffet" },
@@ -109,7 +109,7 @@ const HajjPackage = () => {
                 <div className={styles.detailItem}>
                   <div className={styles.price}>$16,400</div>
                   <p>All-inclusive package</p>
-                  <p className={styles.priceNote}>Shorter option available</p>
+                  <p className={styles.priceNote}>Shorter option available at 11400</p>
                 </div>
                 <div className={styles.detailItem}>
                   <div className={styles.detailIcon}>👥</div>
@@ -126,6 +126,136 @@ const HajjPackage = () => {
                 Secure Your Spiritual Journey
               </button>
             </Link>
+          </div>
+        </div>
+      </section>
+      {/* Package Comparison Section - Add this before features section */}
+      {/* Package Comparison Section */}
+      <section className={styles.packageSection}>
+        <div className={styles.container}>
+          <h2 className={styles.sectionTitle}>Choose Your Package</h2>
+          <div className={styles.packageGrid}>
+
+            {/* Standard Package Card */}
+            <div className={styles.packageCard}>
+              <div className={styles.packageHeader}>
+                <h3 className={styles.packageTitle}>Standard</h3>
+                <div className={styles.packagePrice}>
+                  <span className={styles.price}>$11400</span>
+                  <p className={styles.priceNote}>per person</p>
+                </div>
+              </div>
+              <div className={styles.packageFeatures}>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Mecca Hotel in Azizla</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Hotel in Medina: 3 star</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Breakfast and Dinner</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Flight from Nusuk Platform</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Highspeed Train to Mecca</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Mina transport NOT provided for 10th & 11th</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>All Local Ziarat</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Complete Preparation Classes</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>All Rooms are Quad Sharing</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Double and Triple Occupancy Extra</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Hajj Package (Cinch Bag, Guide, Scarf)</span>
+                </div>
+              </div>
+              <button className={styles.ctaButton} onClick={handleBookingClick}>
+                Select Standard
+              </button>
+            </div>
+
+            {/* Deluxe Package Card */}
+            <div className={`${styles.packageCard} ${styles.premiumCard}`}>
+              <div className={styles.packageBadge}>Most Popular</div>
+              <div className={styles.packageHeader}>
+                <h3 className={styles.packageTitle}>Deluxe</h3>
+                <div className={styles.packagePrice}>
+                  <span className={styles.price}>$16400</span>
+                  <p className={styles.priceNote}>per person</p>
+                </div>
+              </div>
+              <div className={styles.packageFeatures}>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Hotel in Mecca: ANJUM or Similar 5 star</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Hotel in Medina: 4 Star</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Breakfast and Dinner</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Flight from Nusuk Platform</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Highspeed Train to Mecca</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Mina transport provided on 10th and 11th</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>All Local Ziarat</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Complete Preparation Classes</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>All Rooms are Quad Sharing</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Double and Triple Occupancy Extra</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.checkmark}>✓</span>
+                  <span>Hajj Package (Cinch Bag, Guide, Scarf)</span>
+                </div>
+              </div>
+              <button className={styles.finalCtaButton} onClick={handleBookingClick}>
+                Select Deluxe
+              </button>
+            </div>
           </div>
         </div>
       </section>

@@ -65,7 +65,7 @@ const HajjPackage = () => {
             <div className={styles.detailItem}>
               <h3 className={styles.detailIcon}>💲</h3>
               <h3>Cost</h3>
-              <p className={styles.price}>$900</p>
+              <p className={styles.price}>$500</p>
               <p className={styles.priceNote}>Guidance & Support Fee</p>
             </div>
             <div className={styles.detailItem}>

@@ -610,26 +610,18 @@ const ContactPage = () => {
             </div>
 
             <div className={styles.formGroup}>
-                <label className={styles.label}>Departure City *</label>
-                <select
+                <label className={styles.label}>Home City *</label>
+                <input
+                    type="text"
                     name="departureCity"
                     value={formData.departureCity || ''}
                     onChange={handleInputChange}
-                    className={`${styles.select} ${errors.departureCity ? styles.inputError : ''}`}
-                >
-                    <option value="">Select Departure City</option>
-                    <option value="New York">New York</option>
-                    <option value="Washington DC">Washington DC</option>
-                    <option value="Chicago">Chicago</option>
-                    <option value="Atlanta">Atlanta</option>
-                    <option value="Miami">Miami</option>
-                    <option value="Houston">Houston</option>
-                    <option value="Dallas">Dallas</option>
-                    <option value="Los Angeles">Los Angeles</option>
-                    <option value="San Francisco">San Francisco</option>
-                </select>
+                    className={`${styles.input} ${errors.departureCity ? styles.inputError : ''}`}
+                    placeholder="Enter your home city"
+                />
                 {errors.departureCity && <span className={styles.error}>{errors.departureCity}</span>}
             </div>
+
 
             <div className={styles.formGroup}>
                 <label className={styles.label}>Room Requirement (Double and Triple Extra Charge) *</label>
@@ -703,11 +695,12 @@ const ContactPage = () => {
                         className={styles.checkbox}
                     />
                     <span className={styles.checkboxText}>
-                        I have read and understood the terms and conditions of Caravan 72
+                        I have read and understood the <a href="/terms-and-conditions" target="_blank" rel="noopener noreferrer">Terms and Conditions</a> of Caravan 72
                     </span>
                 </label>
                 {errors.termsAccepted && <span className={styles.error}>{errors.termsAccepted}</span>}
             </div>
+
         </div>
     );
 

@@ -255,9 +255,10 @@ export async function POST(req) {
                                     <div class="field-value">${packageType}</div>
                                 </div>
                                 <div class="field">
-                                    <div class="field-label">Departure City:</div>
+                                    <div class="field-label">Home City:</div>
                                     <div class="field-value">${departureCity}</div>
                                 </div>
+
                             </div>
                             <div class="field">
                                 <div class="field-label">Room Requirement:</div>
