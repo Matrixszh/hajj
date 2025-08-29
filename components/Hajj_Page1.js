@@ -7,14 +7,7 @@ const HajjPackage = () => {
   const [spotsLeft, setSpotsLeft] = useState(64);
   const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    setIsVisible(true);
-    // Simulate decreasing spots for urgency
-    const interval = setInterval(() => {
-      setSpotsLeft(prev => Math.max(45, prev - Math.floor(Math.random() * 2)));
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
+
 
   const features = [
     {
