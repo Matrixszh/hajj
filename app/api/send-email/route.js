@@ -310,7 +310,7 @@ export async function POST(req) {
         // Send email
         const mailOptions = {
             from: process.env.EMAIL_USER,
-            to: process.env.EMAIL_TO || 'zainhussaini9898@gmail.com',
+            to: process.env.EMAIL_TO || 'registration@caravan72.com',
             subject: `New Pilgrimage Application: ${firstName} ${lastName} - ${packageType}`,
             html: htmlContent,
             attachments: attachments
