@@ -75,7 +75,7 @@ const HajjPackage = () => {
                             <div className={styles.detailsGrid}>
                                 <div className={styles.detailItem}>
                                     <div className={styles.detailIcon}>📅</div>
-                                    <h3>May 17 – May 31, 2026</h3>
+                                    <h3>May 17 – May 31</h3>
                                     <p>Customizable dates</p>
                                     <p className={styles.priceNote}>Flexible scheduling available</p>
                                 </div>
@@ -103,10 +103,10 @@ const HajjPackage = () => {
             <section className={styles.featuresSection}>
                 <div className={styles.container}>
                     <h2 className={`${styles.sectionTitle} ${styles.teal}`}>🧭 Package Highlights</h2>
-                    <p style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '18px', color: '#666' }}>
+                    <p style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '28px', color: '#666' }}>
                         ✨ Guaranteed Visa. Premium Service. Zero Uncertainty.
                     </p>
-                    <p style={{ textAlign: 'center', marginBottom: '3rem', fontSize: '16px', color: '#666', lineHeight: '1.6' }}>
+                    <p style={{ textAlign: 'center', marginBottom: '3rem', fontSize: '24px', color: '#666', lineHeight: '1.6' }}>
                         This exclusive package is tailored for Pakistani passport holders who wish to bypass the unpredictability of the Nusuk system.
                         With this option, your Hajj visa is 100% guaranteed, and every aspect of your journey is arranged by our experienced team.You will not be grouped with pilgrims traveling from Pakistan—you will fly from the U.S., stay in elite accommodations,
                         and experience the highest level of service throughout your pilgrimage.

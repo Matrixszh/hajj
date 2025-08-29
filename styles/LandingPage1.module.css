@@ -180,7 +180,7 @@
   max-width: 1000px;
   margin: 40px auto;
   padding: 40px 50px;
-  border: 1px solid #f0b207;
+  border: 2px solid #f0b207;
   border-radius: 8px;
   background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -203,10 +203,10 @@
 }
 
 .detailItem h3 {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #333;
+  color: #4a9b93;
 }
 
 .detailItem p {
@@ -225,13 +225,17 @@
 
 .priceNote {
   color: #f0b207 !important;
-  font-size: 0.875rem;
+  font-size: 1.5rem;
+}
+.priceNote2 {
+  color: #4a9b93 !important;
+  font-size: 48px;
 }
 
 .spotsCounter {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #d4af37;
+  color: #4a9b93;
 }
 
 /* CTA Buttons */
@@ -452,7 +456,7 @@
 
 .sectionTitle {
   text-align: center;
-  font-size: 32px;
+  font-size: 48px;
   color: #333;
   margin-bottom: 20px;
   font-weight: 500;
@@ -615,7 +619,7 @@
 
 .inclusionItem {
   background-color: white;
-  border: 1px solid rgba(74, 155, 147, 0.1);
+  border: 2px solid #4a9b93;
   border-radius: 8px;
   padding: 20px;
   display: flex;
@@ -638,7 +642,7 @@
 
 .inclusionItem span:last-child {
   color: #333;
-  font-size: 16px;
+  font-size: 24px;
   line-height: 1.4;
 }
 

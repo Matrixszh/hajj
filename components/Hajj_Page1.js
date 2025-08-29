@@ -16,7 +16,7 @@ const HajjPackage = () => {
     {
       icon: "✈️",
       title: "Airfare Included",
-      desc: "Airfare is included"
+      desc: "Included through Nusuk platform"
     },
     {
       icon: "🏨",
@@ -86,35 +86,36 @@ const HajjPackage = () => {
 
       {/* Hero Section */}
       <section className={`${styles.heroSection} ${isVisible ? styles.visible : ''}`}>
+        <div className={styles.heroTitle}>
+          <div className={styles.titleIcon}>🌙</div>
+          <h1>Hajj 2025</h1>
+        </div>
+        <p className={styles.heroSubtitle}>Full-Service Premium Package</p>
+        <div className={styles.detailsCard}>
+          <div className={styles.detailsGrid}>
+            <div className={styles.detailItem}>
+              <div className={styles.detailIcon}>📅</div>
+              <h3>May 15 – June 3</h3>
+              <p className={styles.priceNote2}>Tentative dates</p>
+            </div>
+            <div className={styles.detailItem}>
+              <div className={styles.detailIcon}>💰</div>
+              <div className={styles.price}>$16,400</div>
+              <p className={styles.priceNote}>Standard Package <p className={styles.priceNote2}>$11,400</p></p>
+            </div>
+            <div className={styles.detailItem}>
+              <div className={styles.detailIcon}>👥</div>
+              <div className={styles.spotsCounter}>{spotsLeft}</div>
+              <p>spots remaining</p>
+              <p className={styles.priceNote}></p>
+            </div>
+          </div>
+        </div>
         <div className={styles.container}>
           <div className={styles.heroContent}>
-            <div className={styles.heroTitle}>
-              <div className={styles.titleIcon}>🌙</div>
-              <h1>Hajj 2025</h1>
-            </div>
-            <p className={styles.heroSubtitle}>Full-Service Premium Package</p>
 
-            {/* Key Details Card */}
-            <div className={styles.detailsCard}>
-              <div className={styles.detailsGrid}>
-                <div className={styles.detailItem}>
-                  <div className={styles.detailIcon}>📅</div>
-                  <h3>Duration</h3>
-                  <p>May 15 – June 3, 2025</p>
-                </div>
-                <div className={styles.detailItem}>
-                  <div className={styles.price}>$16,400</div>
-                  <p>All-inclusive package</p>
-                  <p className={styles.priceNote}>Shorter option available at 11400</p>
-                </div>
-                <div className={styles.detailItem}>
-                  <div className={styles.detailIcon}>👥</div>
-                  <h3>Available Spots</h3>
-                  <div className={styles.spotsCounter}>{spotsLeft}</div>
-                  <p>Limited availability</p>
-                </div>
-              </div>
-            </div>
+
+
 
             {/* CTA Button */}
             <Link href="/contact">
