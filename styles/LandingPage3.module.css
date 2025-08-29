@@ -163,13 +163,13 @@
 }
 
 .detailIcon {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 0.75rem;
   color: #4a9b93;
 }
 
 .detailItem h3 {
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 600;
   margin-bottom: 0.5rem;
   color: #333;
@@ -178,7 +178,7 @@
 .detailItem p {
   color: #333;
   margin: 0.25rem 0;
-  font-size: 20px;
+  font-size: 28px;
   line-height: 1.7;
 }
 
@@ -233,7 +233,7 @@
   background-color: white;
   border-radius: 8px;
   padding: 30px 20px;
-  border: 1px solid rgba(74, 155, 147, 0.1);
+  border: 2px solid #4a9b93;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   text-align: center;
@@ -246,7 +246,7 @@
 }
 
 .featureCard h3 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
   color: #333;
@@ -255,7 +255,7 @@
 .featureCard p {
   color: #666;
   margin: 0;
-  font-size: 15px;
+  font-size: 20px;
   line-height: 1.6;
 }
 
@@ -295,7 +295,7 @@
 .serviceItem {
   display: flex;
   align-items: flex-start;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: #333;
   line-height: 1.6;
 }
@@ -318,7 +318,7 @@
 }
 
 .guidanceCard h3 {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: #2d7d76;
@@ -327,14 +327,14 @@
 }
 
 .guidanceIcon {
-  font-size: 4rem;
+  font-size: 8rem;
   margin-bottom: 1rem;
   color: #2d7d76;
 }
 
 .guidanceCard p {
   color: #555;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.6;
   margin: 0;
 }
