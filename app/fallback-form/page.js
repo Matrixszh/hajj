@@ -80,7 +80,7 @@ const FallbackForm = () => {
 
     const validateForm = () => {
         const newErrors = {};
-        
+
         // Required fields
         const required = [
             'firstName', 'lastName', 'motherName', 'fatherName', 'email', 'cellPhone',
@@ -110,7 +110,7 @@ const FallbackForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (!validateForm()) {
             // Scroll to first error
             const firstError = document.querySelector(`.${styles.inputError}`);
@@ -168,8 +168,8 @@ const FallbackForm = () => {
                             <div style={{ textAlign: 'center', padding: '2rem', color: 'green' }}>
                                 <h2>Registration Successful!</h2>
                                 <p>Thank you for submitting your information.</p>
-                                <button 
-                                    onClick={() => window.location.reload()} 
+                                <button
+                                    onClick={() => window.location.reload()}
                                     className={styles.button}
                                     style={{ marginTop: '1rem' }}
                                 >
@@ -217,7 +217,7 @@ const FallbackForm = () => {
 
                                 <div className={styles.formRow}>
                                     <div className={styles.formGroup}>
-                                        <label className={styles.label}>Mother's Name *</label>
+                                        <label className={styles.label}>Mother&apos;s Name *</label>
                                         <input
                                             type="text"
                                             name="motherName"
@@ -228,7 +228,7 @@ const FallbackForm = () => {
                                         {errors.motherName && <span className={styles.error}>{errors.motherName}</span>}
                                     </div>
                                     <div className={styles.formGroup}>
-                                        <label className={styles.label}>Father's Name *</label>
+                                        <label className={styles.label}>Father&apos;s Name *</label>
                                         <input
                                             type="text"
                                             name="fatherName"
@@ -303,7 +303,7 @@ const FallbackForm = () => {
                                     />
                                     {errors.nationality && <span className={styles.error}>{errors.nationality}</span>}
                                 </div>
-                                
+
                                 <div className={styles.formGroup}>
                                     <label className={styles.label}>Previous Nationality</label>
                                     <input
