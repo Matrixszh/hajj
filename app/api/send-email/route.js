@@ -85,7 +85,7 @@ export async function POST(req) {
         const MAX_FILE_SIZE = 4 * 1024 * 1024; // 4MB total limit for Vercel
 
         try {
-            if (passportCopy && passportCopy.size > 0) {
+            if (passportCopy && typeof passportCopy === 'object' && 'size' in passportCopy && passportCopy.size > 0) {
                 console.log(`📎 Processing passport copy: ${passportCopy.name} (${(passportCopy.size / 1024).toFixed(2)}KB)`);
 
                 if (passportCopy.size > MAX_FILE_SIZE) {
@@ -100,7 +100,7 @@ export async function POST(req) {
                 }
             }
 
-            if (photograph && photograph.size > 0) {
+            if (photograph && typeof photograph === 'object' && 'size' in photograph && photograph.size > 0) {
                 console.log(`📎 Processing photograph: ${photograph.name} (${(photograph.size / 1024).toFixed(2)}KB)`);
 
                 if (photograph.size > MAX_FILE_SIZE) {
@@ -291,9 +291,9 @@ export async function POST(req) {
                         ` : `
                             <div class="attachment-info">
                                 <h3>File Status:</h3>
-                                <p><strong>Passport Copy:</strong> ${passportCopy ? `${passportCopy.name} (${(passportCopy.size / 1024).toFixed(2)}KB) - ${passportCopy.size > MAX_FILE_SIZE ? 'Too large, not attached' : 'Processing failed'}` : 'Not provided'}</p>
-                                <p><strong>Photograph:</strong> ${photograph ? `${photograph.name} (${(photograph.size / 1024).toFixed(2)}KB) - ${photograph.size > MAX_FILE_SIZE ? 'Too large, not attached' : 'Processing failed'}` : 'Not provided'}</p>
-                                ${(passportCopy && passportCopy.size > MAX_FILE_SIZE) || (photograph && photograph.size > MAX_FILE_SIZE) ?
+                                <p><strong>Passport Copy:</strong> ${passportCopy && typeof passportCopy === 'object' && 'size' in passportCopy ? `${passportCopy.name || 'Unknown'} (${(passportCopy.size / 1024).toFixed(2)}KB) - ${passportCopy.size > MAX_FILE_SIZE ? 'Too large, not attached' : 'Processing failed'}` : 'Not provided'}</p>
+                                <p><strong>Photograph:</strong> ${photograph && typeof photograph === 'object' && 'size' in photograph ? `${photograph.name || 'Unknown'} (${(photograph.size / 1024).toFixed(2)}KB) - ${photograph.size > MAX_FILE_SIZE ? 'Too large, not attached' : 'Processing failed'}` : 'Not provided'}</p>
+                                ${(passportCopy && typeof passportCopy === 'object' && 'size' in passportCopy && passportCopy.size > MAX_FILE_SIZE) || (photograph && typeof photograph === 'object' && 'size' in photograph && photograph.size > MAX_FILE_SIZE) ?
                 '<p><em>Large files were not attached. Please request them separately if needed.</em></p>' : ''}
                             </div>
                         `}
@@ -329,7 +329,7 @@ export async function POST(req) {
             hasAttachments: attachments.length > 0,
             attachmentCount: attachments.length,
             messageId: info.messageId,
-            skippedLargeFiles: (passportCopy && passportCopy.size > MAX_FILE_SIZE) || (photograph && photograph.size > MAX_FILE_SIZE)
+            skippedLargeFiles: (passportCopy && typeof passportCopy === 'object' && 'size' in passportCopy && passportCopy.size > MAX_FILE_SIZE) || (photograph && typeof photograph === 'object' && 'size' in photograph && photograph.size > MAX_FILE_SIZE)
         });
 
     } catch (error) {

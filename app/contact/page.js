@@ -211,15 +211,29 @@ const ContactPage = () => {
             }
 
             // Send to API
-            const response = await fetch('/api/send-email', {
-                method: 'POST',
-                body: formDataToSend,
-            });
+            let response;
+            try {
+                response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    body: formDataToSend,
+                });
+            } catch (fetchError) {
+                console.error('Network error:', fetchError);
+                throw new Error('Network error. Please check your internet connection and try again.');
+            }
 
-            const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+            } catch (jsonError) {
+                console.error('Failed to parse response as JSON:', jsonError);
+                const text = await response.text();
+                console.error('Response text:', text);
+                throw new Error('Server returned an invalid response. Please try again.');
+            }
 
             if (!response.ok) {
-                throw new Error(result.message || 'Failed to submit application');
+                throw new Error(result.message || result.error || 'Failed to submit application');
             }
 
             console.log('Application submitted successfully:', result);
