@@ -41,9 +41,8 @@ export async function POST(req) {
         // Step 3 - Travel Details
         const packageType = formData.get('packageType') || '';
         const departureCity = formData.get('departureCity') || '';
-        const roomRequirement = formData.get('roomRequirement') || '';
+        const nusukHajjCompany = formData.get('nusukHajjCompany') || '';
         const travelingCompanions = formData.get('travelingCompanions') || '';
-        const marjaTaqleed = formData.get('marjaTaqleed') || '';
         const termsAccepted = formData.get('termsAccepted') === 'true';
 
         // Extract files
@@ -261,18 +260,14 @@ export async function POST(req) {
 
                             </div>
                             <div class="field">
-                                <div class="field-label">Room Requirement:</div>
-                                <div class="field-value">${roomRequirement}</div>
+                                <div class="field-label">Nusuk Hajj Company:</div>
+                                <div class="field-value">${nusukHajjCompany}</div>
                             </div>
                             <div class="field">
                                 <div class="field-label">Traveling Companions:</div>
                                 <div class="field-value">${travelingCompanions}</div>
                             </div>
                             <div class="field-group">
-                                <div class="field">
-                                    <div class="field-label">Marja Taqleed:</div>
-                                    <div class="field-value">${marjaTaqleed}</div>
-                                </div>
                                 <div class="field">
                                     <div class="field-label">Terms Accepted:</div>
                                     <div class="field-value">${termsAccepted ? 'Yes' : 'No'}</div>

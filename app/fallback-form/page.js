@@ -36,9 +36,8 @@ const FallbackForm = () => {
         // Travel Details
         packageType: '',
         departureCity: '',
-        roomRequirement: '',
+        nusukHajjCompany: '',
         travelingCompanions: '',
-        marjaTaqleed: '',
         termsAccepted: false
     });
 
@@ -87,7 +86,7 @@ const FallbackForm = () => {
             'dateOfBirth', 'gender', 'nationality',
             'streetAddress', 'city', 'zipCode', 'state', 'passportNumber',
             'dateOfIssue', 'dateOfExpiration',
-            'packageType', 'departureCity', 'roomRequirement', 'marjaTaqleed'
+            'packageType', 'departureCity', 'nusukHajjCompany'
         ];
 
         required.forEach(field => {
@@ -462,19 +461,19 @@ const FallbackForm = () => {
                                 </div>
 
                                 <div className={styles.formGroup}>
-                                    <label className={styles.label}>Room Requirement *</label>
+                                    <label className={styles.label}>Choose your nusuk hajj company *</label>
                                     <select
-                                        name="roomRequirement"
-                                        value={formData.roomRequirement}
+                                        name="nusukHajjCompany"
+                                        value={formData.nusukHajjCompany}
                                         onChange={handleInputChange}
-                                        className={`${styles.input} ${errors.roomRequirement ? styles.inputError : ''}`}
+                                        className={`${styles.input} ${errors.nusukHajjCompany ? styles.inputError : ''}`}
                                     >
-                                        <option value="">Select Room Type</option>
-                                        <option value="Quad Room">Quad Room</option>
-                                        <option value="Double Room (Husband and Wife)">Double Room (Husband and Wife)</option>
-                                        <option value="Triple (Family of 3)">Triple (Family of 3)</option>
+                                        <option value="">Select Company</option>
+                                        <option value="Rawaf Mina">Rawaf Mina</option>
+                                        <option value="Ikram Aldeif">Ikram Aldeif</option>
+                                        <option value="Holiday inn">Holiday inn</option>
                                     </select>
-                                    {errors.roomRequirement && <span className={styles.error}>{errors.roomRequirement}</span>}
+                                    {errors.nusukHajjCompany && <span className={styles.error}>{errors.nusukHajjCompany}</span>}
                                 </div>
 
                                 <div className={styles.formGroup}>
@@ -488,17 +487,7 @@ const FallbackForm = () => {
                                     />
                                 </div>
 
-                                <div className={styles.formGroup}>
-                                    <label className={styles.label}>Marja Taqleed *</label>
-                                    <input
-                                        type="text"
-                                        name="marjaTaqleed"
-                                        value={formData.marjaTaqleed}
-                                        onChange={handleInputChange}
-                                        className={`${styles.input} ${errors.marjaTaqleed ? styles.inputError : ''}`}
-                                    />
-                                    {errors.marjaTaqleed && <span className={styles.error}>{errors.marjaTaqleed}</span>}
-                                </div>
+
 
                                 <div className={styles.formGroup}>
                                     <label className={styles.checkboxLabel}>
